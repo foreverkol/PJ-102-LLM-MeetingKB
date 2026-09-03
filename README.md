@@ -90,3 +90,6 @@ MIT License - 详见 [LICENSE](./LICENSE) 文件。
 **王老师认可质量**：meetings 质量非常不错（v1.0 13/13 验证）
 
 **v1.0.0** · 2026-09-04 · 专业级自动化 GitHub 管理
+
+
+<!-- test-release-please-marker: 测试 release-please 自动化 -->
