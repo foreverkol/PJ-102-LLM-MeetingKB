@@ -1,0 +1,41 @@
+# 系统运行时目录
+system/data/raw/
+system/state/
+system/logs/
+system/out/
+
+# Registry
+registry/*.db
+registry/*.sqlite
+
+# WIKI 输出（重新生成，不入库）
+# 注：如果想保留样本 WIKI，可注释掉下面这行
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+
+# 环境
+.env
+*.env
+.env.local
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 临时文件
+*.tmp
+*.bak
+*.log

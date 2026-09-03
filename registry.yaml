@@ -1,0 +1,42 @@
+# PJ-102-LLM-MeetingKB · Project Registry
+
+project_id: PJ-102
+project_name: LLM MeetingKB
+parent_project: null  # 独立项目，无父项目
+created: 2026-09-03
+version: v1.0
+status: active
+isolation: full  # 完全独立，零依赖
+
+# 项目路径
+paths:
+  root: /mnt/d/BaiduSyncdisk/hermes/01-项目/PJ-102-LLM-MeetingKB
+  wiki: /mnt/d/BaiduSyncdisk/hermes/02-知识库/PJ-102-LLM-MeetingKB
+  source: /mnt/d/BaiduSyncdisk/hermes/修改发言人转化  # 只读
+  env: ~/.hermes/.env  # 复用 MiniMax key
+
+# 核心配置
+config:
+  llm_provider: minimax
+  llm_model: MiniMax-Text-01
+  pipeline_steps: 12
+  wiki_types:
+    - meeting
+    - person
+    - concept
+    - judgment
+    - comparison
+
+# 依赖关系（应该都为空）
+dependencies: []
+
+# 历史版本
+changelog:
+:
+  - version: v1.0
+    date: 2026-09-03
+    status: active
+    notes: 全项全量移植版，13/13 验证跑通
+
+# 关联项目（都为空）
+related_projects: []

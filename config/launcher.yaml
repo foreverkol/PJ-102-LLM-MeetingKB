@@ -1,0 +1,41 @@
+# PJ-102-LLM-MeetingKB · launcher 配置
+
+project_id: PJ-102
+project_name: LLM MeetingKB
+version: v1.0
+created: 2026-09-03
+
+# 执行入口
+entries:
+  run_pipeline:
+    description: 跑全量 12 步 pipeline
+    command: "cd 03-执行/code && python3 pipeline.py"
+    env:
+      MINIMAX_API_KEY: "${MINIMAX_API_KEY}"
+      MINIMAX_CN_BASE_URL: "https://api.minimaxi.com/v1"
+
+  test_pipeline:
+    description: 测试 13 个样本
+    command: "cd 03-执行/code && python3 pipeline.py --limit 13"
+    env:
+      MINIMAX_API_KEY: "${MINIMAX_API_KEY}"
+
+  mock_pipeline:
+    description: Mock 模式跑批（不调用 LLM）
+    command: "cd 03-执行/code && python3 pipeline.py --no-llm --limit 13"
+
+  clear_wiki:
+    description: 清空 WIKI 目录
+    command: "rm -rf /mnt/d/BaiduSyncdisk/hermes/02-知识库/PJ-102-LLM-MeetingKB/*"
+
+# 依赖
+dependencies:
+  python: ">=3.11"
+  packages: []  # 全部用标准库
+
+# 配置
+config:
+  llm_provider: minimax
+  pipeline_steps: 12
+  wiki_types:
+    - meeting
