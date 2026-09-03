@@ -25,6 +25,7 @@ from steps import (
     s4_fjv, s5_implicit_knowledge, s6_entity_extraction,
     s7_action_decision, s8_risk_blindspot, s9_knowledge_classify,
     s10_cognitive_refine, s11_value_rating, s12_write_wiki,
+    s12_write_all_5_types,
 )
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent  # PJ-102-LLM-MeetingKB/
@@ -125,10 +126,15 @@ def main():
         try:
             result = process_one(sample, llm)
             if not args.dry_run:
-                out_path = s12_write_wiki(result, WIKI_BASE)
+                out_paths = s12_write_all_5_types(result, WIKI_BASE)
+                total = sum(len(v) for v in out_paths.values())
                 elapsed = time.time() - start
                 total_time += elapsed
-                print(f"✅ ({elapsed:.1f}s) → {Path(out_path).name}")
+                # 显示 5 类产出概览
+                parts = []
+                for k, v in out_paths.items():
+                    parts.append(f"{k[0]}:{len(v)}")
+                print(f"✅ ({elapsed:.1f}s) 5类{total}个 [{' '.join(parts)}]")
             else:
                 print("✅ (dry-run)")
             success += 1

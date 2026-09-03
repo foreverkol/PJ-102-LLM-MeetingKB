@@ -15,7 +15,7 @@ from .s8_risk import s8_risk_blindspot
 from .s9_classify import s9_knowledge_classify
 from .s10_cognitive import s10_cognitive_refine
 from .s11_value import s11_value_rating
-from .s12_wiki import s12_write_wiki
+from .s12_wiki import s12_write_wiki, s12_write_all_5_types
 
 __all__ = [
     "s1_basic_info",
@@ -30,4 +30,5 @@ __all__ = [
     "s10_cognitive_refine",
     "s11_value_rating",
     "s12_write_wiki",
+    "s12_write_all_5_types",
 ]

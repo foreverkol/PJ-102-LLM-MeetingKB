@@ -1,10 +1,15 @@
 """
 S12: WIKI 写入（规则）
-- 生成 meeting Markdown
+- 生成 5 类 WIKI Markdown
+  1. meetings（已实现）
+  2. persons（新增）
+  3. concepts（新增）
+  4. judgments（新增）
+  5. comparisons（新增）
 - 含完整 12 步结果
 """
 from pathlib import Path
-from typing import Dict
+from typing import Dict, List
 
 
 def s12_write_wiki(state: Dict, output_dir: Path) -> str:
@@ -224,3 +229,312 @@ content_hash: {content_hash}
     out_file.parent.mkdir(parents=True, exist_ok=True)
     out_file.write_text(md, encoding='utf-8')
     return str(out_file)
+
+
+# ============================================================
+# 4 类 WIKI 生成器（v1.1 补全）
+# ============================================================
+
+def s12_write_persons(state: Dict, output_dir: Path) -> List[str]:
+    """从 S6 人物实体生成 persons WIKI"""
+    written = []
+    s1 = state["s1"]
+    date = s1["date"]
+    source = state["sample"]
+    content_hash = state["content_hash"]
+
+    for person in state.get('s6', {}).get('persons', []):
+        if isinstance(person, dict):
+            name = person.get('name', '').strip()
+            if not name:
+                continue
+            # 用人物名生成稳定文件名
+            safe_name = name.replace(' ', '_').replace('/', '_')
+            md = f"""---
+type: person
+name: "{name}"
+date: {date}
+role: "{person.get('role', '')}"
+relationship: "{person.get('relationship', '')}"
+source_meeting: {source}
+source_hash: {content_hash}
+generated_at: 2026-09-04
+generator: pj102-llm-meetingkb-v1.1
+llm_provider: {state['_meta']['llm_provider']}
+llm_model: {state['_meta']['llm_model']}
+---
+
+# {name}
+
+## 👤 人物信息
+
+- **姓名**: {name}
+- **角色**: {person.get('role', 'N/A')}
+- **与王老师关系**: {person.get('relationship', 'N/A')}
+
+## 📅 出现会议
+
+- **{s1.get('title', 'N/A')}** ({date})
+
+## 🎯 在该会议中的活动
+
+"""
+            # 添加 S4 中与此人物相关的事实
+            md += "### 关联事实\n"
+            found = False
+            for fact in state.get('s4', {}).get('facts', []):
+                if name in fact or name[:2] in fact:
+                    md += f"- {fact}\n"
+                    found = True
+            if not found:
+                md += "- （无直接关联）\n"
+
+            # 添加 S5 关系性
+            md += "\n### 关联关系\n"
+            found = False
+            for rel in state.get('s5', {}).get('relational', []):
+                if isinstance(rel, dict) and name in str(rel):
+                    md += f"- {rel.get('relation', '')}: {rel.get('description', '')}\n"
+                    found = True
+            if not found:
+                md += "- （无直接关联）\n"
+
+            md += f"""
+## 📊 价值评估
+
+- **相关度**: {state.get('s11', {}).get('relevance', 0):.2f}
+- **综合价值**: {state.get('s11', {}).get('value_score', 0):.2f}
+
+## 📑 元信息
+
+- **生成时间**: 2026-09-04
+- **来源会议**: {source}
+- **LLM**: {state['_meta']['llm_provider']} / {state['_meta']['llm_model']}
+- **项目**: PJ-102-LLM-MeetingKB
+"""
+
+            out_file = output_dir / "persons" / f"person_{safe_name}_{content_hash[:8]}.md"
+            out_file.parent.mkdir(parents=True, exist_ok=True)
+            out_file.write_text(md, encoding='utf-8')
+            written.append(str(out_file))
+
+    return written
+
+
+def s12_write_concepts(state: Dict, output_dir: Path) -> List[str]:
+    """从 S6 概念实体生成 concepts WIKI"""
+    written = []
+    s1 = state["s1"]
+    date = s1["date"]
+    source = state["sample"]
+    content_hash = state["content_hash"]
+
+    for concept in state.get('s6', {}).get('concepts', []):
+        if isinstance(concept, dict):
+            name = concept.get('name', '').strip()
+            if not name:
+                continue
+            safe_name = name.replace(' ', '_').replace('/', '_')[:30]
+            md = f"""---
+type: concept
+name: "{name}"
+date: {date}
+definition: "{concept.get('definition', '')}"
+source_meeting: {source}
+source_hash: {content_hash}
+generated_at: 2026-09-04
+generator: pj102-llm-meetingkb-v1.1
+llm_provider: {state['_meta']['llm_provider']}
+llm_model: {state['_meta']['llm_model']}
+---
+
+# {name}
+
+## 📖 概念定义
+
+{concept.get('definition', 'N/A')}
+
+## 🔗 出现会议
+
+- **{s1.get('title', 'N/A')}** ({date})
+
+## 💡 相关讨论
+
+"""
+            # 添加 S3 中与此概念相关的内容
+            s3 = state.get('s3', {})
+            insight = s3.get('insight', '')
+            if insight and (name in insight or name[:2] in insight):
+                md += f"### 王老师洞察\n{insight}\n"
+
+            md += f"""
+## 📚 知识归类
+
+- **类型**: {state.get('s9', {}).get('knowledge_type', 'N/A')}
+- **标签**: {', '.join(state.get('s9', {}).get('tags', [])) or '（无）'}
+
+## 📑 元信息
+
+- **生成时间**: 2026-09-04
+- **来源会议**: {source}
+- **LLM**: {state['_meta']['llm_provider']} / {state['_meta']['llm_model']}
+"""
+
+            out_file = output_dir / "concepts" / f"concept_{safe_name}_{content_hash[:8]}.md"
+            out_file.parent.mkdir(parents=True, exist_ok=True)
+            out_file.write_text(md, encoding='utf-8')
+            written.append(str(out_file))
+
+    return written
+
+
+def s12_write_judgments(state: Dict, output_dir: Path) -> List[str]:
+    """从 S4 判断生成论 judgments WIKI"""
+    written = []
+    s1 = state["s1"]
+    date = s1["date"]
+    source = state["sample"]
+    content_hash = state["content_hash"]
+
+    judgments = state.get('s4', {}).get('judgments', [])
+    for i, j in enumerate(judgments, 1):
+        if not j or not isinstance(j, str):
+            continue
+        # 取前 30 字作为标题
+        title = j[:30].replace('/', '_').replace(':', '_')
+        md = f"""---
+type: judgment
+title: "{j[:60]}"
+date: {date}
+author: "王老师本人观点"
+source_meeting: {source}
+source_hash: {content_hash}
+generated_at: 2026-09-04
+generator: pj102-llm-meetingkb-v1.1
+llm_provider: {state['_meta']['llm_provider']}
+llm_model: {state['_meta']['llm_model']}
+---
+
+# 判断 #{i}：{j[:50]}
+
+## 💭 判断内容
+
+{j}
+
+## 🔗 来源会议
+
+- **{s1.get('title', 'N/A')}** ({date})
+
+## 📋 上下文
+
+"""
+        # 添加 S3 背景
+        md += f"### 背景\n{state.get('s3', {}).get('background', 'N/A')}\n"
+
+        # 添加相关事实
+        md += "\n### 相关事实\n"
+        facts = state.get('s4', {}).get('facts', [])
+        for f in facts[:3]:
+            md += f"- {f}\n"
+
+        # 添加价值评估
+        md += f"""
+## ⭐ 价值评估
+
+- **综合价值**: {state.get('s11', {}).get('value_score', 0):.2f}
+- **可行动性**: {state.get('s11', {}).get('actionability', 0):.2f}
+
+## 📑 元信息
+
+- **生成时间**: 2026-09-04
+- **来源会议**: {source}
+- **LLM**: {state['_meta']['llm_provider']} / {state['_meta']['llm_model']}
+"""
+
+        out_file = output_dir / "judgments" / f"judgment_{date}_{content_hash[:8]}_{i}.md"
+        out_file.parent.mkdir(parents=True, exist_ok=True)
+        out_file.write_text(md, encoding='utf-8')
+        written.append(str(out_file))
+
+    return written
+
+
+def s12_write_comparisons(state: Dict, output_dir: Path) -> List[str]:
+    """从 S6/S4 中识别比较关系，生成 comparisons WIKI"""
+    written = []
+    s1 = state["s1"]
+    date = s1["date"]
+    source = state["sample"]
+    content_hash = state["content_hash"]
+
+    # 从 S4 facts 中识别比较关系（包含"vs"、"对比"、"vs" 等关键词）
+    facts = state.get('s4', {}).get('facts', [])
+    comparisons_found = []
+    for fact in facts:
+        if isinstance(fact, str):
+            if any(kw in fact for kw in [' vs ', '对比', '比较', '不同', '差异', '优劣势']):
+                comparisons_found.append(fact)
+
+    # 从 S5 关系中识别
+    s5_rel = state.get('s5', {}).get('relational', [])
+    for rel in s5_rel:
+        if isinstance(rel, dict):
+            desc = rel.get('description', '')
+            if any(kw in desc for kw in ['对比', '比较', '差异', ' vs ']):
+                comparisons_found.append(f"{rel.get('relation', '')}: {desc}")
+
+    if not comparisons_found:
+        return written
+
+    # 合并为一个 comparisons 文件
+    md = f"""---
+type: comparison
+date: {date}
+source_meeting: {source}
+source_hash: {content_hash}
+comparison_count: {len(comparisons_found)}
+generated_at: 2026-09-04
+generator: pj102-llm-meetingkb-v1.1
+llm_provider: {state['_meta']['llm_provider']}
+llm_model: {state['_meta']['llm_model']}
+---
+
+# 比较关系 - {s1.get('title', 'N/A')}
+
+## 📅 来源会议
+
+- **{s1.get('title', 'N/A')}** ({date})
+
+## 🔄 比较内容
+
+"""
+    for i, comp in enumerate(comparisons_found, 1):
+        md += f"### 比较 #{i}\n{comp}\n\n\n"
+
+    md += f"""
+## 📑 元信息
+
+- **比较数**: {len(comparisons_found)}
+- **生成时间**: 2026-09-04
+- **来源会议**: {source}
+- **LLM**: {state['_meta']['llm_provider']} / {state['_meta']['llm_model']}
+"""
+
+    out_file = output_dir / "comparisons" / f"comparison_{date}_{content_hash[:8]}.md"
+    out_file.parent.mkdir(parents=True, exist_ok=True)
+    out_file.write_text(md, encoding='utf-8')
+    written.append(str(out_file))
+
+    return written
+
+
+def s12_write_all_5_types(state: Dict, output_dir: Path) -> Dict[str, List[str]]:
+    """一次生成全部 5 类 WIKI，返回各类型产出列表"""
+    result = {
+        "meetings": [s12_write_wiki(state, output_dir)],
+        "persons": s12_write_persons(state, output_dir),
+        "concepts": s12_write_concepts(state, output_dir),
+        "judgments": s12_write_judgments(state, output_dir),
+        "comparisons": s12_write_comparisons(state, output_dir),
+    }
+    return result
