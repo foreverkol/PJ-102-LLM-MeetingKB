@@ -58,7 +58,7 @@ jobs:
           sha256sum pj102-${VERSION}.tar.gz > pj102-${VERSION}.tar.gz.sha256
 
       - name: 创建 GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           name: "PJ-102-LLM-MeetingKB ${{ github.ref_name }}"
           draft: false
