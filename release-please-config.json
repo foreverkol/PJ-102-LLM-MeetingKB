@@ -1,0 +1,50 @@
+{
+  "type": "github",
+  "package-name": "pj102-llm-meetingkb",
+  "package-version": "1.0.0",
+  "changelog-path": "CHANGELOG.md",
+  "release-type": "python",
+  "extra-files": [
+    "src/__init__.py",
+    "pyproject.toml"
+  ],
+  "pull-request-title-pattern": "chore${scope}(${scope}): release ${version}",
+  "versioning": "semver",
+  "changelog-sections": [
+    {
+      "type": "feat",
+      "section": "\ud83c\udf89 Features"
+    },
+    {
+      "type": "fix",
+      "section": "\ud83d\udc1b Bug Fixes"
+    },
+    {
+      "type": "perf",
+      "section": "\ud83d\ude80 Performance"
+    },
+    {
+      "type": "refactor",
+      "section": "\ud83d\udd28 Refactoring"
+    },
+    {
+      "type": "docs",
+      "section": "\ud83d\udcda Documentation"
+    },
+    {
+      "type": "test",
+      "section": "\ud83e\uddea Tests"
+    },
+    {
+      "type": "build",
+      "section": "\ud83d\udce6 Build System"
+    },
+    {
+      "type": "ci",
+      "section": "\ud83d\udc77 CI/CD"
+    }
+  ],
+  "release": true,
+  "tag-separator": "-",
+  "bootstrap": true
+}

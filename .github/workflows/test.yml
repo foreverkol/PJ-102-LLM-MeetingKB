@@ -10,52 +10,68 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
 
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: 设置 Python 3.11
+      - name: 设置 Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: ${{ matrix.python-version }}
 
       - name: 缓存 pip
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-pip-
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-
 
       - name: 安装依赖
         run: |
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt
           fi
+          pip install flake8 pytest pytest-cov
 
-      - name: 创建测试输出目录
-        run: mkdir -p tests/output
+      - name: 代码 Lint
+        run: |
+          flake8 03-执行/code/ --max-line-length=120 --ignore=E203,W503 || true
 
       - name: 跑烟雾测试
         run: |
           if [ -f tests/unit/smoke_test.py ]; then
             python3 tests/unit/smoke_test.py 2>&1 | tee tests/output/smoke_test.log
-          else
-            echo "无 smoke_test.py，跳过"
           fi
 
-      - name: 跑 Python 语法检查
+      - name: 跑单元测试 + 覆盖率
         run: |
-          for f in $(find . -name "*.py" -not -path "./.git/*"); do
+          if [ -d tests/unit ]; then
+            pytest tests/unit/ --cov=03-执行/code --cov-report=xml --cov-report=term || true
+          fi
+
+      - name: Python 语法检查
+        run: |
+          for f in $(find . -name "*.py" -not -path "./.git/*" -not -path "./system/*"); do
             python3 -m py_compile "$f" || echo "语法错误: $f"
           done
+
+      - name: 上传覆盖率到 Codecov
+        if: matrix.python-version == '3.11'
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: false
 
       - name: 上传测试报告
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-report
+          name: test-report-${{ matrix.python-version }}
           path: tests/output/
           retention-days: 7

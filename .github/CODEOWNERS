@@ -1,0 +1,12 @@
+# PJ-102-LLM-MeetingKB · 代码所有者
+# 自动指派审查者
+
+# 默认所有人
+*       @foreverkol
+
+# 关键文件需要核心 owner
+/01-需求/       @foreverkol
+/02-设计/       @foreverkol
+/03-执行/code/  @foreverkol
+/scripts/       @foreverkol
+/.github/       @foreverkol
