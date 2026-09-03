@@ -1,0 +1,129 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 跑测试
+        run: |
+          if [ -f tests/unit/smoke_test.py ]; then
+            python3 tests/unit/smoke_test.py
+          fi
+
+      - name: 创建 tar.gz 包
+        run: |
+          VERSION=${GITHUB_REF_NAME}
+          PACKAGE_NAME="pj102-${VERSION}"
+
+          # 打包
+          tar -czf ${PACKAGE_NAME}.tar.gz \
+            --exclude=__pycache__ \
+            --exclude=.git \
+            --exclude=system/data/raw \
+            --exclude=system/logs \
+            --exclude=system/state \
+            --exclude=.env \
+            --exclude=.pytest_cache \
+            --exclude=tests/output \
+            --exclude=.archive \
+            --exclude='*.pyc' \
+            --exclude='*.pyo' \
+            .
+
+          echo "✅ 已创建 ${PACKAGE_NAME}.tar.gz"
+          ls -lh ${PACKAGE_NAME}.tar.gz
+
+      - name: 计算 SHA256
+        run: |
+          VERSION=${GITHUB_REF_NAME}
+          sha256sum pj102-${VERSION}.tar.gz > pj102-${VERSION}.tar.gz.sha256
+          cat pj102-${VERSION}.tar.gz.sha256
+
+      - name: 生成 changelog
+        run: |
+          # 从上一个 tag 到当前 tag 的提交
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+
+          {
+            echo "## 📦 自动化构建"
+            echo ""
+            echo "构建于: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "Commit: \`$(git rev-parse --short HEAD)\`"
+            echo ""
+            echo "## 📋 变更日志"
+            echo ""
+            if [ -n "$PREV_TAG" ]; then
+              echo "从 **$PREV_TAG** 到 **$GITHUB_REF_NAME**:"
+              echo ""
+              git log ${PREV_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges
+            else
+              echo "**初始版本**："
+              echo ""
+              git log --pretty=format:"- %s (%h)" --no-merges | head -50
+            fi
+            echo ""
+            echo ""
+            echo "## 📥 安装方法"
+            echo ""
+            echo '```bash'
+            echo "# 下载源码包"
+            echo "wget https://github.com/\${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}/pj102-${GITHUB_REF_NAME}.tar.gz"
+            echo "tar -xzf pj102-${GITHUB_REF_NAME}.tar.gz"
+            echo "cd pj102-${GITHUB_REF_NAME}"
+            echo ""
+            echo "# 或 git clone + checkout"
+            echo "git clone https://github.com/\${GITHUB_REPOSITORY}.git"
+            echo "cd pj102-git-learning"
+            echo "git checkout ${GITHUB_REF_NAME}"
+            echo '```'
+            echo ""
+            echo "## 🔍 验证"
+            echo ""
+            echo '```bash'
+            echo "# 验证下载完整性"
+            echo "sha256sum pj102-${GITHUB_REF_NAME}.tar.gz"
+            echo ""
+            echo "# 验证项目完整性"
+            echo "./scripts/verify_version.sh"
+            echo '```'
+            echo ""
+            echo "## 📚 文档"
+            echo ""
+            echo "- [README.md](https://github.com/\${GITHUB_REPOSITORY}/blob/${GITHUB_REF_NAME}/README.md)"
+            echo "- [需求总纲](https://github.com/\${GITHUB_REPOSITORY}/blob/${GITHUB_REF_NAME}/01-需求/需求总纲_v1.0.md)"
+            echo "- [使用手册](https://github.com/\${GITHUB_REPOSITORY}/blob/${GITHUB_REF_NAME}/培训材料/使用手册_v1.0.md)"
+          } > RELEASE_BODY.md
+
+          cat RELEASE_BODY.md
+
+      - name: 创建 GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: "PJ-102-LLM-MeetingKB ${{ github.ref_name }}"
+          body_path: RELEASE_BODY.md
+          draft: false
+          prerelease: ${{ contains(github.ref, '-') }}
+          files: |
+            pj102-${{ github.ref_name }}.tar.gz
+            pj102-${{ github.ref_name }}.tar.gz.sha256
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

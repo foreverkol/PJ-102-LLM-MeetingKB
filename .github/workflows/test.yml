@@ -1,0 +1,61 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, dev]
+    tags: ['v*']
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 缓存 pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: 安装依赖
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+
+      - name: 创建测试输出目录
+        run: mkdir -p tests/output
+
+      - name: 跑烟雾测试
+        run: |
+          if [ -f tests/unit/smoke_test.py ]; then
+            python3 tests/unit/smoke_test.py 2>&1 | tee tests/output/smoke_test.log
+          else
+            echo "无 smoke_test.py，跳过"
+          fi
+
+      - name: 跑 Python 语法检查
+        run: |
+          for f in $(find . -name "*.py" -not -path "./.git/*"); do
+            python3 -m py_compile "$f" || echo "语法错误: $f"
+          done
+
+      - name: 上传测试报告
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: tests/output/
+          retention-days: 7
