@@ -2,8 +2,8 @@
   "version": "v3.0",
   "created": "2026-09-04",
   "source_dir": "/mnt/d/BaiduSyncdisk/hermes/01-项目/PJ-102-LLM-MeetingKB/system/data/raw",
-  "sample_count": 5,
-  "total_size_bytes": 618662,
+  "sample_count": 10,
+  "total_size_bytes": 950461,
   "samples": [
     {
       "filename": "20220419_100811我和李洋吴英杰到浙商银行总行交流票据经纪业务合作.md",
@@ -16,9 +16,34 @@
       "size_bytes": 100163
     },
     {
+      "filename": "20220902_092249通过原来京东王忠华介绍我和朱宝磊到到济南历城控股交流票据供应链业务_原文.md",
+      "content_hash": "d869cd2243fd",
+      "size_bytes": 52601
+    },
+    {
       "filename": "20221012_094427宝磊给给四川交子金控保理公司培训.md",
       "content_hash": "f8bcfc1be8e7",
       "size_bytes": 117658
+    },
+    {
+      "filename": "20230202_140432我和李洋带全总到工商银行深圳分行交流又到万联网总部拜访_原文.md",
+      "content_hash": "906f4acf5727",
+      "size_bytes": 106599
+    },
+    {
+      "filename": "20230519_194818我和李洋和内部讨论微众产业白名单的模式_原文.md",
+      "content_hash": "04e404e84ce7",
+      "size_bytes": 29107
+    },
+    {
+      "filename": "20230907_092715在临沂临沂商城和王朝阳一起交流_原文.md",
+      "content_hash": "ebb54a58f507",
+      "size_bytes": 123459
+    },
+    {
+      "filename": "20240814_163852公司内部讨论票据数据当前情况和未来方向_原文.md",
+      "content_hash": "5fd71a385a85",
+      "size_bytes": 20033
     },
     {
       "filename": "20260827_101659上午梁超杰龚总在菱角湖万达交流_原文.md",

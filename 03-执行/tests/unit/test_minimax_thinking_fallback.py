@@ -106,14 +106,18 @@ class TestRealWikiV3Quality(unittest.TestCase):
             self.assertIn(m.group(1), valid, f"meeting_type {m.group(1)} 不在 6 类中")
 
     def test_02_meeting_36945f63_real_ldamc(self):
-        """sample1 ldamc 5 维非 '暂无'"""
+        """sample1 ldamc 5 维非 '暂无'(v3.0 S9 修复后真实命中)"""
         wiki_path = Path("/mnt/d/BaiduSyncdisk/hermes/02-知识库/PJ-102-LLM-MeetingKB/meetings/meeting_2026-08-27_36945f63c541.md")
         if not wiki_path.exists():
             self.skipTest("wiki 文件不存在")
         text = wiki_path.read_text(encoding="utf-8")
-        # ldamc.lost 字段不应是"暂无"
-        self.assertIn("lost: \"未明确提及", text, "ldamc.lost 应有真实内容")
-        self.assertNotIn("lost: \"暂无\"", text)
+        # v3.0 S13: ldamc.lost 字段必须非空且非"暂无"
+        import re
+        m = re.search(r"^\s*lost:\s*\"(.+?)\"", text, re.MULTILINE)
+        self.assertIsNotNone(m, "ldamc.lost 字段必须存在")
+        lost_content = m.group(1) if m else ""
+        self.assertNotEqual(lost_content, "暂无", "ldamc.lost 不能是占位'暂无'")
+        self.assertGreater(len(lost_content), 5, "ldamc.lost 必须有真实内容(>5 字符)")
 
     def test_03_minimax_m3_in_frontmatter(self):
         """王老师 09-04 纠正生效:llm_model: MiniMax-M3"""
