@@ -183,18 +183,29 @@ git push origin v3.0.x-stable
 
 ---
 
-## 📞 王老师决策点
+## 📞 王老师决策点(09-04 22:30 规范更新)
+
+**stable tag 决策原则**(王老师明确):
+- ❌ **不要每个 Sprint 都打 stable tag**
+- ✅ **stable tag = 王老师确认"形成可发布大版本"才打**
+- 多个 Sprint 累计形成稳定能力后,王老师才决定打新 tag
 
 每次 Sprint 完工后,问王老师:
 
-1. **是否打新 stable tag**?(默认每个 Sprint 完工打)
-2. **版本号递增**?(patch v3.0.x→v3.0.x+1 / minor v3.1.0 / major v4.0.0)
+1. **是否打新 stable tag**?(默认 **不打**,等王老师决策)
+2. **版本号递增?**(patch v3.0.x→v3.0.x+1 / minor v3.1.0 / major v4.0.0)
 3. **是否需要 release page**?(GitHub release,普通用户可见)
 
 王老师答:
 - **"打 stable tag"** → 按上面 Step 1-5 执行
 - **"暂停打 tag"** → 不打,继续开发,工作树保留所有 commit
 - **"回退到 v3.0.1-stable"** → 按场景 1 执行
+
+**历史教训**(09-04 22:30):
+- 我之前在 Sprint 18/19/20 自动打了 v3.0.2/3/4-stable — 违规
+- 王老师纠正:"stable tag 应该是确定稳定测试验证后,我会告诉,形成可发布的大版本 tag"
+- 3 个违规 tag 已清理
+- 当前 tag: v1.0-baseline / v1.0.0 / v1.1.0 / v3.0.0 / v3.0.1-stable
 
 ---
 
