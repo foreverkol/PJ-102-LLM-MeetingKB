@@ -28,6 +28,45 @@ PJ-102 遵循 [Semantic Versioning 2.0](https://semver.org/) + 稳定锚点后�
 
 ## 🔙 回退指南(王老师核心需求)
 
+### 场景 0:完整打包下载整个项目(王老师 09-04 20:40 诉求)
+
+王老师原话:"这个箱子打包是整个所有的项目相关的,包括代码配置文件各个相应的文件"
+
+**实测验证:v3.0.1-stable tag 完整包含**(2026-09-04 20:45):
+- **138 文件 / 1.3MB / tar.gz 256KB**
+- 29 Python 模块 + 12 测试文件
+- 全部目录:01-需求/02-设计/03-执行/04-复盘与决策/.github/scripts/
+- 全部关键文件:VERSION / STATE.md / CHANGELOG.md / VERSION_MANAGEMENT.md / rollback.sh
+
+**方法 1:git archive 命令打包**
+```bash
+git archive --format=tar.gz --output=../PJ-102-v3.0.1-stable.tar.gz v3.0.1-stable
+# 解压后 L1 测试:82/82 PASS(0.080s) ← 实测验证
+```
+
+**方法 2:GitHub 直接下载**
+- 浏览器:https://github.com/foreverkol/PJ-102-LLM-MeetingKB/releases/tag/v3.0.1-stable
+- 点击 "Source code (tar.gz)" 下载完整包
+
+**方法 3:git clone 指定 tag**
+```bash
+git clone --depth=1 --branch=v3.0.1-stable https://github.com/foreverkol/PJ-102-LLM-MeetingKB.git
+```
+
+**解压后验证清单**:
+```bash
+# 1. VERSION 内容
+cat VERSION  # 应输出:3.0.1-stable
+
+# 2. L1 测试
+python3 -m unittest discover 03-执行/tests/unit  # 应 PASS
+
+# 3. 目录结构
+ls 01-需求/ 02-设计/ 03-执行/ 04-复盘与决策/ scripts/ .github/
+```
+
+---
+
 ### 场景 1:开发中遇到 bug,需要回退到 v3.0.1-stable
 
 ```bash
