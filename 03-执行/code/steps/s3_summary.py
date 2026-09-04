@@ -68,7 +68,7 @@ def s3_standard_summary(content: str, llm: LLMClient) -> dict:
 
 只输出 JSON。
 """
-    result = llm.call(prompt, max_tokens=131072)  # v3.0 S10: 升 8000
+    result = llm.call(prompt, max_tokens=524288)  # v3.0 S10: 升 8000
     parsed = safe_json_parse(result, {
         "one_sentence": "未提取",
         "background": "未提取",

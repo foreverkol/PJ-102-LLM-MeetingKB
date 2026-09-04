@@ -82,7 +82,7 @@ class KBRetriever:
         user_prompt = self._build_l2_prompt(query, l1_result)
         try:
             synthesis = self.llm.call(user_prompt, system=system_prompt,
-                                      max_tokens=131072)  # v3.0 S10.1: 改官方推荐 131072
+                                      max_tokens=524288)  # v3.0 S10.2: 王老师 09-04 要求按官方上限 524288
         except Exception as e:
             synthesis = f"[L2 错误: {e}]"
 

@@ -88,7 +88,7 @@ def s14_scenario(content: str, llm: LLMClient) -> list:
 2. 完全无业务模式讨论 → 输出 []
 3. 只输出 JSON 数组
 """
-    result = llm.call(prompt, max_tokens=131072)  # v3.0 S10.1: 改官方推荐 131072
+    result = llm.call(prompt, max_tokens=524288)  # v3.0 S10.2: 王老师 09-04 要求按官方上限 524288
     parsed = safe_json_parse(result, [])
 
     if not isinstance(parsed, list):

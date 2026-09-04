@@ -67,7 +67,7 @@ def s13_financial_params(content: str, llm: LLMClient) -> list:
 
 只输出 JSON,不要其他内容。
 """
-    result = llm.call(prompt, max_tokens=131072)  # v3.0 S10.1: 改官方推荐 131072
+    result = llm.call(prompt, max_tokens=524288)  # v3.0 S10.2: 王老师 09-04 要求按官方上限 524288
     parsed = safe_json_parse(result, {"items": []})
 
     # safe_json_parse 返回 dict 时(默认),提取 items;返回 list 时直接用
