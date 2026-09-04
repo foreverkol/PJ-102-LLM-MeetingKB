@@ -76,7 +76,7 @@ def s6_entity_extraction(content: str, llm: LLMClient) -> dict:
 3. quote_orig 是 verbatim 原文(grep 验证)
 4. 只输出 JSON
 """
-    result = llm.call(prompt, max_tokens=3000)
+    result = llm.call(prompt, max_tokens=8000)  # v3.0 S10: 升 8000
     parsed = safe_json_parse(result, {
         "persons": [],
         "organizations": [],

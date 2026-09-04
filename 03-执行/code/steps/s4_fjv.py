@@ -34,7 +34,7 @@ FJV 说明：
 
 每项最多 5 条，只输出 JSON。
 """
-    result = llm.call(prompt, max_tokens=2000)
+    result = llm.call(prompt, max_tokens=8000)  # v3.0 S10: 王老师 09-04 17:32 反馈升 8000
     return safe_json_parse(result, {
         "facts": [], "judgments": [], "values": [],
     })

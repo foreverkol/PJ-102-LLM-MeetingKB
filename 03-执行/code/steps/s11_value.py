@@ -31,7 +31,7 @@ def s11_value_rating(content: str, llm: LLMClient) -> dict:
 
 只输出 JSON。
 """
-    result = llm.call(prompt, max_tokens=500)
+    result = llm.call(prompt, max_tokens=8000)  # v3.0 S10: 王老师 09-04 17:32 反馈,MiniMax-M3 支持 16000,统一升 8000
     return safe_json_parse(result, {
         "relevance": 0.5, "actionability": 0.5, "innovation": 0.5,
         "value_score": 0.5, "value_reason": "LLM 失败",
