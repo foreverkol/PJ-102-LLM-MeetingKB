@@ -35,13 +35,13 @@ meeting_type: {state['s2'].get('scene_type', 'other')}
 meeting_subtype: {state['s2'].get('scene_subtype', 'N/A')}
 is_external_knowledge: {state['s2'].get('is_external_knowledge', False)}
 # === v6.1 P-1 [判断:] 标注(已嵌入 body) ===
-# === v7.0 ldamc 5 维自检 ===
+# === v7.0 ldamc 5 维自检(从 s10_cognitive 真实读取) ===
 ldamc:
-  lost: "暂无"
-  different: "暂无"
-  added: "暂无"
-  more: "暂无"
-  connected: "暂无"
+  lost: "{state.get('s10', {}).get('ldamc', {}).get('lost', '暂无')}"
+  different: "{state.get('s10', {}).get('ldamc', {}).get('different', '暂无')}"
+  added: "{state.get('s10', {}).get('ldamc', {}).get('added', '暂无')}"
+  more: "{state.get('s10', {}).get('ldamc', {}).get('more', '暂无')}"
+  connected: {state.get('s10', {}).get('ldamc', {}).get('connected', [])}
 # === v7.0 §8.1 必填 ===
 status_stage: compiled
 value_grade: B

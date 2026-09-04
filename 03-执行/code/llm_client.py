@@ -111,7 +111,19 @@ class LLMClient:
         )
         with urllib.request.urlopen(req, timeout=60) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-            return data["choices"][0]["message"]["content"]
+            # v3.0 S9: debug print
+            if os.environ.get("DEBUG_LLM"):
+                print(f"[DEBUG LLM] status=200, raw_data_keys={list(data.keys())}")
+                if "choices" in data and data["choices"]:
+                    content = data["choices"][0].get("message", {}).get("content", "")
+                    print(f"[DEBUG LLM] content_len={len(content)}, preview={content[:200]!r}")
+                    if not content:
+                        print(f"[DEBUG LLM] full_response={json.dumps(data, ensure_ascii=False)[:1000]}")
+            # v3.0 S9: MiniMax-M3 走 thinking, content 可能为空或被截断
+            # 优先 content,fallback reasoning_content
+            msg = data["choices"][0].get("message", {})
+            content = msg.get("content", "") or msg.get("reasoning_content", "")
+            return content
 
     def _call_deepseek(self, prompt: str, system: str, max_tokens: int) -> str:
         """DeepSeek 调用"""
