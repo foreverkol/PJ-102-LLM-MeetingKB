@@ -1,10 +1,5 @@
 """
-S6: 5 类实体提取（LLM）
-- persons: 人物
-- organizations: 机构
-- concepts: 概念
-- products: 产品
-- projects: 项目
+S6: 5 类实体抽取(LLM) - v3.0 升级(v7.0 canonical_name + aliases + entity_id 占位)
 """
 import sys
 from pathlib import Path
@@ -14,36 +9,90 @@ from llm_client import LLMClient, safe_json_parse
 
 
 def s6_entity_extraction(content: str, llm: LLMClient) -> dict:
-    """LLM 提取 5 类实体"""
-    excerpt = content[:8000]
+    """LLM 5 类实体 + v7.0 canonical_name + aliases + quote_orig"""
+    excerpt = content[:10000]
 
-    prompt = f"""从会议中提取 5 类实体，输出 JSON 格式：
+    prompt = f"""从以下会议内容抽取 5 类实体,输出 JSON(v7.0 增强版):
 
-会议内容（前 8000 字）：
+会议内容(前 10000 字):
 {excerpt}
 
-请输出：
+【v3.0 字段规范】
+- persons[] 每条:
+  * name: 中文姓名(必填)
+  * role: 角色/职位
+  * org: 所属机构
+  * relation_to_wang: 长期合作伙伴/被引荐方/下属/上级/同行/渠道方/未确认
+  * aliases[]: 别名数组(如 ["慧穗黄总", "黄总"]),v7.0 §8.3 必填(空数组也算)
+  * quote_orig: 原文 verbatim(15-80 字),grep 可定位
+  * quote_line_range: [起始行, 结束行]
+  * disambiguation_note: 若同名歧义,简述差异;否则空字符串
+
+- organizations[] 每条:
+  * name: 中文机构名(必填)
+  * type: bank/non_bank_fi/fintech/channel/industry_core/saas/platform/other
+  * aliases[]: 别名数组
+  * business_model: 业务模式简述
+  * cooperation_status: target/exploring/active/paused/terminated
+  * quote_orig + quote_line_range
+
+- concepts[] 每条: name, definition, quote_orig, quote_line_range
+- products[] 每条: name, type, description, quote_orig
+- projects[] 每条: name, status, description, quote_orig
+
+【输出格式】
 {{
   "persons": [
-    {{"name": "姓名", "role": "角色/职位", "relationship": "与王老师的关系"}}
+    {{
+      "name": "黄国华",
+      "role": "创始人/CEO",
+      "org": "慧穗科技",
+      "relation_to_wang": "引荐合作方",
+      "aliases": ["慧穗黄总"],
+      "quote_orig": "黄总今天讲了税局连接的逻辑",
+      "quote_line_range": [42, 50],
+      "disambiguation_note": ""
+    }}
   ],
   "organizations": [
-    {{"name": "机构名", "type": "银行/政府/企业/机构", "role": "在本会议中的角色"}}
+    {{
+      "name": "慧穗科技",
+      "type": "fintech",
+      "aliases": ["慧穗"],
+      "business_model": "业票财税一体化SaaS",
+      "cooperation_status": "target",
+      "quote_orig": "...",
+      "quote_line_range": [...]
+    }}
   ],
-  "concepts": [
-    {{"name": "概念名", "definition": "简短定义", "context": "在本会议中的语境"}}
-  ],
-  "products": [
-    {{"name": "产品名", "type": "金融产品/科技产品", "description": "描述"}}
-  ],
-  "projects": [
-    {{"name": "项目名", "status": "进行中/计划/已落地", "description": "描述"}}
-  ]
+  "concepts": [...],
+  "products": [...],
+  "projects": [...]
 }}
 
-每类最多 5 条，只输出 JSON。
+【规则】
+1. persons/organizations 必填,空也返回 []
+2. aliases 必填数组,空填 []
+3. quote_orig 是 verbatim 原文(grep 验证)
+4. 只输出 JSON
 """
-    result = llm.call(prompt, max_tokens=2000)
-    return safe_json_parse(result, {
-        "persons": [], "organizations": [], "concepts": [], "products": [], "projects": [],
+    result = llm.call(prompt, max_tokens=3000)
+    parsed = safe_json_parse(result, {
+        "persons": [],
+        "organizations": [],
+        "concepts": [],
+        "products": [],
+        "projects": [],
     })
+
+    # 兜底:确保 5 个 key 都存在且为 list
+    for key in ["persons", "organizations", "concepts", "products", "projects"]:
+        if key not in parsed or not isinstance(parsed[key], list):
+            parsed[key] = []
+        else:
+            # 对 person/org 确保 aliases 字段
+            for item in parsed[key]:
+                if isinstance(item, dict) and "aliases" not in item:
+                    item["aliases"] = []
+
+    return parsed
