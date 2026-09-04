@@ -1,0 +1,19 @@
+{
+  "alwaysUpdateLinks": true,
+  "newLinkFormat": "shortest",
+  "useMarkdownLinks": false,
+  "newFileLocation": "current",
+  "attachmentFolderPath": "ASSETS/",
+  "showLineNumber": true,
+  "showInlineTitle": true,
+  "spellcheck": true,
+  "theme": "moonstone",
+  "translucency": true,
+  "baseFontSize": 16,
+  "accentColor": "#7c3aed",
+  "pluginEnabledStatusByID": {
+    "dataview": true,
+    "obsidian-git": true,
+    "templater": true
+  }
+}

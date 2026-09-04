@@ -1,0 +1,11 @@
+{
+  "baseColor": "#7c3aed",
+  "accentColor": "#a78bfa",
+  "translucency": true,
+  "themes": {
+    "moonstone": {
+      "name": "Moonstone",
+      "mode": "dark"
+    }
+  }
+}

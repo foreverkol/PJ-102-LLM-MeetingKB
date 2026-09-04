@@ -1,0 +1,32 @@
+{
+  "main": {
+    "id": "main",
+    "type": "split",
+    "direction": "horizontal",
+    "children": [
+      {
+        "type": "tabs",
+        "children": [
+          {
+            "type": "leaf",
+            "id": "graph-view",
+            "state": {"type": "graph", "collapsed": false}
+          },
+          {
+            "type": "leaf",
+            "id": "dataview-view",
+            "state": {"type": "markdown", "file": "WIKI/.dataview-views.md"}
+          }
+        ]
+      }
+    ]
+  },
+  "left": {
+    "id": "left",
+    "type": "sidebar",
+    "children": [
+      {"id": "file-explorer", "type": "leaf", "state": {"type": "file-explorer"}},
+      {"id": "tag-pane", "type": "leaf", "state": {"type": "tag-pane"}}
+    ]
+  }
+}
