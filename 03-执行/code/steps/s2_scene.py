@@ -61,7 +61,7 @@ def s2_scene_recognition(content: str, llm: LLMClient) -> dict:
 3. 涉及外部资料(论文/白皮书/新闻)→ is_external_knowledge=true
 4. 只输出 JSON,不要其他内容
 """
-    result = llm.call(prompt, max_tokens=8000)  # v3.0 S10: 升 8000
+    result = llm.call(prompt, max_tokens=131072)  # v3.0 S10.1: 改官方推荐 131072
     return safe_json_parse(result, {
         "scene_type": "other",
         "meeting_subtype": "n/a",

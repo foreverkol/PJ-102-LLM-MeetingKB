@@ -53,7 +53,7 @@ def s9_knowledge_classify(content: str, llm: LLMClient) -> dict:
 2. 分类标签按内容匹配,可空
 3. 只输出 JSON
 """
-    result = llm.call(prompt, max_tokens=8000)  # v3.0 S10: 升 8000
+    result = llm.call(prompt, max_tokens=131072)  # v3.0 S10.1: 改官方推荐 131072
     parsed = safe_json_parse(result, {
         "knowledge_type": "general",
         "tags": [],

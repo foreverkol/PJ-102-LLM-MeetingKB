@@ -30,7 +30,7 @@ def s8_risk_blindspot(content: str, llm: LLMClient) -> dict:
 
 每类最多 3 条，只输出 JSON。
 """
-    result = llm.call(prompt, max_tokens=8000)  # v3.0 S10: 升 8000
+    result = llm.call(prompt, max_tokens=131072)  # v3.0 S10.1: 改官方推荐 131072
     return safe_json_parse(result, {
         "risks": [], "blindspots": [], "uncertain": [],
     })

@@ -54,7 +54,7 @@ class LLMClient:
         }
         self.model = self.models.get(provider, "mock")
 
-    def call(self, prompt: str, system: str = "", max_tokens: int = 8000, max_retries: int = 3) -> str:
+    def call(self, prompt: str, system: str = "", max_tokens: int = 131072, max_retries: int = 3) -> str:
         """调用 LLM（带重试）"""
         for attempt in range(max_retries):
             try:

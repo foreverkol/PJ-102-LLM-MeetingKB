@@ -48,7 +48,7 @@ def s10_cognitive_refine(content: str, llm: LLMClient) -> dict:
 4. digital_human_material 4 字段全必填
 5. 只输出 JSON
 """
-    result = llm.call(prompt, max_tokens=8000)  # v3.0 S10: 升 8000
+    result = llm.call(prompt, max_tokens=131072)  # v3.0 S10.1: 改官方推荐 131072
     parsed = safe_json_parse(result, {
         "cognitive_refinement": [],
         "digital_human_material": {},
