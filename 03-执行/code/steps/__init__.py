@@ -1,9 +1,6 @@
 """
-12 步 pipeline 拆分 - PJ-102-LLM-MeetingKB v1.0
-
-每步独立模块，按 S1-S12 顺序调用
+steps package - 注册所有 s1-s13 步骤
 """
-
 from .s1_basic import s1_basic_info
 from .s2_scene import s2_scene_recognition
 from .s3_summary import s3_standard_summary
@@ -16,6 +13,7 @@ from .s9_classify import s9_knowledge_classify
 from .s10_cognitive import s10_cognitive_refine
 from .s11_value import s11_value_rating
 from .s12_wiki import s12_write_wiki, s12_write_all_5_types
+from .s13_financial_params import s13_financial_params  # v3.0 v6.1 新增
 
 __all__ = [
     "s1_basic_info",
@@ -31,4 +29,5 @@ __all__ = [
     "s11_value_rating",
     "s12_write_wiki",
     "s12_write_all_5_types",
+    "s13_financial_params",  # v3.0 v6.1 新增
 ]

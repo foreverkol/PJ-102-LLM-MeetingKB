@@ -188,31 +188,43 @@ class LLMClient:
         return '{"mock": true}'
 
 
-def safe_json_parse(content: str, default: dict) -> dict:
-    """安全解析 JSON（处理 markdown 包裹、尾随逗号等）"""
+def safe_json_parse(content: str, default=None) -> dict:
+    """安全解析 JSON(处理 markdown 包裹、尾随逗号等)
+
+    支持返回 dict 或 list(default 可为同类型)
+    """
     if not content:
-        return default
+        return default if default is not None else {}
     content = content.strip()
 
-    # 移除 markdown 包裹
-    content = re.sub(r"^```(?:json)?\s?```", "", content)
+    # 移除 markdown 围栏
+    content = re.sub(r"^```(?:json)?\s?", "", content)
     content = re.sub(r"\s?```$", "", content)
 
-    # 提取 JSON 块
-    m = re.search(r"\{[\s\S]*\}", content)
-    if m:
-        content = m.group(0)
-
-    # 尝试解析
+    # 尝试解析(优先整个 content)
     try:
         return json.loads(content)
     except json.JSONDecodeError:
         pass
 
-    # 修复尾随逗号
-    try:
-        content = re.sub(r",\s*}", "}", content)
-        content = re.sub(r",\s*]", "]", content)
-        return json.loads(content)
-    except:
-        return default
+    # 提取 JSON 块(dict 或 list)
+    for pattern in [r"\{[\s\S]*\}", r"\[[\s\S]*\]"]:
+        m = re.search(pattern, content)
+        if m:
+            try:
+                return json.loads(m.group(0))
+            except json.JSONDecodeError:
+                continue
+
+    # 修复尾随逗号重试
+    for pattern in [r"\{[\s\S]*\}", r"\[[\s\S]*\]"]:
+        m = re.search(pattern, content)
+        if m:
+            try:
+                fixed = re.sub(r",\s*}", "}", m.group(0))
+                fixed = re.sub(r",\s*]", "]", fixed)
+                return json.loads(fixed)
+            except json.JSONDecodeError:
+                continue
+
+    return default if default is not None else {}
