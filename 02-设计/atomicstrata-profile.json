@@ -1,0 +1,166 @@
+{
+  "version": "1.0",
+  "schema": "PJ-102-v3.0",
+  "description": "PJ-102 LLM MeetingKB v3.0 domain profile for atomicstrata llmwiki",
+  "created": "2026-09-04",
+
+  "entities": {
+    "meeting": {
+      "fields": ["title", "date", "duration_min", "participants",
+                 "key_topics", "meeting_type", "meeting_subtype",
+                 "chapters", "action_items", "ldamc", "source_ref"],
+      "required": ["title", "date", "source_ref", "ldamc"],
+      "default_status_stage": "compiled"
+    },
+
+    "person": {
+      "fields": ["name", "canonical_name", "aliases", "entity_id",
+                 "org", "job_title", "relation_to_wang", "trust_level",
+                 "capabilities", "thinking_framework",
+                 "values_beliefs", "decision_style", "emotional_tone",
+                 "value_chain_position", "business_relations",
+                 "source_ref"],
+      "required": ["name", "entity_id", "thinking_framework",
+                   "values_beliefs", "decision_style", "emotional_tone"],
+      "entity_id_pattern": "person_{canonical_name_hash8}_{seq4}"
+    },
+
+    "organization": {
+      "fields": ["name", "canonical_name", "aliases", "entity_id",
+                 "org_type", "industry", "cooperation_status",
+                 "relationship_depth", "business_model",
+                 "competitive_moat", "target_market",
+                 "revenue_model", "business_relations", "value_grade",
+                 "source_ref"],
+      "required": ["name", "entity_id", "org_name", "org_type",
+                   "business_model", "cooperation_status"],
+      "entity_id_pattern": "org_{canonical_name_hash8}_{seq4}"
+    },
+
+    "concept": {
+      "fields": ["name", "domain", "origin", "prerequisites",
+                 "counter_examples", "evolution", "source_ref"]
+    },
+
+    "judgment": {
+      "fields": ["topic_key", "judgment_id", "statement", "judgment_type",
+                 "evidence_strength", "evidence_chain",
+                 "evolved_from", "evolved_to", "contradictions",
+                 "counter_arguments", "confidence_rationale",
+                 "verified_status", "stance", "value_grade",
+                 "source_ref"],
+      "required": ["topic_key", "evidence_chain", "confidence_rationale"]
+    },
+
+    "decision": {
+      "fields": ["problem", "alternatives", "chosen", "reason",
+                 "outcome", "constraints", "review_trigger",
+                 "date", "value_grade", "source_ref"]
+    },
+
+    "scenario": {
+      "fields": ["theme", "customer", "pain_point", "offering",
+                 "value_capture", "channel", "key_resources",
+                 "key_constraints", "hidden_assumptions",
+                 "trigger_signals", "failure_modes",
+                 "extraction_perspective", "source_ref"],
+      "required": ["theme", "customer", "pain_point", "offering",
+                   "value_capture", "channel", "key_resources",
+                   "key_constraints", "hidden_assumptions",
+                   "trigger_signals", "failure_modes"]
+    },
+
+    "external_ref": {
+      "fields": ["title", "source_url", "authors", "publication_date",
+                 "key_claims", "can_update_internal"],
+      "required": ["title", "can_update_internal"],
+      "default_can_update_internal": false
+    }
+  },
+
+  "relations": [
+    {"from": "meeting", "to": "person",
+     "predicate": "mentions", "directed": false},
+    {"from": "meeting", "to": "organization",
+     "predicate": "mentions", "directed": false},
+    {"from": "judgment", "to": "judgment",
+     "predicate": "evolved_from", "directed": true},
+    {"from": "judgment", "to": "judgment",
+     "predicate": "evolved_to", "directed": true},
+    {"from": "judgment", "to": "judgment",
+     "predicate": "contradicts", "directed": true},
+    {"from": "person", "to": "organization",
+     "predicate": "affiliated_with", "directed": true},
+    {"from": "person", "to": "person",
+     "predicate": "introduces", "directed": true},
+    {"from": "scenario", "to": "concept",
+     "predicate": "elaborates", "directed": true}
+  ],
+
+  "lifecycle": {
+    "states": ["raw", "compiled", "reviewed", "canonical", "superseded"],
+    "transitions": {
+      "raw": ["compiled"],
+      "compiled": ["reviewed", "superseded"],
+      "reviewed": ["canonical", "superseded"],
+      "canonical": ["superseded"],
+      "superseded": []
+    },
+    "default_state": "compiled"
+  },
+
+  "content_tiers": {
+    "private": {
+      "description": "王老师私人 + 私密来源",
+      "publishable": false
+    },
+    "internal": {
+      "description": "内部沉淀 + 项目内可见",
+      "publishable": "internal"
+    },
+    "public": {
+      "description": "脱敏后公开(投资人对接/案例)",
+      "publishable": "public"
+    }
+  },
+
+  "workflows": {
+    "default_ingest": [
+      "load source content",
+      "extract entities per schema",
+      "generate citations with verbatim quotes",
+      "append observations to entity master (append-only)",
+      "write 5 types of wiki pages (meeting/person/org/judgment/scenario)",
+      "compute ldamc 5-dim self-check",
+      "lint with 7-dim + v7.0 required fields",
+      "trigger feishu alert if critical"
+    ]
+  },
+
+  "retrieval": {
+    "policy": "entity-first",
+    "l1_entity_nav_threshold": 0.85,
+    "l2_semantic_fallback": true,
+    "max_l1_results": 5
+  },
+
+  "lint_rules": {
+    "v7.0_required_fields": {
+      "meeting": ["subtype", "publishability", "reusable_for",
+                  "ldamc", "source_ref"],
+      "person": ["entity_id", "thinking_framework", "values_beliefs",
+                 "decision_style", "emotional_tone"],
+      "judgment": ["topic_key", "evidence_chain", "confidence_rationale"],
+      "organization": ["entity_id", "org_name", "org_type",
+                       "business_model", "cooperation_status"],
+      "scenario": ["theme", "customer", "pain_point", "offering",
+                   "value_capture", "channel", "key_resources",
+                   "key_constraints", "hidden_assumptions",
+                   "trigger_signals", "failure_modes"]
+    },
+    "ldamc_required_keys": ["lost", "different", "added", "more",
+                             "connected"],
+    "append_only_master": true,
+    "disambiguation_rule": "canonical_name 一对一 entity_id"
+  }
+}
