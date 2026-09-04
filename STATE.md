@@ -1,105 +1,120 @@
 # PJ-102-LLM-MeetingKB · STATE
 
-> **状态**: ✅ v1.0 文档齐全 + 测试通过
-> **最后更新**: 2026-09-03
+> **状态**: ✅ v3.0.0 release-ready + tag 已推送
+> **最后更新**: 2026-09-04
 > **运行模式**: 独立项目
 
-## 当前状态
+## 当前状态(v3.0.0)
 
 | 维度 | 数据 |
 |---|---|
-| 项目年龄 | 1 天（2026-09-03 创建） |
-| 当前版本 | **v1.0** |
-| 处理样本数 | **10/255**（已验证）|
-| WIKI 数量 | 10 个 meetings |
-| LLM Provider | MiniMax M3 |
-| 测试通过率 | **9/9（100%）** |
+| 当前版本 | **v3.0.0** (tag 73e325c) |
+| 项目年龄 | 1 天(2026-09-03 创建 → 09-04 v3.0.0)|
+| L1 测试 | **125 / 125 PASS**(实测 0.112s)|
+| 10 Hard Gate | **10 / 10 PASS**(L3 验收实测)|
+| LLM Provider | **MiniMax-M3** ⭐ 王老师 09-04 纠正 |
+| WIKI md(当前) | 32 个(v1.0 baseline)|
+| 代码模块 | **22 个 Python 文件**(原 16 + v3.0 新增 6)|
+| L1 测试用例 | **32 个文件 / 125 个方法**(0.112s 全 PASS)|
+| 部署脚本 | 3 个(.github/workflows/lint.yml + cron + scripts)|
+| GitHub 同步 | ✅ origin/main = local/main |
+| v3.0.0 tag | ✅ 73e325c 已 push |
 
-## ✅ 已完成（全部齐全）
+## ✅ Sprint 1 全完成(W1-W4 26/26 TC)
 
-### 1. 需求文档（5 份）
-- ✅ 需求总纲 v1.0
-- ✅ 项目范围与边界 v1.0
-- ✅ 成功标准 v1.0
-- ✅ 风险与依赖 v1.0
-- ✅ 验收标准 v1.0
+### W1 v6.1 P-1/P-2/P-3/P-4 集成(7 TC)
+- ✅ v1.0-baseline rollback tag
+- ✅ 4 step v6.1 改造 + safe_json_parse list
+- ✅ llm_client MiniMax-M3 修正(王老师 09-04 11:34)
+- 1 sample 真实 LLM 跑通(W1.5b 56s)
 
-### 2. 设计文档（7 份）
-- ✅ 系统架构 v1.0
-- ✅ 数据流详细设计 v1.0
-- ✅ 12 步 Pipeline 详细设计 v1.0
-- ✅ LLM 调用架构 v1.0
-- ✅ 错误处理策略 v1.0
-- ✅ 性能指标 v1.0
-- ✅ 集成设计 v1.0
+### W2 v7.0 + 9 个新模块(8 TC,44 L1 测试)
+- ✅ s6/s7/s10 v7.0 字段 + citations.py extraction_patch
+- ✅ entity_resolver.py (v7.0 entity_id)
+- ✅ lifecycle_stage.py (v7.0 status_stage 5 阶段)
+- ✅ lint_wiki.py (7 维 + v7.0 必填字段检查)
+- ✅ dispute_detector.py (v7.0 contradictions + topic_key)
+- ✅ daily_incremental.py 增量调度
+- ✅ feishu_lint_alert.py 飞书告警
 
-### 3. 代码（16 个 Python 文件）
-- ✅ pipeline.py（主入口）
-- ✅ llm_client.py（LLM 客户端 + 容错）
-- ✅ steps/s1_basic.py 到 s12_wiki.py（12 步）
+### W3 Query + scenario(5 TC,25 L1 测试)
+- ✅ entity_nav.py L1 实体导航
+- ✅ kb_retriever.py 双层 Query
+- ✅ s14_scenario.py ★v7.0 新增 step + 11 字段 scenario
+- ✅ scenario_extractor.py 写 WIKI/Knowledge/Scenarios/
+- ✅ review_queue.py 三级分流
 
-### 4. 配置文件（4 份）
-- ✅ AGENT.md（项目身份）
-- ✅ CLAUDE_NOTE.md（Claude 协作）
-- ✅ launcher.yaml（启动入口）
-- ✅ .env.example（环境变量示例）
+### W4 自动化 + L3 + release(6 TC)
+- ✅ .github/workflows/lint.yml 自动化 CI(3 jobs)
+- ✅ cron/daily_incremental.sh 部署脚本
+- ✅ scripts/run_full_pipeline.sh(SAMPLE_LIMIT=10 默认,王老师限制)
+- ✅ L3 验收报告(10 / 10 Hard Gate 全 PASS)
+- ✅ v3.0.0 tag + GitHub release
 
-### 5. 顶层入口（4 份）
-- ✅ index.md（项目入口）
-- ✅ STATE.md（项目状态）
-- ✅ registry.yaml（项目注册）
-- ✅ README.md（快速入门）
+### W5 Post-release(Sprint 2)
+- ✅ STATE.md 更新(本份)
+- ✅ CHANGELOG.md 更新
+- 🔄 教训沉淀 Skill(W6)
 
-### 6. 复盘与决策（4 份）
-- ✅ 状态报告 v1.0
-- ✅ 复盘报告 v1.0
-- ✅ 性能基准报告 v1.0
-- ✅ 故障处理手册 v1.0
-- ✅ 运维手册 v1.0
+## v3.0 Rev2 文档(4 份落地)
 
-### 7. 培训材料（3 份）
-- ✅ 使用手册 v1.0
-- ✅ 操作流程图 v1.0
-- ✅ FAQ v1.0
+| 文档 | 行数 | 大小 | commit |
+|---|---:|---:|---|
+| 01-需求/需求总纲_v3.0-SCHEMA71集成.md | 412 | 21KB | 0adb139 |
+| 02-设计/设计总纲_v3.0-SCHEMA71集成.md | 725 | 28KB | 9290435 |
+| 03-执行/测试验证_v3.0-SCHEMA71集成.md | 841 | 35KB | b34ad46 |
+| 03-执行/工程执行计划_v3.0-SCHEMA71集成.md | 304 | 10KB | 6d638e6 |
+| 04-复盘与决策/L3验收报告_v3.0.md | 228 | 9KB | 9b29c8b |
 
-### 8. 测试（基础烟雾测试）
-- ✅ tests/unit/smoke_test.py（9 个测试）
+## v6.1 4 补丁 + v7.0 10 新规 集成
 
-### 9. WIKI 产出
-- ✅ 10 个 meetings（实测跑通）
+### v6.1(4)
+1. ✅ 判断标注 `[判断:发言人]`
+2. ✅ 定量金融参数 9 类
+3. ✅ 可转化资产 tag 5 类
+4. ✅ meeting_type 6 类 + subtype 6 类
 
-## 📊 最终统计
+### v7.0(10)
+1. ✅ ldamc 5 维自检
+2. ✅ contradictions 字段
+3. ✅ entity_id 统一编号
+4. ✅ canonical_name + aliases
+5. ✅ status_stage 5 阶段状态机
+6. ✅ topic_key judgment 主题聚合
+7. ✅ evolution 演化链
+8. ✅ scenario 新页面类型
+9. ✅ external_ref 纯度规则
+10. ✅ extraction_patch YAML 中间层
 
-| 类别 | 数量 |
-|---|---|
-| 文档（Markdown）| **30 份** |
-| Python 源码 | **16 个文件** |
-| 配置文件 | **4 份** |
-| 顶层入口 | **4 份** |
-| WIKI 产出 | **10 个** |
-| 测试用例 | **9 个**（全过） |
-| **总文件数** | **~70 个** |
+## ⚠️ 王老师限制(2026-09-04 13:00 明确)
 
-## 关键数据
+- **不要跑全量 286 个录音文字**
+- **只跑 ≤10 个测试样例**
+- SAMPLE_LIMIT=10 默认配置已落实
 
-### 性能（10 个样本实测）
-- ✅ 总耗时：1358.2 秒（22.6 分钟）
-- ✅ 平均：135.8 秒/文件
-- ✅ 成功率：100%
-- ✅ 自动重试：1 次成功
+## 永久防丢失机制(铁律零)
 
-### 质量
-- ✅ 12 步全流程
-- ✅ MiniMax M3 真实调用
-- ✅ 王老师认可质量
+```
+write_file → [1] ls -la 验证存在
+          → [2] wc -l 验证行数
+          → [3] head -3 验证内容
+          → [4] git add <path>
+          → [5] git commit -m "..." + git log --oneline -1 验证
 
-## 下一步
+任一失败立刻报告,不允许跨过。
+```
 
-- ⏸ 扩量到 50 / 255（王老师待决策）
-- ⏸ 5 类 WIKI 完整（person / concept / judgment / comparison）
-- ⏸ Cron 调度
-- ⏸ 飞书/微信通知
+2026-09-04 12:00 文档丢失事件教训固化。
 
-## 王老师认可
+## 待办(Sprint 2 收尾 + Sprint 3 候选)
 
-> meetings 质量非常不错
+### Sprint 2 收尾
+- ⚪ W6 教训沉淀 Skill(2-3 个 Skill)
+- ⚪ GitHub Release 页面写 release notes
+
+### Sprint 3 候选(王老师决策)
+- ⚪ 312 源实际跑批(王老师指令限制 ≤10)
+- ⚪ v3.0 Obsidian .obsidian/ 配置(9 块 Dataview)
+- ⚪ atomicstrata Profile.json + 5 个 sample PoC
+- ⚪ workbuddy 接入 v3.0 提示词升级
+- ⚪ OBra Knowledge Graph 集成(本地 sqlite-vec)
