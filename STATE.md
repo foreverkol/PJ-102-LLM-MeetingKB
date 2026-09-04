@@ -109,12 +109,18 @@ write_file → [1] ls -la 验证存在
 ## 待办(Sprint 2 收尾 + Sprint 3 候选)
 
 ### Sprint 2 收尾
-- ⚪ W6 教训沉淀 Skill(2-3 个 Skill)
-- ⚪ GitHub Release 页面写 release notes
+- ⚪ W6 教训沉淀 Skill(2-3 个 Skill) — ✅ 已落 write-file-lost-prevention + v3-sprint-superpower-execution
+- ⚪ GitHub Release 页面写 release notes — ✅ v3.0.0 tag 已 push(73e325c)
 
 ### Sprint 3 候选(王老师决策)
 - ⚪ 312 源实际跑批(王老师指令限制 ≤10)
-- ⚪ v3.0 Obsidian .obsidian/ 配置(9 块 Dataview)
-- ⚪ atomicstrata Profile.json + 5 个 sample PoC
-- ⚪ workbuddy 接入 v3.0 提示词升级
+- ⚪ v3.0 Obsidian .obsidian/ 配置(9 块 Dataview) — ✅ Sprint 3 完成
+- ⚪ atomicstrata Profile.json + 5 个 sample PoC — ✅ Sprint 4 完成
+- ⚪ workbuddy 接入 v3.0 提示词升级 — ✅ Sprint 3 完成
 - ⚪ OBra Knowledge Graph 集成(本地 sqlite-vec)
+
+### Sprint 4-5-6 收官
+- ⚪ atomicstrata 真实 PoC 5 sample(王老师限制) — ✅ Sprint 4
+- ⚪ atomicstrata MCP server 集成报告 — ✅ Sprint 5
+- ⚪ Hermes config.yaml 实际接入 atomicstrata MCP — ✅ Sprint 6
+- ⚪ Sprint 6 总结报告
