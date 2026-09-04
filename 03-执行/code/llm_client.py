@@ -46,7 +46,7 @@ class LLMClient:
 
         self.provider = provider
         self.models = {
-            "minimax": "MiniMax-Text-01",
+            "minimax": "MiniMax-M3",   # v3.0 修正:王老师指定 MiniMax-M3,不是 MiniMax-Text-01
             "deepseek": "deepseek-chat",
             "openai": "gpt-4o-mini",
             "anthropic": "claude-3-haiku-20240307",
