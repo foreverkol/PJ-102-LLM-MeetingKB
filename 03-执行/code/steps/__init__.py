@@ -13,7 +13,8 @@ from .s9_classify import s9_knowledge_classify
 from .s10_cognitive import s10_cognitive_refine
 from .s11_value import s11_value_rating
 from .s12_wiki import s12_write_wiki, s12_write_all_5_types
-from .s13_financial_params import s13_financial_params  # v3.0 v6.1 新增
+from .s13_financial_params import s13_financial_params
+from .s14_scenario import s14_scenario  # v3.0 v7.0 新增
 
 __all__ = [
     "s1_basic_info",
@@ -29,5 +30,6 @@ __all__ = [
     "s11_value_rating",
     "s12_write_wiki",
     "s12_write_all_5_types",
-    "s13_financial_params",  # v3.0 v6.1 新增
+    "s13_financial_params",
+    "s14_scenario",  # v3.0 v7.0 新增
 ]
