@@ -79,7 +79,8 @@ class TestKBRetriever(unittest.TestCase):
         result = r.query_wiki("xyz不存在的关键字")
         self.assertEqual(result["level"], "L2")
         self.assertIsNotNone(result["synthesis"])
-        self.assertIn("Stub", result["synthesis"])
+        # Sprint 19: stub 改 lowercase 后,测试断言改为 case-insensitive
+        self.assertIn("stub", result["synthesis"].lower())
 
     def test_03_complex_query_fallback(self):
         """综合查询触发 L2"""
