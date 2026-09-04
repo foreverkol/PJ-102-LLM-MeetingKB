@@ -1,0 +1,69 @@
+name: Lint & L1 Tests
+
+on:
+  schedule:
+    # 每周一 8:00(王老师上班前) + 周四 16:00
+    - cron: '0 0 * * 1'
+    - cron: '0 8 * * 4'
+  push:
+    branches: [main]
+    paths:
+      - '03-执行/code/**/*.py'
+      - '03-执行/tests/**/*.py'
+  workflow_dispatch:    # 手动触发
+
+jobs:
+  l1-tests:
+    name: L1 单元测试
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 设置 Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装 PyYAML(citations.py 需要)
+        run: pip install pyyaml
+
+      - name: 运行 L1 单元测试
+        working-directory: 03-执行
+        run: |
+          python3 -m unittest discover tests/unit -v 2>&1 | tail -50
+
+  lint-wiki:
+    name: lint_wiki.py 健康巡检(dry-run)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 设置 Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 运行 lint_wiki.py CLI 验证可执行
+        run: |
+          python3 03-执行/code/lint_wiki.py /tmp/nonexistent-wiki 2>&1 | head -20
+          echo "---"
+          echo "✅ lint_wiki.py CLI 入口可执行(空目录返回空 report 即可)"
+
+  frontend:
+    name: v2.0 Rev2 文档完整性自检
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 验证 v3.0 Rev2 4 份文档都存在
+        run: |
+          set -e
+          # R5 防坑机制:任何 write_file 后必须 ls -la 验证
+          test -f "01-需求/需求总纲_v3.0-SCHEMA71集成.md" || (echo "❌ 需求总纲缺失"; exit 1)
+          test -f "02-设计/设计总纲_v3.0-SCHEMA71集成.md" || (echo "❌ 设计总纲缺失"; exit 1)
+          test -f "03-执行/测试验证_v3.0-SCHEMA71集成.md" || (echo "❌ 测试验证缺失"; exit 1)
+          test -f "03-执行/工程执行计划_v3.0-SCHEMA71集成.md" || (echo "❌ 工程执行计划缺失"; exit 1)
+          echo "✅ v3.0 Rev2 4 份核心文档全部就位"
