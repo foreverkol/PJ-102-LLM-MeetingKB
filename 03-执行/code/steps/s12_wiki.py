@@ -25,11 +25,26 @@ title: "{title}"
 type: meeting
 file_hash: {content_hash}
 source: {state['sample']}
-generated_at: 2026-09-03
-generator: pj102-llm-meetingkb-v1.0
+generated_at: 2026-09-04
+generator: pj102-llm-meetingkb-v3.0
 llm_provider: {state['_meta']['llm_provider']}
 llm_model: {state['_meta']['llm_model']}
 content_hash: {content_hash}
+# === v6.1 P-4 meeting_type 6 类 ===
+meeting_type: {state['s2'].get('scene_type', 'other')}
+meeting_subtype: {state['s2'].get('scene_subtype', 'N/A')}
+is_external_knowledge: {state['s2'].get('is_external_knowledge', False)}
+# === v6.1 P-1 [判断:] 标注(已嵌入 body) ===
+# === v7.0 ldamc 5 维自检 ===
+ldamc:
+  lost: "暂无"
+  different: "暂无"
+  added: "暂无"
+  more: "暂无"
+  connected: "暂无"
+# === v7.0 §8.1 必填 ===
+status_stage: compiled
+value_grade: B
 ---
 
 # {title}

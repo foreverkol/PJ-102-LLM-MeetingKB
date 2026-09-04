@@ -26,6 +26,8 @@ from steps import (
     s7_action_decision, s8_risk_blindspot, s9_knowledge_classify,
     s10_cognitive_refine, s11_value_rating, s12_write_wiki,
     s12_write_all_5_types,
+    s13_financial_params,  # v3.0 v6.1 P-2
+    s14_scenario,          # v3.0 v7.0 FR-v7.0-008
 )
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent  # PJ-102-LLM-MeetingKB/
@@ -59,12 +61,15 @@ def process_one(sample: dict, llm: LLMClient) -> dict:
     s9 = s9_knowledge_classify(content, llm)
     s10 = s10_cognitive_refine(content, llm)
     s11 = s11_value_rating(content, llm)
+    s13 = s13_financial_params(content, llm)  # v3.0 v6.1 P-2
+    s14 = s14_scenario(content, llm)          # v3.0 v7.0 FR-v7.0-008
 
     return {
         "sample": sample["filename"],
         "content_hash": sample["content_hash"],
         "s1": s1, "s2": s2, "s3": s3, "s4": s4, "s5": s5,
         "s6": s6, "s7": s7, "s8": s8, "s9": s9, "s10": s10, "s11": s11,
+        "s13": s13, "s14": s14,  # v3.0 v6.1+v7.0 集成
         "_meta": {
             "llm_provider": llm.provider,
             "llm_model": llm.model,
