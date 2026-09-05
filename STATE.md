@@ -1,14 +1,63 @@
 # PJ-102-LLM-MeetingKB · STATE
 
-> **状态**: ✅ v3.0.1-stable + Sprint 18/20 P0 完工
+> **状态**: ✅ v3.1.0-rc1 + M0-M3 + M4 A+B + M5 收尾 + Codex 三次评审 8.5/10
 > **最后更新**: 2026-09-05 (由 Hermes 实测同步)
 > **运行模式**: 独立项目 · Sprint 模式
-> **基线对齐**: 与 v3.0.1-stable tag 一致(commit ff7ca8e)
+> **基线对齐**: v3.0.1-stable tag (基线) + v3.1.0-rc1 tag (本次, 19 commits ahead)
 > **HEAD 位置**: 3414518(Sprint 22 VERSION_MANAGEMENT.md 规范更新)
 
 ---
 
-## 📊 当前状态(v3.0.1-stable)
+## 🚧 v3.1.0-rc1 状态(2026-09-06 03:10 CST,Codex 三次评审 8.5/10)
+
+> **当前版本**:**v3.1.0-rc1**(M0-M3 + M4 A+B + M5 收尾 + Codex 8.5/10)
+> **基线对齐**:与 v3.0.1-stable tag 一致(向上 19 commits)
+> **王老师 9-06 OUT-OF-BAND**: "专业建议 + 自动执行 + Codex CLI 评审" 三轮协议完成
+
+### v3.1.0-rc1 阶段状态
+
+| 阶段 | 状态 | 评分 |
+|------|------|------|
+| M0 详细工程计划 + 闸门 | ✅ | - |
+| M1 P0 4 项(T-01/T-02/T-08/T-13) | ✅ | - |
+| M2 P1(T-09 236 → 424 dataview) | ✅ | - |
+| M3 P2(T-12 CLI + T-07 + T-10) | ✅ | - |
+| M4 A(Codex 评审 H1-H4 修复) | ✅ | - |
+| M4 B(王老师 OUT-OF-BAND 6 项) | ✅ | - |
+| M5 收尾(决策 1-4) | ✅ | - |
+| **Codex 评审** | **三次** | **5 → 7.5 → 8.5** |
+
+### v3.1.0-stable 不打(遵守 v41)
+
+- v41 教训:"stable tag 必须王老师拍板"
+- 当前状态:**完美的 rc**,等王老师拍板升 v3.1.0-stable
+
+### 王老师 5 项历史决策点(等下次触发)
+
+| 选项 | 任务 |
+|------|------|
+| A | T-11 Web Clipper |
+| B | T-14 三层架构 |
+| C | T-13B atomicstrata npm 化 |
+| D | T-01 75 relationship 修复 |
+| E | 11 YAML + Sprint 22 + v3.1.0-stable(Codex 推荐)|
+
+### 资产实测(2026-09-06 03:10)
+
+| 资产 | 数字 |
+|------|------|
+| Wiki 总数 | 357 (02-知识库独立 git) |
+| 测试 | 98 PASS |
+| Dataview 块 | 424 |
+| Templater 模板 | 8 (v1.1) |
+| .base 文件 | 5 |
+| Python 模块 | 25 (新 9) |
+| 02-知识库 git commits | 4 |
+| PJ-102 commits ahead | 19 |
+
+---
+
+## 📊 当前状态(v3.0.1-stable) [历史基线]
 
 | 维度 | 数据 | 来源 |
 |---|---|---|
