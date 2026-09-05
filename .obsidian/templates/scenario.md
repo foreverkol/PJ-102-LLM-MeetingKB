@@ -1,6 +1,15 @@
 ---
 type: scenario
+# ============================================
+# @required 必填字段
+# ============================================
 theme: "<% tp.file.title %>"
+type: "scenario"
+date: "<% tp.date.now(\"YYYY-MM-DD\") %>"
+generator: "pj102-templater-v1.1"
+# ============================================
+# @optional 可选字段
+# ============================================
 customer: ""
 pain_point: ""
 offering: ""
@@ -13,28 +22,31 @@ trigger_signals: []
 failure_modes: []
 source_ref: ""
 source_meeting: ""
-date: <% tp.date.now("YYYY-MM-DD") %>
-generator: pj102-templater-v1.0
-llm_provider: minimax
-llm_model: MiniMax-M3
-generated_at: <% tp.date.now("YYYY-MM-DDTHH:mm:ss") %>
+canonical_name: "<% tp.file.title %>"
+aliases: []
+entity_id: "scenario_<% tp.date.now(\"YYYYMMDD_HHmmss\") %>"
+llm_provider: "minimax"
+llm_model: "MiniMax-M3"
+generated_at: "<% tp.date.now(\"YYYY-MM-DDTHH:mm:ss\") %>"
 ---
 
 # <% tp.file.title %>
 
-## 🎯 客户与痛点
+> **@required**:theme / type / date / generator
+
+## 🎯 客户与痛点 (可选)
 
 - **目标客户**: <% tp.file.cursor(1) %>
 - **核心痛点**: <% tp.file.cursor(2) %>
 
-## 💡 提供的价值
+## 💡 提供的价值 (可选)
 
 <% tp.file.cursor(3) %>
 
-## 💰 价值捕获
+## 💰 价值捕获 (可选)
 
 <% tp.file.cursor(4) %>
 
-## 📡 渠道
+## 📡 渠道 (可选)
 
 <% tp.file.cursor(5) %>

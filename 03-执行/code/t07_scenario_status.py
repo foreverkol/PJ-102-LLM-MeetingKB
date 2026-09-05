@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-t07_scenario_extractor.py - T-07 scenario 实质化
+t07_scenario_status.py - T-07 scenario 状态检查
 
 实测 (2026-09-05 22:55):
 - s14_scenario.py 已 4.2 KB,11 字段完整实现
@@ -28,7 +28,7 @@ S14_SIZE = S14_PATH.stat().st_size if S14_PATH.exists() else 0
 
 
 def main():
-    parser = argparse.ArgumentParser(description="T-07 scenario 实质化")
+    parser = argparse.ArgumentParser(description="T-07 scenario 状态检查")
     parser.add_argument("--dry-run", action="store_true", default=True)
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
@@ -36,7 +36,7 @@ def main():
     apply_mode = args.apply
 
     print("=" * 75)
-    print("T-07 scenario 实质化 (基础设施层)")
+    print("T-07 scenario 状态检查 (基础设施层)")
     print("=" * 75)
     print()
 

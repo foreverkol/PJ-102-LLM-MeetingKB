@@ -1,31 +1,43 @@
 ---
 type: concept
+# ============================================
+# @required 必填字段
+# ============================================
 name: "<% tp.file.title %>"
-domain: <% tp.system.suggester(["供应链金融", "票据业务", "保理业务", "助贷", "数据风控", "其他"]) %>
+type: "concept"
+date: "<% tp.date.now(\"YYYY-MM-DD\") %>"
+generator: "pj102-templater-v1.1"
+# ============================================
+# @optional 可选字段
+# ============================================
+domain: ""
 origin: ""
 prerequisites: []
 counter_examples: []
 evolution: ""
 source_ref: ""
 source_meeting: ""
-date: <% tp.date.now("YYYY-MM-DD") %>
-generator: pj102-templater-v1.0
-llm_provider: minimax
-llm_model: MiniMax-M3
-generated_at: <% tp.date.now("YYYY-MM-DDTHH:mm:ss") %>
+canonical_name: "<% tp.file.title %>"
+aliases: []
+entity_id: "concept_<% tp.date.now(\"YYYYMMDD_HHmmss\") %>"
+llm_provider: "minimax"
+llm_model: "MiniMax-M3"
+generated_at: "<% tp.date.now(\"YYYY-MM-DDTHH:mm:ss\") %>"
 ---
 
 # <% tp.file.title %>
 
-## 📚 概念定义
+> **@required**:name / type / date / generator
+
+## 📚 概念定义 (可选)
 
 <% tp.file.cursor(1) %>
 
-## 🔄 起源
+## 🔄 起源 (可选)
 
 <% tp.file.cursor(2) %>
 
-## ⚠️ 反例
+## ⚠️ 反例 (可选)
 
 <% tp.file.cursor(3) %>
 

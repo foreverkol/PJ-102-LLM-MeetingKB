@@ -4,7 +4,7 @@ project_id: PJ-102
 project_name: LLM MeetingKB
 parent_project: null  # 独立项目，无父项目
 created: 2026-09-03
-version: v1.0
+version: v3.1.0-rc1
 status: active
 isolation: full  # 完全独立，零依赖
 
@@ -18,7 +18,7 @@ paths:
 # 核心配置
 config:
   llm_provider: minimax
-  llm_model: MiniMax-Text-01
+  llm_model: MiniMax-M3
   pipeline_steps: 12
   wiki_types:
     - meeting
@@ -26,16 +26,27 @@ config:
     - concept
     - judgment
     - comparison
+    - organization
+    - decision
+    - scenario
+    - external_ref
 
 # 依赖关系（应该都为空）
 dependencies: []
 
 # 历史版本
 changelog:
-:
+  - version: v3.1.0-rc1
+    date: 2026-09-05
+    status: active
+    notes: Superpower 模式 M0+M1+M2+M3 + M4 阶段 A 完成(98 测试 PASS)
+  - version: v3.0.1-stable
+    date: 2026-09-04
+    status: previous
+    notes: Sprint 15 主版本
   - version: v1.0
     date: 2026-09-03
-    status: active
+    status: archived
     notes: 全项全量移植版，13/13 验证跑通
 
 # 关联项目（都为空）

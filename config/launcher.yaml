@@ -2,8 +2,9 @@
 
 project_id: PJ-102
 project_name: LLM MeetingKB
-version: v1.0
+version: v3.1.0-rc1
 created: 2026-09-03
+updated: 2026-09-06
 
 # 执行入口
 entries:
@@ -28,6 +29,18 @@ entries:
     description: 清空 WIKI 目录
     command: "rm -rf /mnt/d/BaiduSyncdisk/hermes/02-知识库/PJ-102-LLM-MeetingKB/*"
 
+  pj102_status:
+    description: 项目状态查询
+    command: "cd 03-执行/code && python3 pj102.py status"
+
+  pj102_lint:
+    description: Wiki lint
+    command: "cd 03-执行/code && python3 pj102.py lint"
+
+  pytest:
+    description: 跑所有单元测试
+    command: "python3 -m pytest 03-执行/tests/unit/ -v"
+
 # 依赖
 dependencies:
   python: ">=3.11"
@@ -36,6 +49,24 @@ dependencies:
 # 配置
 config:
   llm_provider: minimax
+  llm_model: MiniMax-M3
   pipeline_steps: 12
   wiki_types:
     - meeting
+    - person
+    - concept
+    - judgment
+    - comparison
+    - organization
+    - decision
+    - scenario
+    - external_ref
+
+# M4 阶段产出 (Codex 评审 9-06 触发)
+m4_gates:
+  A1: "✅ H1 修复 19 个损坏 frontmatter"
+  A2: "✅ H3 cascade_updater --apply 真实现"
+  A3: "✅ H4 t13 行号引用真升级"
+  A4: "✅ M1 T-09 兼容 meetings (15 个加 dataview)"
+  A5: "✅ 新增 8 个单元测试 (98 passed)"
+  A6: "✅ H2 02-知识库 git 化 (357 文件 init commit)"
