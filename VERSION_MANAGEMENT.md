@@ -1,8 +1,52 @@
 # PJ-102-LLM-MeetingKB · 版本管理 + 回退指南
 
 > **当前稳定版本**:v3.0.1-stable(13 sample 实测跑通,meeting_type 6 类命中 5/6)
-> **生成时间**:2026-09-04
+> **下一开发版**:v3.1.0-rc1(Sprint 21 Sprint 21 Karpathy+Obsidian 双核心升级)
+> **生成时间**:2026-09-05 21:30 CST(王老师 SOP v1.0 全量同步后)
 > **适用**:PJ-102 v3.0 体系所有迭代
+
+---
+
+## 📌 2026-09-05 SOP v1.0 重大更新
+
+王老师 9-05 OUT-OF-BAND:"我们项目是一个逐步迭代的过程,如果有差异比加大或者有分支要明确提示和版本设置以及版本分支的处理"
+
+### 分支架构(实测,本次创建)
+
+```
+main (v3.0.1-stable, 55 commits, 实际稳定版)
+  │
+  ├── dev (本次创建,持续开发)
+  │   │
+  │   ├── feature/sprint-21-v3.1.0-rc1 (待 Sprint 21 启动时创建)
+  │   ├── feature/sprint-22-xxx (待 Sprint 22 启动)
+  │   │
+  │   └── release/v3.1.0-rc1 (待 Sprint 21 完工)
+  │       │
+  │       └── hotfix/xxx-yyy (紧急修复)
+  │
+  └── poc/atomicstrata-experiment (本次创建,隔离实验)
+       └─ 24 concepts + 3 sources + profile.json
+
+备份: backup/main-before-sop-v1.0 (本次执行前备份,防回滚)
+```
+
+### 5 条铁律军规(王老师 9-05 OUT-OF-BAND 触发)
+
+1. **SemVer 严禁混用 v1.x / v2.x / v3.0.x**
+2. **实验性内容必须用 poc/ 分支**
+3. **工作树脏区 ≤ 5 项** ( > 5 警告, > 15 阻断)
+4. **文档必须全量同步** (STATE.md / VERSION / VERSION_MANAGEMENT.md)
+5. **stable tag 必须王老师拍板** (alpha / beta / rc 可自打)
+
+### 4 道自动化闸门
+
+| 闸门 | 检查 | 工具 | 状态 |
+|------|------|------|------|
+| 1. pre-commit | 版本号 + tag 命名 + poc 分支 | `scripts/pre-commit-hooks/check-version-consistency.sh` | ✅ 已落地 |
+| 2. weekly cron | 工作树 + 分支差异 + tag 状态 | `03-执行/scripts/weekly-git-health.sh` | ✅ 已落地 |
+| 3. weekly cron | 分支差异过大警告/阻断 | `03-执行/scripts/git-diff-monitor.sh` | ✅ 已落地 |
+| 4. monthly review | 大版本对齐 + 文档同步 | 王老师评审 | ⏳ 待设 |
 
 ---
 
