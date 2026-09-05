@@ -1,8 +1,8 @@
 # PJ-102-LLM-MeetingKB · 执行看板(实时)
 
 > **自动生成**:`python3 03-执行/scripts/build_dashboard.py`
-> **最后更新**:2026-09-04 22:44:59
-> **当前版本**:**3.0.3-stable**
+> **最后更新**:2026-09-05 12:54:02
+> **当前版本**:**3.0.1-stable**
 > **总 Sprint**:12 | **已完成**:8
 
 ---
@@ -38,17 +38,15 @@
 
 | 维度 | 数值 |
 |---|---|
-| **当前版本** | **3.0.3-stable** |
-| **GitHub commits** | **66** |
-| **GitHub tags** | **7** |
+| **当前版本** | **3.0.1-stable** |
+| **GitHub commits** | **70** |
+| **GitHub tags** | **5** |
 | **完成 Sprint** | **8/12** |
 | **总体进度** | **66%** |
 
 ## 🏷️ 所有 tag
 
 ```
-v3.0.3-stable
-v3.0.2-stable
 v3.0.1-stable
 v3.0.0
 v1.0-baseline
@@ -59,11 +57,11 @@ v1.0.0
 ## 📁 最近 commit(后 5)
 
 ```
+3414518 docs: VERSION_MANAGEMENT.md 加王老师 22:30 规范更新
+b7acc0c fix: 清理 Sprint 节点违规 tag + 修正版本规范
+3d50c24 S20 release: v3.0.4-stable - 五层动态进度可视化体验升级
+eedfc67 S20 feat: 五层动态进度可视化工具落地 — build_dashboard + progress.sh + build_changelog
 cad5db6 S20 docs: 五层动态进度可视化方案 — 不改变执行内容,只增加观察/汇报层
-2d8b375 S19 release: v3.0.3-stable - Karpathy P1 全套完工
-362880c S19 feat: P1 全套完工 - log.md + Triage + 同义词扩展
-1521744 S18 docs: Sprint 18 P0 完工报告 + v3.0.2-stable 锚定说明
-cfd3954 S18 release: v3.0.2-stable - Karpathy 对齐 + index.md + Grounding Invariant
 
 ```
 
