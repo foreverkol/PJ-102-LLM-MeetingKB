@@ -2,34 +2,36 @@
 task_id: T-01
 title: 修 persons 67 个空关联事实
 priority: P0
-status: 📋 待启动(王老师 9-05 SOP 执行后)
+status: ✅ 部分落地(Superpower M0)
 parent_sprint: Sprint 21 v3.1.0-rc1
-created: 2026-09-05 21:50 CST
-assignee: 待王老师指派
+created: 2026-09-05 22:20 CST
+updated: 2026-09-05 22:20 CST
 ---
 
 # T-01: 修 persons 67 个空关联事实
 
-## 📋 任务说明
+## 📋 实测摸底(2026-09-05 22:20 CST)
 
-**优先级**: P0
-**背景**: Sprint 18 P0-2 未真做
-**目标**: check_evidence 揭露的真实数据缺失
+实测 99 个 persons,**94 个 relationship 字段空(94.9%)**:
+- relationship 字段空: 94
+- source_meeting 字段空: 0(OK)
+- name / role / type / date: 0% 空
 
-## 🎯 验收标准
+## ✅ 已完成
 
-(待具体 Sprint 启动时详细化)
+1. **t01_fix_persons_relationship.py**(200 行)落地
+2. **Dry-run 实测**:
+   - 可自动分类:19 个(role 字段已知)
+   - 需人工确认:75 个(role 未知,需王老师拍板)
+3. 建议输出:`/tmp/pj102-t01-suggestions.json`(94 个建议)
 
-## 📂 相关文档
+## ⏳ 待王老师决策
 
-- `04-复盘与决策/Sprint21_v3.1.0-rc1_Karpathy_Obsidian双核心升级方案.md` 第二部分修订 B
-- `02-设计/atomicstrata-profile.json`(profile 设计)
-- `03-执行/poc_atomicstrata/`(atomicstrata 24 concepts 参考)
+王老师 9-05 OUT-OF-BAND Superpower 授权后,我自主完成:
+- ✅ 脚本 + dry-run 实测
+- ❌ 不擅自 apply(75 个需人工确认)
 
-## 📊 依赖关系
-
-(待评估)
-
-## 💡 实施建议
-
-(待 Sprint 启动时详细化)
+王老师选项:
+- 🟢 A 王老师审 94 个建议清单,标记要 apply 的,Agent 跑 --apply
+- 🟡 B Agent 跑 --apply 只 apply 19 个"可自动分类"(安全子集)
+- 🟣 C 暂不修改,Sprint M1 D5 一起处理
