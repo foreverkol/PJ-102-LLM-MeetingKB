@@ -87,8 +87,10 @@ def main():
                 has_block += 1
                 continue
 
-            source_meeting = fm.get('source_meeting', '').strip()
-            # 支持多种 name 字段(王老师 9-05 修复)
+            # A4:支持多种 source 字段(meetings 用 source,其他用 source_meeting)
+            source_meeting = (fm.get('source_meeting', '') or
+                             fm.get('source', '')).strip()
+            # 支持多种 name 字段
             name = (fm.get('name', '') or
                     fm.get('title', '') or
                     fm.get('entity_id', '') or
