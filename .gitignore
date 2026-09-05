@@ -39,3 +39,15 @@ desktop.ini
 *.tmp
 *.bak
 *.log
+
+# === 2026-09-05 SOP v1.0 增量 ===
+
+# 跑批输出(Sprint 11-14 残留 + 自动跑批)
+03-执行/工具/output/
+03-执行/tools/output/
+
+# 系统备份目录(不应该入库,实测 9-05 发现)
+system/data/wiki_a1_backup/
+
+# PoC 实验目录已迁到 poc/atomicstrata-experiment 分支(不再入库)
+03-执行/poc_atomicstrata/
