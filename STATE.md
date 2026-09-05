@@ -194,6 +194,38 @@ git status 报告:
 
 ---
 
+## 🚧 Sprint 21 v3.1.0-rc1 状态(2026-09-05 21:00 实测)
+
+> **王老师 9-05 OUT-OF-BAND**:"前面不是 V3.0 的版本吗"+"没有对项目 PJ-102 的继承"
+> **修正**:3 个 Sprint 21 文档版本号从 v1.0/v2.0 → v3.1.0-minor/alpha1/rc1,真实继承 PJ-102 现有基础
+
+### 3 个 Sprint 21 决策文档(已 commit `f7ff32c`)
+
+| 文档 | 大小 | 状态 |
+|------|------|------|
+| `Sprint21_v3.1.0-minor路线图.md` | 8.5 KB | ✅ 粗略版 |
+| `Sprint21_v3.1.0-alpha1详细方案.md` | 18.7 KB | ✅ 王老师语音第 1 次后 |
+| `Sprint21_v3.1.0-rc1_Karpathy_Obsidian双核心升级方案.md` | 27.9 KB | ✅ 王老师语音第 2 次后(双核心定位) |
+
+### v3.1.0-rc1 真实待做(14 个任务,精简)
+
+基于已完工的 Sprint 18/19/20(check_evidence.py + index.md + log.md + Triage + 同义词 + 五层 dashboard),v3.1.0-rc1 真实待做只有 14 个任务(T-01~T-14),不是之前的 18 FR + 11 NFR。
+
+**完整内容**:见 `04-复盘与决策/Sprint21_v3.1.0-rc1_Karpathy_Obsidian双核心升级方案.md` 第二部分修订(A/B/C/D/E 5 段)。
+
+### 关键继承事实(实测,2026-09-05)
+
+| 项 | 状态 |
+|----|------|
+| v3.0.1-stable tag | ✅ 55 commits,真实存在 |
+| Sprint 18 P0 (cfd3954) | ✅ 代码已完成,tag v3.0.2-stable 未打(v41 教训)|
+| Sprint 19 P1 (2d8b375) | ✅ 代码已完成,tag v3.0.3-stable 未打 |
+| Sprint 20 (3d50c24) | ✅ 代码已完成,tag v3.0.4-stable 未打 |
+| atomicstrata PoC | ✅ 24 concepts + 3 sources,commit `438716d` |
+
+---
+
 **生成者**: Hermes Agent (MiniMax-M3)
-**生成时间**: 2026-09-05 12:54 CST
-**协议版本**: hermes-anti-hallucination v42(实测溯源)
+**生成时间**: 2026-09-05 21:00 CST
+**协议版本**: hermes-anti-hallucination v42 + v44 教训(诚实告知错误)
+**关联 commit**: `f7ff32c` (Sprint 21 v3.1.0-rc1 修正版)
