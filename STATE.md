@@ -225,7 +225,51 @@ git status 报告:
 
 ---
 
-**生成者**: Hermes Agent (MiniMax-M3)
-**生成时间**: 2026-09-05 21:00 CST
-**协议版本**: hermes-anti-hallucination v42 + v44 教训(诚实告知错误)
-**关联 commit**: `f7ff32c` (Sprint 21 v3.1.0-rc1 修正版)
+## 🚧 Sprint 21 v3.1.0-rc1 Superpower M0+M1 状态(2026-09-05 22:35 CST)
+
+> **王老师 9-05 OUT-OF-BAND**:"按照你的建议智能化执行"
+> **Superpower 模式**:授权后不询问直接执行,真阻塞才上报
+
+### M0 详细工程计划 + 闸门(已落地)
+
+| 产出 | 状态 | commit |
+|------|------|--------|
+| 详细工程计划 v1.0(16.5 KB, 8 部分) | ✅ | `20091f5` |
+| 14 个 T-XX 子任务文件 | ✅ | `20091f5` |
+| T-08 obsidian_export.py(200 行, 4 .base + CLAUDE.md) | ✅ | `20091f5` |
+| 闸门 1 pre-commit hook(实测通过 exit 0) | ✅ | `d69ddb9` |
+| SOP_cron 启用指南 v1.0(王老师手动) | ✅ | `b5cc000` |
+
+### M1 P0 4 项(已落地)
+
+| 任务 | 状态 | 实测产出 |
+|------|------|---------|
+| T-01 persons relationship | ✅ 部分 | 94 个空(94.9%) / 可自动分类 19 / 需人工 75 |
+| T-02 Cascade Updates | ✅ 部分 | 13 sources / 派生 wiki > 280 |
+| T-08 Obsidian Bases | ✅ 完成 | 4 .base + CLAUDE.md / 325 wiki 源 |
+| T-13 行号引用 | ✅ 分析 | 主 wiki 0 / poc 24 中 22 / 279 处 |
+
+### M1 commits(本次 4 个)
+
+```
+3a2051b feat(sprint21-m1): T-02 Cascade Updates + T-13 行号引用分析
+b5cc000 feat(sprint21-m1-t01): T-01 persons relationship 修复脚本 + dry-run 实测
+d69ddb9 sop: 闸门 1 pre-commit hook 落地并实测通过
+20091f5 feat(sprint21-m0): 详细工程计划 v1.0 + 14 个子任务 + obsidian_export.py 落地
+```
+
+### 王老师拍板点(下一步)
+
+1. **T-01 是否 apply**:🟢 A 仅 apply 19 个可自动分类 / 🟡 B 王老师审 94 个建议 / 🟣 C 不修改
+2. **T-13 升级方案**:🟢 A 迁移 / 🟡 B 升级流水线 / 🟣 C 保留
+3. **cron 启用**:王老师手动 `sudo service cron start` + 加 2 行(已在 SOP_cron启用指南_v1.0.md)
+4. **M2 启动**:P1 5 项 T-03 + T-04 + T-05 + T-06 + T-09
+
+### v44 教训:Superpower 模式自主推进
+
+- ✅ 闸门 1 已启用并实测通过(exit 0)
+- ✅ T-01/T-02/T-13 dry-run(不擅自 apply)
+- ✅ T-08 完成(王老师立即可用)
+- ❌ 不擅自 apply T-01 75 个需人工确认文件
+
+---
