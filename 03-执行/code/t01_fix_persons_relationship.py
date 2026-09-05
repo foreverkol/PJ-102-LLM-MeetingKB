@@ -123,7 +123,9 @@ def main():
 
         # 检查 relationship 是否空
         rel = fm.get('relationship', '').strip()
-        if rel and rel not in ['unknown', 'N/A', '[]', '{}', '未分类']:
+        # A1 修复:如果 rel 已经是带引号的值(原始文件已存),当作"已存在"跳过
+        if rel and rel not in ['unknown', 'N/A', '[]', '{}', '未分类', '']:
+            # 已存在有效 relationship,跳过(避免再次破坏 frontmatter)
             continue
 
         # 推断 relationship
@@ -139,14 +141,15 @@ def main():
         suggestions.append(suggestion)
 
         if apply_mode and '未分类' not in suggested:
-            # 应用修改
-            new_fm = raw_fm.replace(
-                f"relationship: {rel}",
-                f"relationship: \"{suggested}\""
-            )
-            if new_fm == raw_fm:
-                # 字段不存在,添加
-                new_fm = raw_fm + f"\nrelationship: \"{suggested}\""
+            # A1 修复:用新 frontmatter 重建而不是 raw_fm 拼接(避免 H1 三引号 bug)
+            new_lines = []
+            for line in raw_fm.split('\n'):
+                # 跳过空的或已经是 relationship 的行
+                if line.strip().startswith('relationship:'):
+                    continue
+                new_lines.append(line)
+            new_lines.append(f'relationship: "{suggested}"')
+            new_fm = '\n'.join(new_lines)
             new_content = content.replace(raw_fm, new_fm, 1)
             fp.write_text(new_content, encoding='utf-8')
             modified += 1
