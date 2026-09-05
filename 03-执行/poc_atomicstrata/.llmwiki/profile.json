@@ -1,0 +1,420 @@
+{
+  "schemaVersion": 1,
+  "profileId": "pj102-finance-meeting",
+  "profileVersion": "1.0.0",
+  "displayName": "PJ-102 产业金融会议知识库",
+  "entities": {
+    "meetings": {
+      "directory": "wiki/meetings",
+      "titleField": "title",
+      "requiredFields": [
+        "title",
+        "date",
+        "speakers",
+        "stage"
+      ],
+      "fields": {
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "date": {
+          "type": "date",
+          "required": true
+        },
+        "speakers": {
+          "type": "string[]",
+          "required": true
+        },
+        "organizations": {
+          "type": "string[]"
+        },
+        "key-topics": {
+          "type": "string[]"
+        },
+        "basic-facts": {
+          "type": "string[]"
+        },
+        "core-judgments": {
+          "type": "string[]"
+        },
+        "values-and-standards": {
+          "type": "string[]"
+        },
+        "meeting-type": {
+          "type": "enum",
+          "enum": [
+            "业务洽谈",
+            "战略讨论",
+            "日常沟通",
+            "复盘",
+            "培训",
+            "外部接待"
+          ]
+        },
+        "schema-version": {
+          "type": "string"
+        },
+        "stage": {
+          "type": "enum",
+          "enum": [
+            "transcribed",
+            "extracted",
+            "linked",
+            "archived"
+          ],
+          "required": true
+        }
+      },
+      "lifecycle": {
+        "field": "stage",
+        "initial": "transcribed",
+        "terminal": [
+          "archived"
+        ],
+        "transitions": {
+          "transcribed": [
+            "extracted"
+          ],
+          "extracted": [
+            "linked"
+          ],
+          "linked": [
+            "archived"
+          ]
+        },
+        "transitionRequirements": {
+          "extracted": [
+            "basic-facts",
+            "core-judgments"
+          ],
+          "linked": [
+            "speakers",
+            "organizations"
+          ],
+          "archived": [
+            "schema-version"
+          ]
+        }
+      }
+    },
+    "persons": {
+      "directory": "wiki/persons",
+      "titleField": "name",
+      "requiredFields": [
+        "name",
+        "stage"
+      ],
+      "fields": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "role": {
+          "type": "string"
+        },
+        "affiliation": {
+          "type": "string"
+        },
+        "first-mentioned": {
+          "type": "date"
+        },
+        "last-mentioned": {
+          "type": "date"
+        },
+        "mention-count": {
+          "type": "integer"
+        },
+        "meetings": {
+          "type": "string[]"
+        },
+        "tags": {
+          "type": "string[]"
+        },
+        "stage": {
+          "type": "enum",
+          "enum": [
+            "first-seen",
+            "tracked",
+            "key-person",
+            "archived"
+          ],
+          "required": true
+        }
+      },
+      "lifecycle": {
+        "field": "stage",
+        "initial": "first-seen",
+        "terminal": [
+          "archived"
+        ],
+        "transitions": {
+          "first-seen": [
+            "tracked"
+          ],
+          "tracked": [
+            "key-person"
+          ],
+          "key-person": [
+            "archived"
+          ]
+        }
+      }
+    },
+    "organizations": {
+      "directory": "wiki/organizations",
+      "titleField": "name",
+      "requiredFields": [
+        "name",
+        "stage"
+      ],
+      "fields": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "type": {
+          "type": "enum",
+          "enum": [
+            "银行",
+            "企业",
+            "中介机构",
+            "监管机构",
+            "科技公司",
+            "行业协会"
+          ]
+        },
+        "industry": {
+          "type": "string"
+        },
+        "mention-count": {
+          "type": "integer"
+        },
+        "cooperation": {
+          "type": "enum",
+          "enum": [
+            "洽谈中",
+            "已合作",
+            "未合作",
+            "竞争",
+            "监管",
+            "潜在"
+          ]
+        },
+        "meetings": {
+          "type": "string[]"
+        },
+        "key-persons": {
+          "type": "string[]"
+        },
+        "stage": {
+          "type": "enum",
+          "enum": [
+            "first-seen",
+            "tracked",
+            "key-partner",
+            "archived"
+          ],
+          "required": true
+        }
+      },
+      "lifecycle": {
+        "field": "stage",
+        "initial": "first-seen",
+        "terminal": [
+          "archived"
+        ],
+        "transitions": {
+          "first-seen": [
+            "tracked"
+          ],
+          "tracked": [
+            "key-partner"
+          ],
+          "key-partner": [
+            "archived"
+          ]
+        }
+      }
+    },
+    "topics": {
+      "directory": "wiki/topics",
+      "titleField": "name",
+      "requiredFields": [
+        "name"
+      ],
+      "fields": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "category": {
+          "type": "enum",
+          "enum": [
+            "票据业务",
+            "供应链金融",
+            "银行合作",
+            "产业互联网",
+            "铝产业",
+            "数据风控",
+            "其他"
+          ]
+        },
+        "definition": {
+          "type": "string"
+        },
+        "related-meetings": {
+          "type": "string[]"
+        },
+        "related-topics": {
+          "type": "string[]"
+        },
+        "tag-count": {
+          "type": "integer"
+        }
+      }
+    },
+    "judgments": {
+      "directory": "wiki/judgments",
+      "titleField": "name",
+      "requiredFields": [
+        "name",
+        "type"
+      ],
+      "fields": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "type": {
+          "type": "enum",
+          "enum": [
+            "判断:发言人",
+            "判断:战略",
+            "判断:风险",
+            "判断:机会",
+            "判断:合作",
+            "判断:其他"
+          ],
+          "required": true
+        },
+        "confidence": {
+          "type": "enum",
+          "enum": [
+            "strong",
+            "medium",
+            "weak"
+          ]
+        },
+        "context": {
+          "type": "string"
+        },
+        "speakers": {
+          "type": "string[]"
+        },
+        "related-meetings": {
+          "type": "string[]"
+        },
+        "related-topics": {
+          "type": "string[]"
+        },
+        "evolution": {
+          "type": "string[]"
+        }
+      }
+    },
+    "comparisons": {
+      "directory": "wiki/comparisons",
+      "titleField": "name",
+      "requiredFields": [
+        "name"
+      ],
+      "fields": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "entity-a": {
+          "type": "string"
+        },
+        "entity-b": {
+          "type": "string"
+        },
+        "dimension": {
+          "type": "string[]"
+        },
+        "analysis": {
+          "type": "string"
+        },
+        "conclusion": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "relations": {
+    "person-participated-in-meeting": {
+      "from": [
+        "persons"
+      ],
+      "to": [
+        "meetings"
+      ],
+      "direction": "directed"
+    },
+    "org-involved-in-meeting": {
+      "from": [
+        "organizations"
+      ],
+      "to": [
+        "meetings"
+      ],
+      "direction": "directed"
+    },
+    "person-affiliated-with-org": {
+      "from": [
+        "persons"
+      ],
+      "to": [
+        "organizations"
+      ],
+      "direction": "directed"
+    },
+    "meeting-discusses-topic": {
+      "from": [
+        "meetings"
+      ],
+      "to": [
+        "topics"
+      ],
+      "direction": "directed"
+    },
+    "topic-related-to-topic": {
+      "from": [
+        "topics"
+      ],
+      "to": [
+        "topics"
+      ],
+      "direction": "symmetric"
+    },
+    "judgment-relates-to-topic": {
+      "from": [
+        "judgments"
+      ],
+      "to": [
+        "topics"
+      ],
+      "direction": "directed"
+    },
+    "judgment-made-in-meeting": {
+      "from": [
+        "judgments"
+      ],
+      "to": [
+        "meetings"
+      ],
+      "direction": "directed"
+    }
+  }
+}
