@@ -225,51 +225,64 @@ git status 报告:
 
 ---
 
-## 🚧 Sprint 21 v3.1.0-rc1 Superpower M0+M1 状态(2026-09-05 22:35 CST)
+## 🚧 Sprint 21 v3.1.0-rc1 Superpower M0+M1+M2 状态(2026-09-05 22:50 CST)
 
-> **王老师 9-05 OUT-OF-BAND**:"按照你的建议智能化执行"
+> **王老师 9-05 OUT-OF-BAND**:"继续按你建议智能化执行,后续不要让我确认"
 > **Superpower 模式**:授权后不询问直接执行,真阻塞才上报
 
-### M0 详细工程计划 + 闸门(已落地)
+### M0 详细工程计划 + 闸门
 
 | 产出 | 状态 | commit |
 |------|------|--------|
 | 详细工程计划 v1.0(16.5 KB, 8 部分) | ✅ | `20091f5` |
-| 14 个 T-XX 子任务文件 | ✅ | `20091f5` |
+| 14 个 T-XX 子任务 | ✅ | `20091f5` |
 | T-08 obsidian_export.py(200 行, 4 .base + CLAUDE.md) | ✅ | `20091f5` |
-| 闸门 1 pre-commit hook(实测通过 exit 0) | ✅ | `d69ddb9` |
-| SOP_cron 启用指南 v1.0(王老师手动) | ✅ | `b5cc000` |
+| 闸门 1 pre-commit hook(实测 exit 0) | ✅ | `d69ddb9` |
 
-### M1 P0 4 项(已落地)
+### M1 P0 4 项
 
-| 任务 | 状态 | 实测产出 |
-|------|------|---------|
-| T-01 persons relationship | ✅ 部分 | 94 个空(94.9%) / 可自动分类 19 / 需人工 75 |
-| T-02 Cascade Updates | ✅ 部分 | 13 sources / 派生 wiki > 280 |
-| T-08 Obsidian Bases | ✅ 完成 | 4 .base + CLAUDE.md / 325 wiki 源 |
-| T-13 行号引用 | ✅ 分析 | 主 wiki 0 / poc 24 中 22 / 279 处 |
+| 任务 | 状态 | 实测 |
+|------|------|------|
+| T-01 persons relationship | ✅ 部分 | 19 apply / 75 待人工 |
+| T-02 Cascade Updates | ✅ 脚本 | 13 sources / 派生 wiki > 280 |
+| T-08 Obsidian Bases | ✅ 完成 | 4 .base + CLAUDE.md / 325 wiki |
+| T-13 行号引用 | ✅ 分析 | 主 0 / poc 279 / 56 sources |
 
-### M1 commits(本次 4 个)
+### M2 P1 推进(王老师"智能化执行"触发)
+
+| 任务 | 状态 | 实测 |
+|------|------|------|
+| T-01 apply 19 个 | ✅ | 24 个有 relationship 总 |
+| T-09 Dataview 块 | ✅ **完成** | **236 个文件**自动反查 |
+| T-04 organization | ⚠️ 脚本就绪暂缓 | s4-s12 person 无 org 字段 |
+| T-03 Disputed | ⚠️ 暂缓 | judgments 无 contradictions |
+| T-05 decision | ⚠️ 暂缓 | judgments 无 alternatives |
+| T-06 external_ref | ⚠️ 暂缓 | source 缺 URL |
+
+### M0+M1+M2 全部 commits(本次会话 Superpower 5 个)
 
 ```
-3a2051b feat(sprint21-m1): T-02 Cascade Updates + T-13 行号引用分析
-b5cc000 feat(sprint21-m1-t01): T-01 persons relationship 修复脚本 + dry-run 实测
-d69ddb9 sop: 闸门 1 pre-commit hook 落地并实测通过
-20091f5 feat(sprint21-m0): 详细工程计划 v1.0 + 14 个子任务 + obsidian_export.py 落地
+41183a1 feat(sprint21-m2): T-04 + T-09 + M2 报告
+52a8d71 docs(state): Sprint 21 M0+M1 同步
+3a2051b feat(sprint21-m1): T-02 Cascade + T-13
+b5cc000 feat(sprint21-m1-t01): T-01 dry-run
+d69ddb9 sop: 闸门 1 pre-commit hook
+20091f5 feat(sprint21-m0): 详细工程计划 + 14 子任务 + obsidian
 ```
 
-### 王老师拍板点(下一步)
+### 王老师可立刻验证的产出
 
-1. **T-01 是否 apply**:🟢 A 仅 apply 19 个可自动分类 / 🟡 B 王老师审 94 个建议 / 🟣 C 不修改
-2. **T-13 升级方案**:🟢 A 迁移 / 🟡 B 升级流水线 / 🟣 C 保留
-3. **cron 启用**:王老师手动 `sudo service cron start` + 加 2 行(已在 SOP_cron启用指南_v1.0.md)
-4. **M2 启动**:P1 5 项 T-03 + T-04 + T-05 + T-06 + T-09
+- 📂 02-知识库/PJ-102-LLM-MeetingKB/CLAUDE.md(2.6 KB schema)
+- 📂 02-知识库/PJ-102-LLM-MeetingKB/{meetings,persons,concepts,judgments}.base(4 个 Obsidian 看板)
+- 📂 02-知识库/.../persons/*.md(24 个有 relationship)
+- 📂 02-知识库/.../all .md(236 个文件底部有 Dataview 自动反查)
+- 📂 04-复盘与决策/Sprint21_v3.1.0-rc1_详细工程计划/(M0 详细工程 + M2 报告)
 
-### v44 教训:Superpower 模式自主推进
+### v44 + v42 教训
 
-- ✅ 闸门 1 已启用并实测通过(exit 0)
-- ✅ T-01/T-02/T-13 dry-run(不擅自 apply)
-- ✅ T-08 完成(王老师立即可用)
-- ❌ 不擅自 apply T-01 75 个需人工确认文件
+- T-01 仅 apply 19 个安全子集,75 个保留
+- T-03/T-05/T-06 不写空数据(数据条件不具备)
+- 每个"完成"都有 `ls` + `git log` 实测
+- 不擅自补历史 tag(v41 教训)
 
 ---
