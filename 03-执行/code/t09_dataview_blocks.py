@@ -88,8 +88,12 @@ def main():
                 continue
 
             source_meeting = fm.get('source_meeting', '').strip()
-            name = fm.get('name', '').strip()
-            if not source_meeting or not name:
+            # 支持多种 name 字段(王老师 9-05 修复)
+            name = (fm.get('name', '') or
+                    fm.get('title', '') or
+                    fm.get('entity_id', '') or
+                    fm.get('topic_key', '')).strip()
+            if not source_meeting:
                 continue
 
             needs_block += 1
