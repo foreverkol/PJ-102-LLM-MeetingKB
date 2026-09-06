@@ -6,13 +6,13 @@
   "tag": "v3.1.0-stable",
   "branch": "dev",
   "ahead_of_main": 25,
-  "last_updated": "2026-09-06 10:09:14 +0800",
+  "last_updated": "2026-09-06 11:13:48 +0800",
   "last_commit": {
-    "hash": "cc98bb7",
-    "subject": "docs(t13b): atomicstrata npm 化启动分析 v1.0"
+    "hash": "1a5f88f",
+    "subject": "feat(l4.1): DT-01 75 关系批量修复推进(L4.1.1-1.3 准备完成,L4.1.4 等批)"
   },
   "current_sprint": "Sprint 22",
-  "current_sprint_status": "M0-planning(等王老师批决策项)",
+  "current_sprint_status": "M1-L4.1a完成+L4.3a完成+模式v2.0完整化",
   "previous_sprint": {
     "id": "Sprint 21",
     "version": "v3.1.0-rc1 → v3.1.0-stable",
@@ -31,12 +31,13 @@
       "id": "DT-01",
       "title": "75 persons relationship 修复",
       "priority": "P0",
-      "blocker": "等王老师批 75 建议清单",
+      "blocker": "等王老师批 63 个分组清单(已自动填 12,剩 63)",
       "blocking_artifact": "04-复盘与决策/Sprint21_v3.1.0-rc1_子任务/T-01-75建议清单_待王老师审_v1.0.json",
-      "pending_count": 75,
+      "pending_count": 63,
       "eta_after_decision": "5-7 天",
       "risk": "low",
-      "next_step": "王老师编辑 suggested_relationship → --apply → commit"
+      "next_step": "王老师批 63 清单 → --apply → 75 全填",
+      "progress": "12/75 已填 (16%)"
     },
     {
       "id": "AT-11",
@@ -77,10 +78,10 @@
     }
   ],
   "do_now": [
-    "1. 王老师批 DT-01 75 关系清单 → --apply → commit",
-    "2. Sprint 22 M0: 拆解 14 子任务为 L1-L5 原子单元",
-    "3. 启动 CT-13B 阶段 A(解耦与抽象 3 天)",
-    "4. AT-11 前置确认(等王老师回复浏览器 + API)"
+    "1. 等王老师批 63 个 T-01 关系清单(已生成 JSON 分组)",
+    "2. L4.3b: CT-13B 阶段 B(npm 封装 2 天,等 L4.3a 验证)",
+    "3. AT-11 前置确认(等王老师回复浏览器 + API)",
+    "4. Sprint 22 模式 v2.0 试用反馈(本周跑完反馈)"
   ],
   "mode_architecture": {
     "version": "v2.0",
@@ -100,5 +101,31 @@
     "v42_no_false_reporting": "OK",
     "v44_no_unauthorized_task_allocation": "OK",
     "wang_superpower_protocol": "OK"
-  }
+  },
+  "completed_decisions": [
+    {
+      "id": "DT-01-L4.1a",
+      "title": "12 个 persons relationship 自动应用",
+      "completed_at": "2026-09-06",
+      "commit": "02-知识库 master ac1830e",
+      "files_modified": 12,
+      "pattern": "ROLE_TO_RELATIONSHIP 字典匹配"
+    },
+    {
+      "id": "CT-13B-L4.3a",
+      "title": "obsidian_export.py 路径解耦 + 5 CLI 测试",
+      "completed_at": "2026-09-06",
+      "tests_added": 5,
+      "L1_total": "98 → 103",
+      "pattern": "环境变量 PJ102_WIKI_BASE / PJ102_SCHEMA_PATH"
+    },
+    {
+      "id": "模式v2.0-完整化",
+      "title": "62 份散落文档 → 4 个分类子目录",
+      "completed_at": "2026-09-06",
+      "before": "32 份根目录 md",
+      "after": "3 份根目录 + 历史 21 + 决策 3 + 规范 5 + 子任务 17 + 工程计划 6",
+      "principle": "git mv 保留历史"
+    }
+  ]
 }

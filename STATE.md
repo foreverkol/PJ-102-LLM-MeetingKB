@@ -1,7 +1,7 @@
 # PJ-102 LLM MeetingKB · 项目状态
 
 > **自动生成**:`python3 scripts/state_to_md.py`
-> **生成时间**:2026-09-06 10:09:14 +0800
+> **生成时间**:2026-09-06 11:13:48 +0800
 > **真值源**:`STATE.json`(不要手改本文件,改 STATE.json 后跑本脚本)
 
 ---
@@ -15,8 +15,8 @@
 | **分支** | `dev` |
 | **ahead of main** | 25 commits |
 | **当前 Sprint** | **Sprint 22** |
-| **Sprint 状态** | M0-planning(等王老师批决策项) |
-| **最后 commit** | `cc98bb7` docs(t13b): atomicstrata npm 化启动分析 v1.0 |
+| **Sprint 状态** | M1-L4.1a完成+L4.3a完成+模式v2.0完整化 |
+| **最后 commit** | `1a5f88f` feat(l4.1): DT-01 75 关系批量修复推进(L4.1.1-1.3 准备完成,L4.1.4 等批) |
 
 ---
 
@@ -40,7 +40,7 @@
 
 | 优先级 | ID | 标题 | 阻塞 | ETA | 风险 |
 |---|---|---|---|---|---|
-| P0 | `DT-01` | 75 persons relationship 修复 | 等王老师批 75 建议清单 | 5-7 天 | low |
+| P0 | `DT-01` | 75 persons relationship 修复 | 等王老师批 63 个分组清单(已自动填 12,剩 63) | 5-7 天 | low |
 | P1 | `AT-11` | Web Clipper 集成 | 浏览器(Chrome/Edge/Firefox)+ API 来源(Noteboo | 5-7 天 | medium |
 | P1 | `CT-13B` | atomicstrata npm 化 | 范围已明确,等 Sprint 22 第二周启动 | 7-10 天 | medium |
 | P2 | `BT-14` | 三层架构(raw/citations/wiki 重写) | 架构级风险,需 Sprint 23+ 评估 | 15-20 天 | high |
@@ -50,10 +50,10 @@
 
 ## 🚀 Do Now(本 Sprint 立即行动)
 
-1. 王老师批 DT-01 75 关系清单 → --apply → commit
-2. Sprint 22 M0: 拆解 14 子任务为 L1-L5 原子单元
-3. 启动 CT-13B 阶段 A(解耦与抽象 3 天)
-4. AT-11 前置确认(等王老师回复浏览器 + API)
+1. 等王老师批 63 个 T-01 关系清单(已生成 JSON 分组)
+2. L4.3b: CT-13B 阶段 B(npm 封装 2 天,等 L4.3a 验证)
+3. AT-11 前置确认(等王老师回复浏览器 + API)
+4. Sprint 22 模式 v2.0 试用反馈(本周跑完反馈)
 
 ---
 
@@ -87,12 +87,12 @@
 ### DT-01:75 persons relationship 修复
 
 - **优先级**:P0
-- **阻塞**:等王老师批 75 建议清单
+- **阻塞**:等王老师批 63 个分组清单(已自动填 12,剩 63)
 - **关联文件**:`04-复盘与决策/Sprint21_v3.1.0-rc1_子任务/T-01-75建议清单_待王老师审_v1.0.json`
-- **待批数**:75
+- **待批数**:63
 - **ETA(批后)**:5-7 天
 - **风险**:low
-- **下一步**:王老师编辑 suggested_relationship → --apply → commit
+- **下一步**:王老师批 63 清单 → --apply → 75 全填
 
 ### AT-11:Web Clipper 集成
 
@@ -129,4 +129,4 @@
 
 ---
 
-_本文件由 `state_to_md.py` 从 `STATE.json` 自动生成于 2026-09-06 10:09:14 +0800_
+_本文件由 `state_to_md.py` 从 `STATE.json` 自动生成于 2026-09-06 11:13:48 +0800_

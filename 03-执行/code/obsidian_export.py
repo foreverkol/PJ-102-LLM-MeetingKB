@@ -21,8 +21,13 @@ import sys
 from pathlib import Path
 from datetime import datetime
 
-WIKI_BASE = Path("/mnt/d/BaiduSyncdisk/hermes/02-知识库/PJ-102-LLM-MeetingKB")
-SCHEMA_PATH = Path("/mnt/d/BaiduSyncdisk/hermes/01-项目/PJ-102-LLM-MeetingKB/02-设计/atomicstrata-profile.json")
+# 默认路径(L4.3a 阶段 A:支持 argparse + 环境变量覆盖)
+DEFAULT_WIKI_BASE = Path("/mnt/d/BaiduSyncdisk/hermes/02-知识库/PJ-102-LLM-MeetingKB")
+DEFAULT_SCHEMA_PATH = Path("/mnt/d/BaiduSyncdisk/hermes/01-项目/PJ-102-LLM-MeetingKB/02-设计/atomicstrata-profile.json")
+
+# 优先级:argparse --wiki-base > 环境变量 PJ102_WIKI_BASE > 默认
+WIKI_BASE = Path(os.environ.get("PJ102_WIKI_BASE", str(DEFAULT_WIKI_BASE)))
+SCHEMA_PATH = Path(os.environ.get("PJ102_SCHEMA_PATH", str(DEFAULT_SCHEMA_PATH)))
 
 
 def human_size(n: int) -> str:
