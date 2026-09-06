@@ -1,0 +1,104 @@
+{
+  "$schema": "PJ-102-STATE-v1",
+  "project_id": "PJ-102",
+  "project_name": "LLM MeetingKB",
+  "version": "3.1.0-stable",
+  "tag": "v3.1.0-stable",
+  "branch": "dev",
+  "ahead_of_main": 25,
+  "last_updated": "2026-09-06 10:09:14 +0800",
+  "last_commit": {
+    "hash": "cc98bb7",
+    "subject": "docs(t13b): atomicstrata npm 化启动分析 v1.0"
+  },
+  "current_sprint": "Sprint 22",
+  "current_sprint_status": "M0-planning(等王老师批决策项)",
+  "previous_sprint": {
+    "id": "Sprint 21",
+    "version": "v3.1.0-rc1 → v3.1.0-stable",
+    "completed_at": "2026-09-06",
+    "metrics": {
+      "L1_tests": "98 passed in 3.45s",
+      "wiki_files_total": 351,
+      "wiki_bad_yaml": 0,
+      "sub_tasks_total": 14,
+      "sub_tasks_completed": 12,
+      "sub_tasks_pending_decision": 5
+    }
+  },
+  "pending_decisions": [
+    {
+      "id": "DT-01",
+      "title": "75 persons relationship 修复",
+      "priority": "P0",
+      "blocker": "等王老师批 75 建议清单",
+      "blocking_artifact": "04-复盘与决策/Sprint21_v3.1.0-rc1_子任务/T-01-75建议清单_待王老师审_v1.0.json",
+      "pending_count": 75,
+      "eta_after_decision": "5-7 天",
+      "risk": "low",
+      "next_step": "王老师编辑 suggested_relationship → --apply → commit"
+    },
+    {
+      "id": "AT-11",
+      "title": "Web Clipper 集成",
+      "priority": "P1",
+      "blocker": "浏览器(Chrome/Edge/Firefox)+ API 来源(NotebookLM/微信/自建)",
+      "eta": "5-7 天",
+      "risk": "medium",
+      "next_step": "王老师确认浏览器 + API 来源"
+    },
+    {
+      "id": "CT-13B",
+      "title": "atomicstrata npm 化",
+      "priority": "P1",
+      "blocker": "范围已明确,等 Sprint 22 第二周启动",
+      "blocking_artifact": "04-复盘与决策/Sprint21_v3.1.0-rc1_子任务/T-13B-atomicstrata-npm化启动分析_v1.0.md",
+      "eta": "7-10 天",
+      "risk": "medium",
+      "next_step": "Sprint 22 M1 启动阶段 A(解耦与抽象 3 天)"
+    },
+    {
+      "id": "ET-04",
+      "title": "organization entity 暂缓",
+      "priority": "P3",
+      "blocker": "数据条件不具备(等 PJ-201 数据)",
+      "eta": "3-5 天",
+      "risk": "low",
+      "next_step": "等 PJ-201 数据库接入后再启动"
+    },
+    {
+      "id": "BT-14",
+      "title": "三层架构(raw/citations/wiki 重写)",
+      "priority": "P2",
+      "blocker": "架构级风险,需 Sprint 23+ 评估",
+      "eta": "15-20 天",
+      "risk": "high",
+      "next_step": "Sprint 23 启动架构评估,本 Sprint 暂缓"
+    }
+  ],
+  "do_now": [
+    "1. 王老师批 DT-01 75 关系清单 → --apply → commit",
+    "2. Sprint 22 M0: 拆解 14 子任务为 L1-L5 原子单元",
+    "3. 启动 CT-13B 阶段 A(解耦与抽象 3 天)",
+    "4. AT-11 前置确认(等王老师回复浏览器 + API)"
+  ],
+  "mode_architecture": {
+    "version": "v2.0",
+    "single_source_of_truth": "STATE.json",
+    "regen_script": "scripts/state_to_md.py",
+    "principle": "STATE.json = 主体,STATE.md = 自动生成的 markdown 视图"
+  },
+  "documents": {
+    "STATE.md": "自动从 STATE.json 生成",
+    "STATE.json": "本文件 = 单一真值源",
+    "CHANGELOG.md": "自动从 git log 生成",
+    "VERSION_REGISTRY.md": "自动从 git tag + STATE.json 生成",
+    "RELEASE_NOTES_*.md": "模板 + STATE.json 填充"
+  },
+  "protocols": {
+    "v41_no_unauthorized_stable_tag": "OK",
+    "v42_no_false_reporting": "OK",
+    "v44_no_unauthorized_task_allocation": "OK",
+    "wang_superpower_protocol": "OK"
+  }
+}
