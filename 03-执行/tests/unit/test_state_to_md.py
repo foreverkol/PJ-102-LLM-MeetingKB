@@ -48,11 +48,12 @@ def test_state_json_has_required_keys():
 
 
 def test_pending_decisions_structure():
-    """pending_decisions 必须是数组 + 每个元素有 id/priority/options"""
+    """pending_decisions 必须是数组(可空:Sprint 22 已 100% 闭环)
+    + 每个元素有 id/priority/options"""
     data = json.loads(STATE_JSON.read_text(encoding="utf-8"))
     decisions = data["pending_decisions"]
     assert isinstance(decisions, list)
-    assert len(decisions) >= 1
+    # pending_decisions 可以为空(全部已闭环)
     for d in decisions:
         assert "id" in d
         assert "priority" in d

@@ -114,9 +114,14 @@ def test_html_under_50kb():
 
 
 def test_risk_emoji_present():
-    """风险等级 emoji 应显示"""
+    """风险等级 emoji 应显示(Sprint 22 已 100% 闭环时为可选)"""
     content = HTML_FILE.read_text(encoding="utf-8")
-    # 应至少有 4 个风险 emoji
+    # 至少有 2 个风险 emoji(可能为空 if 所有已闭环)
+    import json
+    state = json.loads((PROJECT_ROOT / "STATE.json").read_text(encoding="utf-8"))
+    pending = state.get("pending_decisions", [])
+    if not pending:
+        pytest.skip("无 pending_decisions(Sprint 22 已 100%)")
     emojis = ["🟢", "🟡", "🔴"]
     found = sum(1 for e in emojis if e in content)
     assert found >= 2, f"风险 emoji 显示不全: {found}"
