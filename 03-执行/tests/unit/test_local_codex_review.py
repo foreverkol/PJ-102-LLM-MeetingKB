@@ -46,12 +46,13 @@ def test_reviews_dir_created():
 
 
 def test_post_commit_uses_local_review():
-    """post-commit hook 必须用 local_codex_review.py(不是 codex CLI)"""
+    """post-commit hook 必须用 kanban_refresh(集成 local_codex_review)"""
     hook = PROJECT_ROOT / ".git/hooks/post-commit"
     content = hook.read_text(encoding="utf-8")
-    assert "local_codex_review" in content
-    # 不应直接调 codex CLI
-    assert "codex review" not in content or "codex review" in content and "scripts/codex_review.py" not in content
+    # 应该用 kanban_refresh(L4.12 集成入口)
+    assert "kanban_refresh" in content
+    # 不应单独调 codex CLI
+    assert "codex review" not in content
 
 
 def test_no_project_file_modification():

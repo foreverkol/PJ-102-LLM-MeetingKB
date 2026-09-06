@@ -90,11 +90,11 @@ def test_post_commit_hook_exists():
 
 
 def test_post_commit_only_review():
-    """post-commit 必须只调 codex review(不调 exec/其他)"""
+    """post-commit 必须只调 codex review 或 kanban_refresh(不调 exec)"""
     hook = PROJECT_ROOT / ".git/hooks/post-commit"
     content = hook.read_text(encoding="utf-8")
-    # 应该有 codex review 或 local_codex_review(王老师 C 选项后用本地化)
-    assert "codex review" in content or "local_codex_review" in content
+    # 应该有 codex review 或 local_codex_review 或 kanban_refresh
+    assert any(kw in content for kw in ["codex review", "local_codex_review", "kanban_refresh"])
     # 不应有 codex exec
     assert "codex exec" not in content
     # 异步(后台)执行
