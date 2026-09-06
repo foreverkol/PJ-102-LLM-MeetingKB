@@ -113,18 +113,24 @@ def screen_two(state: dict) -> str:
         pid = d["id"]
         prio = d["priority"]
         title = d["title"][:30]
-        blocker = d["blocker"][:35]
+        # 找推荐选项(⭐ 强烈推荐 > ✅ 推荐,跳过 👎/⚠️)
+        recommended = ""
+        for opt in d.get("options", []):
+            rec = opt.get("my_recommendation", "")
+            if "强烈推荐" in rec or "推荐" in rec and "不推荐" not in rec and "👎" not in rec:
+                recommended = f"{opt['key']}({rec})"
+                break
         risk = d.get("risk", "?")
-        progress = d.get("progress", "")
 
         # 风险 emoji
         risk_emoji = {"low": "🟢", "medium": "🟡", "high": "🔴"}.get(risk, "⚪")
 
         lines.append(f"{risk_emoji} [{prio}] {pid}:{title}")
-        lines.append(f"   阻塞:{blocker}")
-        if progress:
-            lines.append(f"   进度:{progress}")
-        lines.append(f"   下一步:{d.get('next_step', '?')[:50]}")
+        lines.append(f"   状态:{d.get('current_status', '?')[:40]}")
+        if recommended:
+            lines.append(f"   推荐:{recommended}")
+        if d.get("options"):
+            lines.append(f"   选项:{', '.join(o['key'] for o in d['options'])}")
         lines.append("")
 
     return "\n".join(lines)

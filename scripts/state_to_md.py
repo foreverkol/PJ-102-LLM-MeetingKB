@@ -81,14 +81,21 @@ def render(state: dict) -> str:
     lines.append("")
     lines.append(f"**当前生效 Sprint**:{state['current_sprint']}")
     lines.append("")
-    lines.append("| 优先级 | ID | 标题 | 阻塞 | ETA | 风险 |")
-    lines.append("|---|---|---|---|---|---|")
+    lines.append("| 优先级 | ID | 标题 | 状态 | 推荐选项 |")
+    lines.append("|---|---|---|---|---|")
     priority_order = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
     sorted_decisions = sorted(state['pending_decisions'], key=lambda d: priority_order.get(d['priority'], 99))
     for d in sorted_decisions:
         title_short = d['title'][:30]
-        blocker_short = d['blocker'][:40].replace('|', '/')
-        lines.append(f"| {d['priority']} | `{d['id']}` | {title_short} | {blocker_short} | {d.get('eta_after_decision', d.get('eta', '-'))} | {d['risk']} |")
+        status_short = d.get('current_status', '-')[:30].replace('|', '/')
+        # 找推荐选项(⭐ 强烈推荐 > ✅ 推荐)
+        recommended = ""
+        for opt in d.get('options', []):
+            rec = opt.get('my_recommendation', '')
+            if '强烈推荐' in rec or ('推荐' in rec and '不推荐' not in rec and '👎' not in rec):
+                recommended = f"{opt['key']}. {rec[:20]}"
+                break
+        lines.append(f"| {d['priority']} | `{d['id']}` | {title_short} | {status_short} | {recommended} |")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -134,7 +141,13 @@ def render(state: dict) -> str:
         lines.append(f"### {d['id']}:{d['title']}")
         lines.append("")
         lines.append(f"- **优先级**:{d['priority']}")
-        lines.append(f"- **阻塞**:{d['blocker']}")
+        # 改为显示状态 + 推荐
+        rec_line = ""
+        for opt in d.get('options', []):
+            if '推荐' in opt.get('my_recommendation', ''):
+                rec_line = f"\n- **推荐**:`{opt['key']}` {opt.get('label', '')} — {opt.get('reason', '')}"
+                break
+        lines.append(f"- **状态**:{d.get('current_status', '-')}{rec_line}")
         if 'blocking_artifact' in d:
             lines.append(f"- **关联文件**:`{d['blocking_artifact']}`")
         if 'pending_count' in d:
@@ -144,7 +157,7 @@ def render(state: dict) -> str:
         elif 'eta' in d:
             lines.append(f"- **ETA**:{d['eta']}")
         lines.append(f"- **风险**:{d['risk']}")
-        lines.append(f"- **下一步**:{d['next_step']}")
+        lines.append(f"- **下一步**:{d.get('next_step', '-')}")
         lines.append("")
     
     lines.append("---")

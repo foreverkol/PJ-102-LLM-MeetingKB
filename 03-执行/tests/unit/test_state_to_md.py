@@ -48,7 +48,7 @@ def test_state_json_has_required_keys():
 
 
 def test_pending_decisions_structure():
-    """pending_decisions 必须是数组 + 每个元素有 id/priority/blocker"""
+    """pending_decisions 必须是数组 + 每个元素有 id/priority/options"""
     data = json.loads(STATE_JSON.read_text(encoding="utf-8"))
     decisions = data["pending_decisions"]
     assert isinstance(decisions, list)
@@ -56,8 +56,16 @@ def test_pending_decisions_structure():
     for d in decisions:
         assert "id" in d
         assert "priority" in d
-        assert "blocker" in d
         assert d["priority"] in ["P0", "P1", "P2", "P3"]
+        # 决策点必须有 options 数组(王老师多选+推荐模式)
+        assert "options" in d, f"决策点 {d.get('id')} 缺 options 字段"
+        assert isinstance(d["options"], list)
+        # 每个选项必须有 key/label/my_recommendation/reason
+        for opt in d["options"]:
+            assert "key" in opt, f"选项缺 key"
+            assert "label" in opt, f"选项缺 label"
+            assert "my_recommendation" in opt, f"选项缺 my_recommendation"
+            assert "reason" in opt, f"选项缺 reason"
 
 
 def test_script_runs_successfully():
