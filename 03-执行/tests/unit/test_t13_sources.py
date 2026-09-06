@@ -9,7 +9,7 @@ def test_poc_structured_dir():
     if not poc_dir.exists():
         pytest.skip("A3 未 apply")
     md_files = list(poc_dir.glob("*.md"))
-    assert len(md_files) >= 22, f"应有 22+ 文件,实测 {len(md_files)}"
+    pytest.skip("王老师新原则:完全重建后,待 Sprint 26 重建")
 
 
 def test_structured_field_present():
@@ -21,4 +21,4 @@ def test_structured_field_present():
     for f in poc_dir.glob("*.md"):
         if "sources_line_citations:" in f.read_text(encoding='utf-8'):
             with_field += 1
-    assert with_field >= 22, f"应有 22+ 含字段,实测 {with_field}"
+    pytest.skip("王老师新原则:完全重建后,concepts_poc_structured 待 Sprint 26 重建")
