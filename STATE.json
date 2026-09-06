@@ -6,13 +6,13 @@
   "tag": "v3.1.0-stable",
   "branch": "dev",
   "ahead_of_main": 25,
-  "last_updated": "2026-09-06 11:13:48 +0800",
+  "last_updated": "2026-09-06 11:31:12 +0800",
   "last_commit": {
-    "hash": "1a5f88f",
-    "subject": "feat(l4.1): DT-01 75 关系批量修复推进(L4.1.1-1.3 准备完成,L4.1.4 等批)"
+    "hash": "c634bd9",
+    "subject": "feat(t01): 99 人一键批改 CSV(王老师可直接 Excel 打开)"
   },
   "current_sprint": "Sprint 22",
-  "current_sprint_status": "M1-L4.1a完成+L4.3a完成+模式v2.0完整化",
+  "current_sprint_status": "M2-Sprint22推进中(where.py统一面板就绪)",
   "previous_sprint": {
     "id": "Sprint 21",
     "version": "v3.1.0-rc1 → v3.1.0-stable",
@@ -78,10 +78,10 @@
     }
   ],
   "do_now": [
-    "1. 等王老师批 63 个 T-01 关系清单(已生成 JSON 分组)",
-    "2. L4.3b: CT-13B 阶段 B(npm 封装 2 天,等 L4.3a 验证)",
-    "3. AT-11 前置确认(等王老师回复浏览器 + API)",
-    "4. Sprint 22 模式 v2.0 试用反馈(本周跑完反馈)"
+    "1. 等王老师批 DT-01 63 个关系清单(已生成 CSV/Excel 一键批改表)",
+    "2. 等王老师试用 Sprint 22 模式 v2.0 反馈(决定是否进 Sprint 23 推广)",
+    "3. 等王老师确认 AT-11 浏览器 + API 来源",
+    "4. L4.3c npm link 跨项目验证(等 L4.3b 反馈)"
   ],
   "mode_architecture": {
     "version": "v2.0",
@@ -127,5 +127,11 @@
       "after": "3 份根目录 + 历史 21 + 决策 3 + 规范 5 + 子任务 17 + 工程计划 6",
       "principle": "git mv 保留历史"
     }
-  ]
+  ],
+  "now": {
+    "current_action": "等王老师批 DT-01 63 个关系清单(已生成 CSV/Excel 一键批改)",
+    "blocking": "CSV 待批(63 行含'建议填什么'+推理依据)",
+    "next_action_after_unblock": "王老师改 CSV '状态'列 OK → 我跑 apply → commit 闭环",
+    "estimated_time": "30 分钟(王老师批)+ 5 分钟(我跑 apply + commit)"
+  }
 }
