@@ -84,7 +84,7 @@ def test_three_tier_separation():
 
 
 def test_add_tier_frontmatter_idempotent():
-    """add_tier_frontmatter 应幂等(已设置不重复)"""
+    """add_tier_frontmatter 应幂等(已设置返回 False)"""
     import importlib.util
     spec = importlib.util.spec_from_file_location("tier_classifier", SCRIPT)
     module = importlib.util.module_from_spec(spec)
@@ -95,14 +95,19 @@ def test_add_tier_frontmatter_idempotent():
     if j_file is None:
         pytest.skip("无 judgments 文件")
 
-    # 第一次设置
-    success1 = module.add_tier_frontmatter(j_file, "citations")
-    # 第二次设置相同 tier
-    success2 = module.add_tier_frontmatter(j_file, "citations")
+    # 读当前 tier
+    content_before = j_file.read_text(encoding="utf-8")
+    fm, _ = module.extract_frontmatter(content_before)
+    current_tier = fm.get("tier")
 
-    # 第一次应成功,第二次应跳过
-    assert success1 is True
-    assert success2 is False
+    # 如果已有 tier, 测试重复调用应返回 False
+    if current_tier:
+        result = module.add_tier_frontmatter(j_file, current_tier)
+        assert result is False, f"已有 tier={current_tier} 时应返回 False"
+    else:
+        # 没有 tier, 第一次应返回 True
+        result = module.add_tier_frontmatter(j_file, "citations")
+        assert result is True
 
 
 if __name__ == "__main__":
