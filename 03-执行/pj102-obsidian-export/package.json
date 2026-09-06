@@ -1,0 +1,37 @@
+{
+  "name": "pj102-obsidian-export",
+  "version": "0.1.0-alpha1",
+  "description": "PJ-102 atomicstrata → Obsidian Bases/CLAUDE.md 自动生成器(Node.js wrapper)",
+  "main": "bin/pj102-obsidian-export.js",
+  "bin": {
+    "pj102-obsidian-export": "bin/pj102-obsidian-export.js"
+  },
+  "scripts": {
+    "test": "node tests/cli.test.js",
+    "lint": "echo 'TODO: add eslint'"
+  },
+  "keywords": [
+    "pj102",
+    "atomicstrata",
+    "obsidian",
+    "llmwiki",
+    "meeting-kb"
+  ],
+  "author": "Hermes Agent (MiniMax-M3) for Wang Teacher",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "README.md"
+  ],
+  "dependencies": {
+    "child_process": "built-in"
+  },
+  "private": true,
+  "publishConfig": {
+    "access": "restricted"
+  }
+}
