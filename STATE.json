@@ -133,5 +133,13 @@
     "blocking": "CSV 待批(63 行含'建议填什么'+推理依据)",
     "next_action_after_unblock": "王老师改 CSV '状态'列 OK → 我跑 apply → commit 闭环",
     "estimated_time": "30 分钟(王老师批)+ 5 分钟(我跑 apply + commit)"
-  }
+  },
+  "last_codex_review": {
+    "file": ".codex-reviews/e78eb1b.md",
+    "critical_count": 0,
+    "medium_count": 0,
+    "improvements_count": 0,
+    "reviewed_at": "2026-09-06 12:04:59"
+  },
+  "last_notified_commit": "e78eb1b7124b031fd38e239304e5c969c69ea9f0"
 }

@@ -76,6 +76,7 @@ def render_dashboard(state: dict) -> str:
     # 决策点卡片 HTML
     decision_cards = ""
     risk_emoji = {"low": "🟢", "medium": "🟡", "high": "🔴"}
+    codex = state.get("last_codex_review", {})
     for d in pending:
         emoji = risk_emoji.get(d.get("risk", ""), "⚪")
         prio = d.get("priority", "?")
@@ -316,6 +317,15 @@ footer {{
         <div class="status-label">🎯 Sprint</div>
         <div class="status-value">{sprint}</div>
     </div>
+    {f'''<div class="status-cell">
+        <div class="status-label">🔍 Codex 评审</div>
+        <div class="status-value" style="font-size:14px">
+            🚨{codex.get('critical_count', 0)} ⚠️{codex.get('medium_count', 0)} 💡{codex.get('improvements_count', 0)}
+        </div>
+        <div style="font-size:11px;color:var(--text-dim);margin-top:4px">
+            {codex.get('reviewed_at', '')[:16] if codex else '无评审'}
+        </div>
+    </div>''' if codex else ''}
 </div>
 
 {now_html}
