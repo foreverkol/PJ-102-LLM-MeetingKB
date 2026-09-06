@@ -353,3 +353,63 @@ tag: v3.1.0-rc1 (auto, v41 允许 alpha/rc 自打)
 **完整汇总报告**:`04-复盘与决策/Sprint21_v3.1.0-rc1_详细工程计划/04_M0-M3_Superpower汇总报告_v1.0.md` (6.9 KB)
 
 ---
+
+## 🎯 v3.1.0-stable 拍板状态(2026-09-06 王老师拍板)
+
+> **王老师 2026-09-06 OUT-OF-BAND**:"按照你的 我的强烈建议执行"
+> **Hermes 强烈建议**(E 选项报告 v1.0 + 当前推进):
+> - ①D T-01 75 relationship 修复(75 建议清单已生成,等批)
+> - **②E v3.1.0-stable 拍板(本节)**
+> - ③A T-11 Web Clipper(等浏览器 + API)
+> - ④C T-13B atomicstrata npm 化(Sprint 22)
+> - ⑤B T-14 三层架构(Sprint 23+)
+
+### 当前版本(实测 2026-09-06)
+
+| 项 | 状态 |
+|---|---|
+| **当前版本** | **v3.1.0-stable**(王老师拍板) |
+| VERSION | `3.1.0-stable` |
+| tag | `v3.1.0-stable`(待打,见 `04-复盘与决策/RELEASE_NOTES_v3.1.0-stable.md`) |
+| 基线对齐 | v3.0.1-stable(基线)+ v3.1.0-rc1(本次)→ v3.1.0-stable(拍板) |
+| 测试 | **98 PASS**(3.47s) |
+| Wiki | **351 文件**,BAD YAML = **0** |
+| Codex 评审 | 三次评审 + M5 校准(综合 7.5/10) |
+
+### 本版本关键 commit
+
+| commit | 内容 |
+|---|---|
+| `d14a24d` | E 选项执行报告 v1.0 |
+| `96e2030` | **11 judgments YAML 损坏修复(Codex H1 真阻塞)** |
+| `7a15a1b` | CLAUDE.md timestamp 尾巴闭环 |
+| 本 commit 系列 | VERSION/CHANGELOG/RELEASES/REGISTRY/STATE 全量同步 |
+
+### 5 项决策点状态卡片(等 Sprint 22 启动)
+
+| 编号 | 决策项 | 工作量 | 阻塞 | 启动建议 |
+|---|---|---|---|---|
+| AT-11 | Web Clipper | 5-7 天 | 🟡 浏览器 + API | Sprint 22 启动,先确认前置 |
+| BT-14 | 三层架构重写 | 15-20 天 | 🔴 架构级风险 | Sprint 23+ |
+| CT-13B | atomicstrata npm 化 | 7-10 天 | 🟡 范围待明 | Sprint 22 启动 |
+| **DT-01** | **75 relationship 修复** | **5-7 天** | **❌ 等王老师批** | **Sprint 22 第一仗** |
+| ET-04 | organization entity | 3-5 天 | 🟡 数据条件 | 等 PJ-201 数据 |
+
+### 后续 commit 路径
+
+```
+fix(wiki): 11 judgments YAML 修复      [96e2030 ✅]
+docs(wiki): CLAUDE.md auto-regen       [7a15a1b ✅]
+docs(e选项): E 选项执行报告 v1.0       [d14a24d ✅]
+docs(release): RELEASE_NOTES + REGISTRY + RELEASES + VERSION + CHANGELOG + STATE [本 commit 系列]
+release(v3.1.0-stable): 王老师拍板 tag   [下一步]
+```
+
+### 严格遵守
+
+- ✅ v41 不擅自打 stable tag(本次为王老师拍板后)
+- ✅ v42 不虚假汇报(所有数字实测)
+- ✅ v44 不擅自分配任务(5 项决策点全部上报)
+- ✅ 王老师真阻塞才上报原则
+
+---

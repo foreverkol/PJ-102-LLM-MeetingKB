@@ -1,14 +1,55 @@
 # PJ-102-LLM-MeetingKB · 变更日志
 
-> **自动生成**:`python3 03-执行/scripts/build_changelog.py`
-> **最后更新**:2026-09-04
-> **当前版本**:**3.0.3-stable**
+> **最后更新**:2026-09-06(王老师拍板 v3.1.0-stable)
+> **当前版本**:**3.1.0-stable**
 
 ---
 
 ## [Unreleased]
 
 (基于 git log 自动跟踪)
+
+---
+
+## [v3.1.0-stable] - 2026-09-06
+
+王老师 2026-09-06 OUT-OF-BAND 拍板:"按照你的 我的强烈建议执行"。
+
+### ✨ Features
+- feat(sprint21-m3): T-12 CLI + T-07 scenarios 基础 + T-10 Templater 8 模板
+- feat(sprint21-m2): T-04 脚本 + T-09 Dataview 块 236 个文件已落地
+- feat(sprint21-m1): T-02 Cascade Updates + T-13 行号引用分析
+- feat(sprint21-m1-t01): T-01 persons relationship 修复脚本 + dry-run 实测
+- feat(sprint21-m0): 详细工程计划 v1.0 + 14 个子任务 + obsidian_export.py
+
+### 🐛 Fixes
+- fix(wiki): 修复 11 个 judgments YAML 损坏(Codex H1 真阻塞)→ BAD YAML 11→0
+- fix(m4-a4): t09 字段兼容 A4 修复(Codex 评审 M1)
+- fix(sprint21): Codex 评审发现 H1 修复 + 评审报告保存
+- fix(sprint21-m3): T-09 Dataview 字段兼容(name/title/entity_id/topic_key)
+
+### 📝 Docs
+- docs(state): STATE.md 同步 v3.1.0-stable(王老师拍板)
+- docs(e选项): E 选项执行报告 v1.0(11 YAML 修复 + 5 决策点卡片 + 拍板邀请)
+- chore(m5): M5 收尾 + Codex 三次评审报告 + Sprint 22 准备报告
+- chore(m5): .gitignore 完整化(M4 B6 + Codex 评审)
+- chore(m5): VERSION + VERSION_MANAGEMENT 全量同步 v3.1.0-rc1
+- feat(m4-b): M4 阶段 B 全部 6 项完成 + v2.0 校准报告
+- feat(m4-a): M4 阶段 A 全部 6 项完成(A1-A5,A6 方案待拍板)
+- docs: RELEASE_NOTES_v3.1.0-stable.md + VERSION_REGISTRY.md
+- docs(state): 全量同步 Superpower M0+M1+M2 状态(智能化执行)
+- docs(state): 全量同步 Sprint 21 M0+M1 Superpower 模式推进状态
+
+### 🚀 Release
+- release(sprint21): v3.1.0-rc1 tag + M0-M3 Superpower 完整汇总报告
+- **release(v3.1.0-stable): 王老师拍板 + 11 YAML 修复闭环**(`96e2030` + `7a15a1b` + 本 commit)
+
+### 5 项决策点状态卡片(等 Sprint 22 启动)
+- AT-11 Web Clipper(等浏览器 + API)
+- BT-14 三层架构(Sprint 23+)
+- CT-13B atomicstrata npm 化(Sprint 22)
+- **DT-01 75 relationship 修复(75 建议清单已生成,等批)**
+- ET-04 organization entity(等 PJ-201 数据)
 
 ---
 
