@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PJ Swarm 跨项目看板 · Hermes</title>
+<style>
+:root {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --success: #3fb950;
+    --warning: #d29922;
+    --danger: #f85149;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+header {
+    background: linear-gradient(135deg, #1f6feb, #388bfd);
+    color: white;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+h1 { font-size: 28px; margin-bottom: 8px; }
+.subtitle { opacity: 0.9; font-size: 14px; }
+.status-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.status-cell {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+}
+.status-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; }
+.status-value { font-size: 20px; font-weight: 600; margin-top: 4px; }
+.swarm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.swarm-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    transition: transform 0.2s;
+}
+.swarm-card:hover { transform: translateY(-2px); }
+.swarm-card.active { border-left: 3px solid var(--success); }
+.swarm-card.inactive { border-left: 3px solid var(--text-dim); opacity: 0.7; }
+.pj-name { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--accent); }
+.pj-meta { font-size: 12px; color: var(--text-dim); margin-bottom: 4px; }
+.pj-stats {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    font-size: 12px;
+}
+.pj-stat { padding: 2px 8px; border-radius: 4px; background: rgba(88, 166, 255, 0.1); }
+.pj-git {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--text-dim);
+    font-family: monospace;
+    line-height: 1.4;
+}
+@media (max-width: 768px) {
+    body { padding: 10px; }
+    h1 { font-size: 20px; }
+    .swarm-grid { grid-template-columns: 1fr; }
+    .status-bar { grid-template-columns: 1fr 1fr; }
+}
+</style>
+<script>
+setTimeout(() => location.reload(), 30000);  // 30 秒自动刷新
+</script>
+</head>
+<body>
+<header>
+    <h1>🌐 PJ Swarm 跨项目看板</h1>
+    <div class="subtitle">王老师 2026-09-06 · L3 模式 v2.0 v3.0 · 自动 30 秒刷新</div>
+</header>
+
+<div class="status-bar">
+    <div class="status-cell">
+        <div class="status-label">总 PJ 项目</div>
+        <div class="status-value">24</div>
+    </div>
+    <div class="status-cell">
+        <div class="status-label">已激活(STATE.json)</div>
+        <div class="status-value" style="color: var(--success);">24</div>
+    </div>
+    <div class="status-cell">
+        <div class="status-label">工具已复制</div>
+        <div class="status-value" style="color: var(--accent);">24</div>
+    </div>
+    <div class="status-cell">
+        <div class="status-label">看板已建</div>
+        <div class="status-value" style="color: var(--warning);">1</div>
+    </div>
+    <div class="status-cell">
+        <div class="status-label">未激活</div>
+        <div class="status-value" style="color: var(--text-dim);">0</div>
+    </div>
+</div>
+<h2 style="margin-bottom: 16px;">📋 项目列表</h2><div class="swarm-grid">
+<div class="swarm-card active">
+    <div class="pj-name">PJ-000-Hermes个人操作系统总控</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-001-个人知识积累工程</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-002-资源云数据库查询工程</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-003-梁超杰厦门大学产融工程项目</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-004-技术复用研究工程</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-005-Prompt-OS提示词工程能力系统</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-006-PPT智能生成优化工程</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-101-个人知识库构建工程</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-102-LLM-MeetingKB</div>
+    <div class="pj-meta">✅ 已激活 · 3.1.3-rc1 · Sprint 23</div>
+    <div class="pj-meta">git:✅ · scripts:✅ · kanban:✅</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 9</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    <div class="pj-git">99281f1 feat(sprint25): L1 v3.1.3-rc1 tag + Sprint 24 试用报告</div><div class="pj-git">3c9653f feat(sprint24): L2-L6 全部按推荐执行</div>
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-201-电销AI赋能工程</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:✅ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-202-山东泰合合作项目</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-301-重要商机项目</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-900-AI工程构建迭代</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-901-通用功能系统</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-902-AI重要工具深度应用与实践</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-902-工具与代理项目</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-903-外部专业知识引进工程</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-904-hermes agent 工程</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-906-图片视频类能力</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-909-AI与Agent外部研究工程</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-909-AI情报站</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-999-个人与家庭项目</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-902-16-Codex桌面版工程</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+
+<div class="swarm-card active">
+    <div class="pj-name">PJ-Codex-001-NotebookLM-MCP对接</div>
+    <div class="pj-meta">✅ 已激活 · 无 · Sprint 1(初始)</div>
+    <div class="pj-meta">git:❌ · scripts:✅ · kanban:❌</div>
+    <div class="pj-stats">
+        <span class="pj-stat">✅ 1</span>
+        <span class="pj-stat">⏸ 0</span>
+    </div>
+    
+</div>
+</div></body></html>
