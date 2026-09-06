@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PJ-102 实时看板 · 3.1.0-stable</title>
+<style>
+:root {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --success: #3fb950;
+    --warning: #d29922;
+    --danger: #f85149;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+header {
+    background: linear-gradient(135deg, #1f6feb, #388bfd);
+    color: white;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+h1 { font-size: 28px; margin-bottom: 8px; }
+.subtitle { opacity: 0.9; font-size: 14px; }
+.status-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.status-cell {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+}
+.status-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; }
+.status-value { font-size: 16px; font-weight: 600; margin-top: 4px; }
+.now-banner {
+    background: linear-gradient(135deg, #d29922, #f0c674);
+    color: #0d1117;
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+.now-label { font-size: 12px; text-transform: uppercase; opacity: 0.7; margin-bottom: 8px; }
+.now-text { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.now-meta { font-size: 14px; opacity: 0.85; margin-top: 4px; }
+h2 { font-size: 20px; margin: 32px 0 16px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+}
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px;
+    transition: transform 0.2s;
+}
+.card:hover { transform: translateY(-2px); }
+.card.low-risk { border-left-color: var(--success); }
+.card.medium-risk { border-left-color: var(--warning); }
+.card.high-risk { border-left-color: var(--danger); }
+.card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.risk-emoji { font-size: 18px; }
+.prio-badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.prio-P0 { background: var(--danger); color: white; }
+.prio-P1 { background: var(--warning); color: #0d1117; }
+.prio-P2 { background: #8b949e; color: white; }
+.prio-P3 { background: #484f58; color: white; }
+.id-badge {
+    background: var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: 'SF Mono', Monaco, monospace;
+}
+.card h3 { font-size: 16px; margin-bottom: 8px; }
+.blocker { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; line-height: 1.5; }
+.progress {
+    background: rgba(63, 185, 80, 0.1);
+    border: 1px solid rgba(63, 185, 80, 0.3);
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--success);
+    margin-bottom: 8px;
+}
+.next-step {
+    font-size: 13px;
+    color: var(--accent);
+    background: rgba(88, 166, 255, 0.1);
+    padding: 8px 10px;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+.completed-list { list-style: none; }
+.completed-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.completed-item .check { color: var(--success); }
+.completed-item .cid {
+    background: var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 12px;
+}
+.completed-item .ctitle { flex: 1; }
+.git-log {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'SF Mono', Monaco, monospace;
+    font-size: 13px;
+}
+.commit-line { padding: 4px 0; color: var(--text-dim); }
+.commit-line:hover { color: var(--text); }
+footer {
+    margin-top: 40px;
+    padding: 16px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+}
+.refresh-info { display: inline-block; margin-left: 12px; }
+</style>
+</head>
+<body>
+<header>
+    <h1>📚 PJ-102 LLM MeetingKB · 实时看板</h1>
+    <div class="subtitle">
+        版本 v3.1.0-stable · Sprint 22 · M2-Sprint22推进中(where.py统一面板就绪)
+        · 🌿 dev(ahead 25) · 🕐 2026-09-06 11:36:25
+    </div>
+</header>
+
+<div class="status-bar">
+    <div class="status-cell">
+        <div class="status-label">📝 最后 Commit</div>
+        <div class="status-value">c634bd9</div>
+        <div style="font-size:12px;color:var(--text-dim);margin-top:4px">feat(t01): 99 人一键批改 CSV(王老师可直接 Excel 打开)</div>
+    </div>
+    <div class="status-cell">
+        <div class="status-label">⏸ 待决策点</div>
+        <div class="status-value">5 项</div>
+    </div>
+    <div class="status-cell">
+        <div class="status-label">✅ 已闭环</div>
+        <div class="status-value">3 项</div>
+    </div>
+    <div class="status-cell">
+        <div class="status-label">🎯 Sprint</div>
+        <div class="status-value">Sprint 22</div>
+    </div>
+</div>
+
+
+<div class="now-banner">
+    <div class="now-label">🎯 当前唯一动作</div>
+    <div class="now-text">等王老师批 DT-01 63 个关系清单(已生成 CSV/Excel 一键批改)</div>
+    <div class="now-meta">🚫 阻塞:CSV 待批(63 行含&#x27;建议填什么&#x27;+推理依据)</div>
+    <div class="now-meta">⏱ 预计:30 分钟(王老师批)+ 5 分钟(我跑 apply + commit)</div>
+    <div class="now-meta">➡️ 解除后:王老师改 CSV &#x27;状态&#x27;列 OK → 我跑 apply → commit 闭环</div>
+</div>
+
+
+<h2>📋 决策点状态 (5 项)</h2>
+<div class="cards">
+
+<div class="card low-risk">
+    <div class="card-header">
+        <span class="risk-emoji">🟢</span>
+        <span class="prio-badge prio-P0">P0</span>
+        <span class="id-badge">DT-01</span>
+    </div>
+    <h3>75 persons relationship 修复</h3>
+    <div class="blocker">🚫 等王老师批 63 个分组清单(已自动填 12,剩 63)</div>
+    <div class="progress">📊 12/75 已填 (16%)</div>
+    <div class="next-step">➡️ 王老师批 63 清单 → --apply → 75 全填</div>
+</div>
+
+<div class="card medium-risk">
+    <div class="card-header">
+        <span class="risk-emoji">🟡</span>
+        <span class="prio-badge prio-P1">P1</span>
+        <span class="id-badge">AT-11</span>
+    </div>
+    <h3>Web Clipper 集成</h3>
+    <div class="blocker">🚫 浏览器(Chrome/Edge/Firefox)+ API 来源(NotebookLM/微信/自建)</div>
+    
+    <div class="next-step">➡️ 王老师确认浏览器 + API 来源</div>
+</div>
+
+<div class="card medium-risk">
+    <div class="card-header">
+        <span class="risk-emoji">🟡</span>
+        <span class="prio-badge prio-P1">P1</span>
+        <span class="id-badge">CT-13B</span>
+    </div>
+    <h3>atomicstrata npm 化</h3>
+    <div class="blocker">🚫 范围已明确,等 Sprint 22 第二周启动</div>
+    
+    <div class="next-step">➡️ Sprint 22 M1 启动阶段 A(解耦与抽象 3 天)</div>
+</div>
+
+<div class="card low-risk">
+    <div class="card-header">
+        <span class="risk-emoji">🟢</span>
+        <span class="prio-badge prio-P3">P3</span>
+        <span class="id-badge">ET-04</span>
+    </div>
+    <h3>organization entity 暂缓</h3>
+    <div class="blocker">🚫 数据条件不具备(等 PJ-201 数据)</div>
+    
+    <div class="next-step">➡️ 等 PJ-201 数据库接入后再启动</div>
+</div>
+
+<div class="card high-risk">
+    <div class="card-header">
+        <span class="risk-emoji">🔴</span>
+        <span class="prio-badge prio-P2">P2</span>
+        <span class="id-badge">BT-14</span>
+    </div>
+    <h3>三层架构(raw/citations/wiki 重写)</h3>
+    <div class="blocker">🚫 架构级风险,需 Sprint 23+ 评估</div>
+    
+    <div class="next-step">➡️ Sprint 23 启动架构评估,本 Sprint 暂缓</div>
+</div>
+
+</div>
+
+<h2>✅ 已闭环 (3 项)</h2>
+<ul class="completed-list">
+
+<li class="completed-item">
+    <span class="check">✅</span>
+    <span class="cid">DT-01-L4.1a</span>
+    <span class="ctitle">12 个 persons relationship 自动应用</span>
+</li>
+
+<li class="completed-item">
+    <span class="check">✅</span>
+    <span class="cid">CT-13B-L4.3a</span>
+    <span class="ctitle">obsidian_export.py 路径解耦 + 5 CLI 测试</span>
+</li>
+
+<li class="completed-item">
+    <span class="check">✅</span>
+    <span class="cid">模式v2.0-完整化</span>
+    <span class="ctitle">62 份散落文档 → 4 个分类子目录</span>
+</li>
+
+</ul>
+
+<h2>🛠 最近 Commits</h2>
+<div class="git-log">
+<div class="commit-line">efe0c9b (HEAD -&gt; dev, origin/dev) feat(l4.8): where.py 统一推进面板 + Hermes Kanban 同步 + now 字段精简</div>
+<div class="commit-line">c634bd9 feat(t01): 99 人一键批改 CSV(王老师可直接 Excel 打开)</div>
+<div class="commit-line">7592877 feat(l4.5+l4.6+l4.3b+l4.4): Sprint 22 模式 v2.0 完整闭环 + 试用报告</div>
+<div class="commit-line">3c66cf6 feat(l4.1+l4.3+v2): 综合推进 - 模式 v2.0 完整化 + 12 relationship 填 + 5 CLI 测试</div>
+<div class="commit-line">1a5f88f feat(l4.1): DT-01 75 关系批量修复推进(L4.1.1-1.3 准备完成,L4.1.4 等批)</div>
+<div class="commit-line">52ddf99 docs(sprint22): Sprint 22 详细推进方案 v1.0(模式 v2.0 试用 + L1-L5 原子单元)</div>
+<div class="commit-line">cbb0e99 feat(state): 模式 v2.0 - STATE.json 单一真值源 + 自动生成</div>
+<div class="commit-line">cc98bb7 docs(t13b): atomicstrata npm 化启动分析 v1.0</div>
+<div class="commit-line">03fc33e docs(t01): 75 person relationship 建议清单(王老师批改格式)</div>
+<div class="commit-line">c5c61ec (tag: v3.1.0-stable) release(v3.1.0-stable): 王老师拍板 + 文档全量同步</div>
+
+</div>
+
+<footer>
+    <span>Hermes Kanban 实时同步</span>
+    <span class="refresh-info">· 30 秒自动刷新 · 最后更新:2026-09-06 11:36:25</span>
+    <br><br>
+    <span>📁 本地打开:file:///mnt/d/BaiduSyncdisk/hermes/01-项目/PJ-102-LLM-MeetingKB/.kanban/index.html</span>
+    <br>
+    <span>🌐 HTTP 服务:cd .kanban && python3 -m http.server 8788</span>
+</footer>
+
+<script>
+// 自动刷新(每 30 秒)
+setTimeout(function() {
+    location.reload();
+}, 30000);
+console.log('🔄 PJ-102 看板自动刷新:30 秒后');
+</script>
+
+</body>
+</html>
