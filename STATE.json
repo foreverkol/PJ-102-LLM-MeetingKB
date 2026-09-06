@@ -29,59 +29,62 @@
   "pending_decisions": [
     {
       "id": "DT-01",
-      "title": "75 persons relationship 修复",
-      "priority": "P0",
-      "blocker": "等王老师批 63 个分组清单(已自动填 12,剩 63)",
-      "blocking_artifact": "04-复盘与决策/Sprint21_v3.1.0-rc1_子任务/T-01-75建议清单_待王老师审_v1.0.json",
-      "pending_count": 63,
-      "eta_after_decision": "5-7 天",
+      "title": "扫一眼 99 人 relationship,改错的(可选)",
+      "priority": "P3",
+      "blocker": "无需操作,99/100 已全填",
+      "current_status": "✅ 已 100% (99/99)",
+      "user_action": "👉 可选:打开 CSV 看 99 行,只改错的",
+      "or_skip": "👉 跳过:王老师不做任何事,我下次再说",
       "risk": "low",
-      "next_step": "王老师批 63 清单 → --apply → 75 全填",
-      "progress": "12/75 已填 (16%)"
+      "next_step": "跳过 → 我继续 Sprint 22 收尾"
     },
     {
       "id": "AT-11",
-      "title": "Web Clipper 集成",
+      "title": "AT-11 Web Clipper:浏览器 + API 来源",
       "priority": "P1",
-      "blocker": "浏览器(Chrome/Edge/Firefox)+ API 来源(NotebookLM/微信/自建)",
-      "eta": "5-7 天",
+      "blocker": "需王老师回复 2 项",
+      "current_status": "⏸ 等王老师回复",
+      "user_action": "👉 必选:浏览器(Chrome/Edge/Firefox) + API(NotebookLM/微信/自建)",
+      "or_skip": "👉 不做也行,5-7 天工作可推迟",
       "risk": "medium",
-      "next_step": "王老师确认浏览器 + API 来源"
+      "next_step": "回复后 → 我开发 Web Clipper"
     },
     {
       "id": "CT-13B",
-      "title": "atomicstrata npm 化",
+      "title": "CT-13B atomicstrata npm 化:阶段 C 启动?",
       "priority": "P1",
-      "blocker": "范围已明确,等 Sprint 22 第二周启动",
-      "blocking_artifact": "04-复盘与决策/Sprint21_v3.1.0-rc1_子任务/T-13B-atomicstrata-npm化启动分析_v1.0.md",
-      "eta": "7-10 天",
+      "blocker": "等王老师确认 npm link 验证是否启动",
+      "current_status": "🔄 阶段 A+B 完成,等阶段 C",
+      "user_action": "👉 必选:做 / 不做 / 推迟",
+      "or_skip": "👉 不做也行,Sprint 23 再说",
       "risk": "medium",
-      "next_step": "Sprint 22 M1 启动阶段 A(解耦与抽象 3 天)"
+      "next_step": "回复后 → 我推进"
     },
     {
       "id": "ET-04",
-      "title": "organization entity 暂缓",
+      "title": "ET-04 organization entity:暂缓中",
       "priority": "P3",
-      "blocker": "数据条件不具备(等 PJ-201 数据)",
-      "eta": "3-5 天",
+      "blocker": "等 PJ-201 数据,自动暂停",
+      "current_status": "⏸ 自动暂缓",
+      "user_action": "👉 不需要操作",
+      "or_skip": "👉 不需要操作",
       "risk": "low",
-      "next_step": "等 PJ-201 数据库接入后再启动"
+      "next_step": "等 PJ-201 数据接入"
     },
     {
       "id": "BT-14",
-      "title": "三层架构(raw/citations/wiki 重写)",
+      "title": "BT-14 三层架构:评估中",
       "priority": "P2",
-      "blocker": "架构级风险,需 Sprint 23+ 评估",
-      "eta": "15-20 天",
+      "blocker": "架构级风险,Sprint 23 评估",
+      "current_status": "⏸ Sprint 23 评估",
+      "user_action": "👉 不需要操作",
+      "or_skip": "👉 不需要操作",
       "risk": "high",
-      "next_step": "Sprint 23 启动架构评估,本 Sprint 暂缓"
+      "next_step": "Sprint 23 启动架构评估"
     }
   ],
   "do_now": [
-    "1. 等王老师批 DT-01 63 个关系清单(已生成 CSV/Excel 一键批改表)",
-    "2. 等王老师试用 Sprint 22 模式 v2.0 反馈(决定是否进 Sprint 23 推广)",
-    "3. 等王老师确认 AT-11 浏览器 + API 来源",
-    "4. L4.3c npm link 跨项目验证(等 L4.3b 反馈)"
+    "1. 王老师只需决定 AT-11 是否启动(其他 4 项都不阻塞 Sprint 22 收尾)"
   ],
   "mode_architecture": {
     "version": "v2.0",
@@ -129,17 +132,17 @@
     }
   ],
   "now": {
-    "current_action": "等王老师批 DT-01 63 个关系清单(已生成 CSV/Excel 一键批改)",
-    "blocking": "CSV 待批(63 行含'建议填什么'+推理依据)",
-    "next_action_after_unblock": "王老师改 CSV '状态'列 OK → 我跑 apply → commit 闭环",
-    "estimated_time": "30 分钟(王老师批)+ 5 分钟(我跑 apply + commit)"
+    "current_action": "王老师决定 AT-11:做 / 不做 / 推迟",
+    "blocking": "AT-11 浏览器+API 来源(2 项决策)",
+    "next_action_after_decision": "回复'做' → 我开发 Web Clipper;回复'不做' → Sprint 22 收尾",
+    "estimated_time": "1 分钟(王老师回复)+ 5-7 天(我开发)"
   },
   "last_codex_review": {
     "file": ".codex-reviews/b187643c.md",
     "critical_count": 2,
     "medium_count": 2,
     "improvements_count": 1,
-    "reviewed_at": "2026-09-06 12:28:51"
+    "reviewed_at": "2026-09-06 12:34:51"
   },
-  "last_notified_commit": "baaa6fcaa864044a83fac6347529589b67dd562b"
+  "last_notified_commit": "2e8d3edcec352f214a917a288e2ae31dc18e026c"
 }

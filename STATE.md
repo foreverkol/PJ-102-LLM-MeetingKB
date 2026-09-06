@@ -40,20 +40,17 @@
 
 | 优先级 | ID | 标题 | 阻塞 | ETA | 风险 |
 |---|---|---|---|---|---|
-| P0 | `DT-01` | 75 persons relationship 修复 | 等王老师批 63 个分组清单(已自动填 12,剩 63) | 5-7 天 | low |
-| P1 | `AT-11` | Web Clipper 集成 | 浏览器(Chrome/Edge/Firefox)+ API 来源(Noteboo | 5-7 天 | medium |
-| P1 | `CT-13B` | atomicstrata npm 化 | 范围已明确,等 Sprint 22 第二周启动 | 7-10 天 | medium |
-| P2 | `BT-14` | 三层架构(raw/citations/wiki 重写) | 架构级风险,需 Sprint 23+ 评估 | 15-20 天 | high |
-| P3 | `ET-04` | organization entity 暂缓 | 数据条件不具备(等 PJ-201 数据) | 3-5 天 | low |
+| P1 | `AT-11` | AT-11 Web Clipper:浏览器 + API 来源 | 需王老师回复 2 项 | - | medium |
+| P1 | `CT-13B` | CT-13B atomicstrata npm 化:阶段 C | 等王老师确认 npm link 验证是否启动 | - | medium |
+| P2 | `BT-14` | BT-14 三层架构:评估中 | 架构级风险,Sprint 23 评估 | - | high |
+| P3 | `DT-01` | 扫一眼 99 人 relationship,改错的(可选) | 无需操作,99/100 已全填 | - | low |
+| P3 | `ET-04` | ET-04 organization entity:暂缓中 | 等 PJ-201 数据,自动暂停 | - | low |
 
 ---
 
 ## 🚀 Do Now(本 Sprint 立即行动)
 
-1. 等王老师批 DT-01 63 个关系清单(已生成 CSV/Excel 一键批改表)
-2. 等王老师试用 Sprint 22 模式 v2.0 反馈(决定是否进 Sprint 23 推广)
-3. 等王老师确认 AT-11 浏览器 + API 来源
-4. L4.3c npm link 跨项目验证(等 L4.3b 反馈)
+1. 王老师只需决定 AT-11 是否启动(其他 4 项都不阻塞 Sprint 22 收尾)
 
 ---
 
@@ -84,48 +81,40 @@
 
 ## 📋 决策点详情(完整)
 
-### DT-01:75 persons relationship 修复
-
-- **优先级**:P0
-- **阻塞**:等王老师批 63 个分组清单(已自动填 12,剩 63)
-- **关联文件**:`04-复盘与决策/Sprint21_v3.1.0-rc1_子任务/T-01-75建议清单_待王老师审_v1.0.json`
-- **待批数**:63
-- **ETA(批后)**:5-7 天
-- **风险**:low
-- **下一步**:王老师批 63 清单 → --apply → 75 全填
-
-### AT-11:Web Clipper 集成
+### AT-11:AT-11 Web Clipper:浏览器 + API 来源
 
 - **优先级**:P1
-- **阻塞**:浏览器(Chrome/Edge/Firefox)+ API 来源(NotebookLM/微信/自建)
-- **ETA**:5-7 天
+- **阻塞**:需王老师回复 2 项
 - **风险**:medium
-- **下一步**:王老师确认浏览器 + API 来源
+- **下一步**:回复后 → 我开发 Web Clipper
 
-### CT-13B:atomicstrata npm 化
+### CT-13B:CT-13B atomicstrata npm 化:阶段 C 启动?
 
 - **优先级**:P1
-- **阻塞**:范围已明确,等 Sprint 22 第二周启动
-- **关联文件**:`04-复盘与决策/Sprint21_v3.1.0-rc1_子任务/T-13B-atomicstrata-npm化启动分析_v1.0.md`
-- **ETA**:7-10 天
+- **阻塞**:等王老师确认 npm link 验证是否启动
 - **风险**:medium
-- **下一步**:Sprint 22 M1 启动阶段 A(解耦与抽象 3 天)
+- **下一步**:回复后 → 我推进
 
-### BT-14:三层架构(raw/citations/wiki 重写)
+### BT-14:BT-14 三层架构:评估中
 
 - **优先级**:P2
-- **阻塞**:架构级风险,需 Sprint 23+ 评估
-- **ETA**:15-20 天
+- **阻塞**:架构级风险,Sprint 23 评估
 - **风险**:high
-- **下一步**:Sprint 23 启动架构评估,本 Sprint 暂缓
+- **下一步**:Sprint 23 启动架构评估
 
-### ET-04:organization entity 暂缓
+### DT-01:扫一眼 99 人 relationship,改错的(可选)
 
 - **优先级**:P3
-- **阻塞**:数据条件不具备(等 PJ-201 数据)
-- **ETA**:3-5 天
+- **阻塞**:无需操作,99/100 已全填
 - **风险**:low
-- **下一步**:等 PJ-201 数据库接入后再启动
+- **下一步**:跳过 → 我继续 Sprint 22 收尾
+
+### ET-04:ET-04 organization entity:暂缓中
+
+- **优先级**:P3
+- **阻塞**:等 PJ-201 数据,自动暂停
+- **风险**:low
+- **下一步**:等 PJ-201 数据接入
 
 ---
 

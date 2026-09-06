@@ -73,7 +73,7 @@ def render_dashboard(state: dict) -> str:
 
     now_str = datetime.now(cst).strftime("%Y-%m-%d %H:%M:%S")
 
-    # 决策点卡片 HTML
+    # 决策点卡片 HTML - 王老师单一行动项
     decision_cards = ""
     risk_emoji = {"low": "🟢", "medium": "🟡", "high": "🔴"}
     codex = state.get("last_codex_review", {})
@@ -81,9 +81,9 @@ def render_dashboard(state: dict) -> str:
         emoji = risk_emoji.get(d.get("risk", ""), "⚪")
         prio = d.get("priority", "?")
         title = html.escape(d.get("title", ""))
-        blocker = html.escape(d.get("blocker", ""))
-        next_step = html.escape(d.get("next_step", "")[:60])
-        progress = d.get("progress", "")
+        status = html.escape(d.get("current_status", ""))
+        action = html.escape(d.get("user_action", ""))
+        skip = html.escape(d.get("or_skip", ""))
 
         decision_cards += f"""
 <div class="card {d.get('risk', 'low')}-risk">
@@ -93,9 +93,9 @@ def render_dashboard(state: dict) -> str:
         <span class="id-badge">{d.get('id', '?')}</span>
     </div>
     <h3>{title}</h3>
-    <div class="blocker">🚫 {blocker}</div>
-    {f'<div class="progress">📊 {progress}</div>' if progress else ''}
-    <div class="next-step">➡️ {next_step}</div>
+    <div class="current-status">📍 {status}</div>
+    <div class="user-action">👉 <strong>{action}</strong></div>
+    {f'<div class="skip-option">💭 或:{skip}</div>' if skip and skip != action else ''}
 </div>
 """
 
@@ -232,6 +232,33 @@ h2 {{ font-size: 20px; margin: 32px 0 16px; color: var(--accent); border-bottom:
 }}
 .card h3 {{ font-size: 16px; margin-bottom: 8px; }}
 .blocker {{ font-size: 13px; color: var(--text-dim); margin-bottom: 8px; line-height: 1.5; }}
+.current-status {{
+    font-size: 13px;
+    color: var(--accent);
+    background: rgba(88, 166, 255, 0.1);
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}}
+.user-action {{
+    font-size: 14px;
+    color: var(--text);
+    background: rgba(63, 185, 80, 0.1);
+    border: 1px solid rgba(63, 185, 80, 0.3);
+    padding: 8px 10px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    line-height: 1.5;
+}}
+.user-action strong {{
+    color: var(--success);
+}}
+.skip-option {{
+    font-size: 12px;
+    color: var(--text-dim);
+    font-style: italic;
+    padding: 4px 10px;
+}}
 .progress {{
     background: rgba(63, 185, 80, 0.1);
     border: 1px solid rgba(63, 185, 80, 0.3);
