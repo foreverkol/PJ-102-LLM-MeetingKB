@@ -1,0 +1,116 @@
+[
+  {
+    "file": "person_华少_906f4acf.md",
+    "name": "华少",
+    "role": "浙江卫视主持人(直播带货方)",
+    "suggested_relationship": "媒体关系"
+  },
+  {
+    "file": "person_姓鹏副总_36945f63.md",
+    "name": "姓鹏副总",
+    "role": "系统架构师候选人(雪藏中)",
+    "suggested_relationship": "团队关系"
+  },
+  {
+    "file": "person_孙冰冰_56776c39.md",
+    "name": "孙冰冰",
+    "role": "金融科技公司相关人员",
+    "suggested_relationship": "金融业务"
+  },
+  {
+    "file": "person_张总_bf4ffd29.md",
+    "name": "张总",
+    "role": "家长(被提及)",
+    "suggested_relationship": "家庭关系"
+  },
+  {
+    "file": "person_朝阳总_04e404e8.md",
+    "name": "朝阳总",
+    "role": "推广负责人",
+    "suggested_relationship": "运营关系"
+  },
+  {
+    "file": "person_李加尔_04e404e8.md",
+    "name": "李加尔",
+    "role": "深度运营",
+    "suggested_relationship": "运营关系"
+  },
+  {
+    "file": "person_林商银行行长(退休)_906f4acf.md",
+    "name": "林商银行行长(退休)",
+    "role": "临沂供应链金融协会会长",
+    "suggested_relationship": "金融业务"
+  },
+  {
+    "file": "person_王平_d869cd22.md",
+    "name": "王平",
+    "role": "济南历城城投陪同人员(姓名提及)",
+    "suggested_relationship": "政府关系"
+  },
+  {
+    "file": "person_王总_232f0446.md",
+    "name": "王总",
+    "role": "数字金融云负责人",
+    "suggested_relationship": "金融业务"
+  },
+  {
+    "file": "person_王老师_36945f63.md",
+    "name": "王老师",
+    "role": "风控产品平台负责人/技术合伙人",
+    "suggested_relationship": "团队关系"
+  },
+  {
+    "file": "person_王老师_5fd71a38.md",
+    "name": "王老师",
+    "role": "公司负责人/主持方(疑似王总)",
+    "suggested_relationship": "媒体关系"
+  },
+  {
+    "file": "person_王老师_e98fedfd.md",
+    "name": "王老师",
+    "role": "数据风控/产业金融业务负责人",
+    "suggested_relationship": "金融业务"
+  },
+  {
+    "file": "person_范老师_bf4ffd29.md",
+    "name": "范老师",
+    "role": "数学老师",
+    "suggested_relationship": "学术合作"
+  },
+  {
+    "file": "person_董博士_67433832.md",
+    "name": "董博士",
+    "role": "中科院博士/产业模型设计者",
+    "suggested_relationship": "学术合作"
+  },
+  {
+    "file": "person_郑淑娇_36945f63.md",
+    "name": "郑淑娇",
+    "role": "签约方负责人",
+    "suggested_relationship": "客户关系"
+  },
+  {
+    "file": "person_郭总_d869cd22.md",
+    "name": "郭总",
+    "role": "济南历城城投业务负责人",
+    "suggested_relationship": "政府关系"
+  },
+  {
+    "file": "person_长城妈妈_bf4ffd29.md",
+    "name": "长城妈妈",
+    "role": "家长(被提及)",
+    "suggested_relationship": "家庭关系"
+  },
+  {
+    "file": "person_马林海_36945f63.md",
+    "name": "马林海",
+    "role": "签约方负责人",
+    "suggested_relationship": "客户关系"
+  },
+  {
+    "file": "person_骆总_906f4acf.md",
+    "name": "骆总",
+    "role": "原京东金融保理业务负责人",
+    "suggested_relationship": "金融业务"
+  }
+]
