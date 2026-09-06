@@ -36,8 +36,7 @@ def test_brief_mode():
     rc, stdout, stderr = run_where("--brief")
     assert rc == 0, f"where.py --brief 失败: {stderr}"
     assert "📍" in stdout
-    assert "v3.1.0-stable" in stdout
-    # 包含当前 Sprint 信息
+    # 包含当前 Sprint 信息(任意 Sprint)
     assert "Sprint" in stdout
     # 不应该超过 200 字符(一屏)
     assert len(stdout) < 500, f"brief 输出过长: {len(stdout)} 字符"

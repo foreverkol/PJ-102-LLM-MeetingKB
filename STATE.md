@@ -10,12 +10,12 @@
 
 | 项 | 值 |
 |---|---|
-| **版本** | `3.1.0-stable` |
-| **tag** | `v3.1.0-stable` |
+| **版本** | `3.1.1-rc1` |
+| **tag** | `v3.1.1-rc1` |
 | **分支** | `dev` |
 | **ahead of main** | 25 commits |
-| **当前 Sprint** | **Sprint 22** |
-| **Sprint 状态** | M2-Sprint22推进中(where.py统一面板就绪) |
+| **当前 Sprint** | **Sprint 23** |
+| **Sprint 状态** | L1-tag+启动文档就绪 |
 | **最后 commit** | `c634bd9` feat(t01): 99 人一键批改 CSV(王老师可直接 Excel 打开) |
 
 ---
@@ -36,7 +36,7 @@
 
 ## 🎯 待王老师决策点(优先级排序)
 
-**当前生效 Sprint**:Sprint 22
+**当前生效 Sprint**:Sprint 23
 
 | 优先级 | ID | 标题 | 状态 | 推荐选项 |
 |---|---|---|---|---|
@@ -45,8 +45,9 @@
 
 ## 🚀 Do Now(本 Sprint 立即行动)
 
-1. Sprint 22 收尾:打 v3.1.1-rc1 tag + 总结报告
-2. Sprint 23 准备:5 个新方向 + 优先级排序
+1. 打 v3.1.1-rc1 tag(本地 + push)
+2. Sprint 23 启动文档(Sprint23_v3.1.1-rc1_启动方案v1.0.md)
+3. STATE.json 更新 + push
 
 ---
 

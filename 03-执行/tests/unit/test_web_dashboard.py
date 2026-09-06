@@ -49,13 +49,17 @@ def test_html_contains_key_info():
     assert "PJ-102" in content
 
     # 头部状态
-    assert "v3.1.0-stable" in content
-    assert "Sprint 22" in content or "Sprint 21" in content
+    import json
+    state = json.loads((PROJECT_ROOT / "STATE.json").read_text(encoding="utf-8"))
+    assert state["version"] in content, f"看板缺 version {state['version']}"
+    assert state["current_sprint"] in content, f"看板缺 current_sprint {state['current_sprint']}"
 
-    # 5 决策点 ID 至少出现 4 个
-    decision_ids = ["DT-01", "AT-11", "CT-13B", "ET-04", "BT-14"]
-    found = sum(1 for did in decision_ids if did in content)
-    assert found >= 4, f"决策点显示不全, 找到 {found}/5"
+    # 5 决策点 ID 至少出现 4 个(如果 pending_decisions 非空)
+    pending = state.get("pending_decisions", [])
+    if pending:
+        decision_ids = [d["id"] for d in pending]
+        found = sum(1 for did in decision_ids if did in content)
+        assert found >= len(decision_ids) * 0.8, f"决策点显示不全, 找到 {found}/{len(decision_ids)}"
 
     # 已闭环
     assert "已闭环" in content

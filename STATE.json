@@ -2,8 +2,8 @@
   "$schema": "PJ-102-STATE-v1",
   "project_id": "PJ-102",
   "project_name": "LLM MeetingKB",
-  "version": "3.1.0-stable",
-  "tag": "v3.1.0-stable",
+  "version": "3.1.1-rc1",
+  "tag": "v3.1.1-rc1",
   "branch": "dev",
   "ahead_of_main": 25,
   "last_updated": "2026-09-06 11:31:12 +0800",
@@ -11,8 +11,8 @@
     "hash": "c634bd9",
     "subject": "feat(t01): 99 人一键批改 CSV(王老师可直接 Excel 打开)"
   },
-  "current_sprint": "Sprint 22",
-  "current_sprint_status": "M2-Sprint22推进中(where.py统一面板就绪)",
+  "current_sprint": "Sprint 23",
+  "current_sprint_status": "L1-tag+启动文档就绪",
   "previous_sprint": {
     "id": "Sprint 21",
     "version": "v3.1.0-rc1 → v3.1.0-stable",
@@ -28,8 +28,9 @@
   },
   "pending_decisions": [],
   "do_now": [
-    "1. Sprint 22 收尾:打 v3.1.1-rc1 tag + 总结报告",
-    "2. Sprint 23 准备:5 个新方向 + 优先级排序"
+    "1. 打 v3.1.1-rc1 tag(本地 + push)",
+    "2. Sprint 23 启动文档(Sprint23_v3.1.1-rc1_启动方案v1.0.md)",
+    "3. STATE.json 更新 + push"
   ],
   "mode_architecture": {
     "version": "v2.0",
@@ -104,20 +105,26 @@
       "title": "三层架构(王老师按推荐 A:Sprint 23 评估)",
       "completed_at": "2026-09-06 13:01:49",
       "user_choice": "A"
+    },
+    {
+      "id": "Sprint23-L1",
+      "title": "v3.1.1-rc1 tag + Sprint 23 启动文档",
+      "completed_at": "2026-09-06 13:09:38",
+      "pattern": "Sprint 22 收尾 → Sprint 23 启动"
     }
   ],
   "now": {
-    "current_action": "🎉 Sprint 22 全部 5 决策点已闭环!开始 Sprint 23 准备",
+    "current_action": "打 v3.1.1-rc1 tag + Sprint 23 启动文档",
     "blocking": "(无)",
-    "next_action_after_decision": "准备 v3.1.1-rc1 tag + Sprint 23 启动方案",
-    "estimated_time": "30 分钟"
+    "next_action_after_decision": "tag 落地 → Sprint 23 L2 BT-14 启动",
+    "estimated_time": "5 分钟"
   },
   "last_codex_review": {
     "file": ".codex-reviews/b187643c.md",
     "critical_count": 2,
     "medium_count": 2,
     "improvements_count": 1,
-    "reviewed_at": "2026-09-06 13:03:36"
+    "reviewed_at": "2026-09-06 13:11:30"
   },
-  "last_notified_commit": "45a9ebad84514d3fd701d4d1b02e1dde83990c45"
+  "last_notified_commit": "b5c0df67d5b812aef9347a5e7749e0dbe55c0aeb"
 }
