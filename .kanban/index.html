@@ -121,6 +121,52 @@ h2 { font-size: 20px; margin: 32px 0 16px; color: var(--accent); border-bottom: 
 .user-action strong {
     color: var(--success);
 }
+.option {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--border);
+}
+.option-recommended {
+    background: rgba(63, 185, 80, 0.08);
+    border-left-color: var(--success);
+}
+.option-picked {
+    background: rgba(63, 185, 80, 0.15);
+    border-left-color: var(--success);
+    border-left-width: 4px;
+}
+.option-key {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 24px;
+    text-align: center;
+    padding-top: 2px;
+}
+.option-content {
+    flex: 1;
+}
+.option-label {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.option-rec {
+    font-size: 12px;
+    color: var(--warning);
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+.option-reason {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.4;
+}
 .skip-option {
     font-size: 12px;
     color: var(--text-dim);
@@ -190,7 +236,7 @@ footer {
     <h1>📚 PJ-102 LLM MeetingKB · 实时看板</h1>
     <div class="subtitle">
         版本 v3.1.0-stable · Sprint 22 · ⏸ Sprint 23 评估
-        · 🌿 dev(ahead 25) · 🕐 2026-09-06 12:34:57
+        · 🌿 dev(ahead 25) · 🕐 2026-09-06 12:42:22
     </div>
 </header>
 
@@ -218,7 +264,7 @@ footer {
             🚨2 ⚠️2 💡1
         </div>
         <div style="font-size:11px;color:var(--text-dim);margin-top:4px">
-            2026-09-06 12:34
+            2026-09-06 12:42
         </div>
     </div>
 </div>
@@ -226,9 +272,9 @@ footer {
 
 <div class="now-banner">
     <div class="now-label">🎯 当前唯一动作</div>
-    <div class="now-text">王老师决定 AT-11:做 / 不做 / 推迟</div>
-    <div class="now-meta">🚫 阻塞:AT-11 浏览器+API 来源(2 项决策)</div>
-    <div class="now-meta">⏱ 预计:1 分钟(王老师回复)+ 5-7 天(我开发)</div>
+    <div class="now-text">回复 AT-11 + CT-13B(我推荐 A+A,5-7 天完成)</div>
+    <div class="now-meta">🚫 阻塞:AT-11 浏览器+API 来源 / CT-13B 阶段 C 启动</div>
+    <div class="now-meta">⏱ 预计:1 分钟(王老师回复)+ 7-9 天(我完成)</div>
     <div class="now-meta">➡️ 解除后:</div>
 </div>
 
@@ -242,10 +288,27 @@ footer {
         <span class="prio-badge prio-P3">P3</span>
         <span class="id-badge">DT-01</span>
     </div>
-    <h3>扫一眼 99 人 relationship,改错的(可选)</h3>
+    <h3>DT-01 99 人 relationship</h3>
     <div class="current-status">📍 ✅ 已 100% (99/99)</div>
-    <div class="user-action">👉 <strong>👉 可选:打开 CSV 看 99 行,只改错的</strong></div>
-    <div class="skip-option">💭 或:👉 跳过:王老师不做任何事,我下次再说</div>
+    
+<div class="option option-recommended">
+    <div class="option-key">A</div>
+    <div class="option-content">
+        <div class="option-label">A. 扫一眼 CSV,改错的(可选)</div>
+        <div class="option-rec">👎 不推荐</div>
+        <div class="option-reason">💡 Codex 评审已修正1 个错案,启发式扩量到 99 人,王老师扫一遍耗 30+ 分钟发现不了新问题</div>
+    </div>
+</div>
+
+<div class="option option-recommended option-picked">
+    <div class="option-key">B</div>
+    <div class="option-content">
+        <div class="option-label">B. 跳过,我继续 Sprint 22 收尾</div>
+        <div class="option-rec">✅ 推荐</div>
+        <div class="option-reason">💡 99/99 已全填,L4.1b 已闭环,不需要王老师操作</div>
+    </div>
+</div>
+
 </div>
 
 <div class="card medium-risk">
@@ -254,10 +317,45 @@ footer {
         <span class="prio-badge prio-P1">P1</span>
         <span class="id-badge">AT-11</span>
     </div>
-    <h3>AT-11 Web Clipper:浏览器 + API 来源</h3>
+    <h3>AT-11 Web Clipper</h3>
     <div class="current-status">📍 ⏸ 等王老师回复</div>
-    <div class="user-action">👉 <strong>👉 必选:浏览器(Chrome/Edge/Firefox) + API(NotebookLM/微信/自建)</strong></div>
-    <div class="skip-option">💭 或:👉 不做也行,5-7 天工作可推迟</div>
+    
+<div class="option option-recommended option-picked">
+    <div class="option-key">A</div>
+    <div class="option-content">
+        <div class="option-label">A. Chrome + NotebookLM API</div>
+        <div class="option-rec">⭐ 强烈推荐</div>
+        <div class="option-reason">💡 Chrome 用户最多(王老师常用),NotebookLM 王老师已有账号;5-7 天完成,与 Sprint 22 收尾并行</div>
+    </div>
+</div>
+
+<div class="option option-recommended">
+    <div class="option-key">B</div>
+    <div class="option-content">
+        <div class="option-label">B. Edge + 自建 API</div>
+        <div class="option-rec">👎 不推荐</div>
+        <div class="option-reason">💡 Edge 用户少,自建 API 工作量大(&gt;10 天),性价比低</div>
+    </div>
+</div>
+
+<div class="option option-other">
+    <div class="option-key">C</div>
+    <div class="option-content">
+        <div class="option-label">C. Firefox + 微信剪藏</div>
+        <div class="option-rec">⚠️ 备选</div>
+        <div class="option-reason">💡 微信剪藏 API 王老师已用,但 Firefox 兼容性问题多;只推荐王老师 Firefox 重度用户</div>
+    </div>
+</div>
+
+<div class="option option-recommended">
+    <div class="option-key">D</div>
+    <div class="option-content">
+        <div class="option-label">D. 推迟到 Sprint 23</div>
+        <div class="option-rec">👎 不推荐</div>
+        <div class="option-reason">💡 Sprint 22 已有 7 项进展,推迟失去连贯性</div>
+    </div>
+</div>
+
 </div>
 
 <div class="card medium-risk">
@@ -266,10 +364,27 @@ footer {
         <span class="prio-badge prio-P1">P1</span>
         <span class="id-badge">CT-13B</span>
     </div>
-    <h3>CT-13B atomicstrata npm 化:阶段 C 启动?</h3>
-    <div class="current-status">📍 🔄 阶段 A+B 完成,等阶段 C</div>
-    <div class="user-action">👉 <strong>👉 必选:做 / 不做 / 推迟</strong></div>
-    <div class="skip-option">💭 或:👉 不做也行,Sprint 23 再说</div>
+    <h3>CT-13B 阶段 C npm link</h3>
+    <div class="current-status">📍 🔄 阶段 A+B 完成</div>
+    
+<div class="option option-recommended option-picked">
+    <div class="option-key">A</div>
+    <div class="option-content">
+        <div class="option-label">A. 做(本 Sprint 完成)</div>
+        <div class="option-rec">⭐ 强烈推荐</div>
+        <div class="option-reason">💡 npm 包结构 + Node.js wrapper 已就绪,只差跨项目验证;1-2 天工作量,闭合 L4.3c</div>
+    </div>
+</div>
+
+<div class="option option-recommended">
+    <div class="option-key">B</div>
+    <div class="option-content">
+        <div class="option-label">B. 推迟到 Sprint 23</div>
+        <div class="option-rec">👎 不推荐</div>
+        <div class="option-reason">💡 代码已写完,推迟是浪费;Sprint 23 会重新评估</div>
+    </div>
+</div>
+
 </div>
 
 <div class="card low-risk">
@@ -278,10 +393,18 @@ footer {
         <span class="prio-badge prio-P3">P3</span>
         <span class="id-badge">ET-04</span>
     </div>
-    <h3>ET-04 organization entity:暂缓中</h3>
+    <h3>ET-04 organization entity</h3>
     <div class="current-status">📍 ⏸ 自动暂缓</div>
-    <div class="user-action">👉 <strong>👉 不需要操作</strong></div>
     
+<div class="option option-recommended option-picked">
+    <div class="option-key">A</div>
+    <div class="option-content">
+        <div class="option-label">A. 等 PJ-201 数据接入(自动)</div>
+        <div class="option-rec">✅ 推荐</div>
+        <div class="option-reason">💡 无需王老师操作,数据条件不成熟时不应推进</div>
+    </div>
+</div>
+
 </div>
 
 <div class="card high-risk">
@@ -290,10 +413,18 @@ footer {
         <span class="prio-badge prio-P2">P2</span>
         <span class="id-badge">BT-14</span>
     </div>
-    <h3>BT-14 三层架构:评估中</h3>
+    <h3>BT-14 三层架构</h3>
     <div class="current-status">📍 ⏸ Sprint 23 评估</div>
-    <div class="user-action">👉 <strong>👉 不需要操作</strong></div>
     
+<div class="option option-recommended option-picked">
+    <div class="option-key">A</div>
+    <div class="option-content">
+        <div class="option-label">A. 等 Sprint 23 评估(自动)</div>
+        <div class="option-rec">✅ 推荐</div>
+        <div class="option-reason">💡 架构级风险不应在 Sprint 22 推进,需专项评估</div>
+    </div>
+</div>
+
 </div>
 
 </div>
@@ -323,7 +454,8 @@ footer {
 
 <h2>🛠 最近 Commits</h2>
 <div class="git-log">
-<div class="commit-line">2e8d3ed (HEAD -&gt; dev, origin/dev) feat(sprint22-v2): 完整试用报告 v2.0 + L4.1b/c + Codex 评审扩展</div>
+<div class="commit-line">a9ffb76 (HEAD -&gt; dev, origin/dev) feat(看板): 决策点卡片改为&#x27;王老师单一行动项&#x27;格式</div>
+<div class="commit-line">2e8d3ed feat(sprint22-v2): 完整试用报告 v2.0 + L4.1b/c + Codex 评审扩展</div>
 <div class="commit-line">baaa6fc feat(t01): 启发式扩量建议 v1.0(63 行已全部有建议,扩量 19 项)</div>
 <div class="commit-line">b187643 fix(test): post-commit hook 测试适配 kanban_refresh(L4.12 集成)</div>
 <div class="commit-line">dedc683 feat(l4.12): 看板常态化全链路自动刷新(4 步骤 + cron + post-commit)</div>
@@ -332,13 +464,12 @@ footer {
 <div class="commit-line">d87c10a feat(l4.9): HTML 浏览器看板 + 30秒自动刷新 + HTTP 8788 服务</div>
 <div class="commit-line">efe0c9b feat(l4.8): where.py 统一推进面板 + Hermes Kanban 同步 + now 字段精简</div>
 <div class="commit-line">c634bd9 feat(t01): 99 人一键批改 CSV(王老师可直接 Excel 打开)</div>
-<div class="commit-line">7592877 feat(l4.5+l4.6+l4.3b+l4.4): Sprint 22 模式 v2.0 完整闭环 + 试用报告</div>
 
 </div>
 
 <footer>
     <span>Hermes Kanban 实时同步</span>
-    <span class="refresh-info">· 30 秒自动刷新 · 最后更新:2026-09-06 12:34:57</span>
+    <span class="refresh-info">· 30 秒自动刷新 · 最后更新:2026-09-06 12:42:22</span>
     <br><br>
     <span>📁 本地打开:file:///mnt/d/BaiduSyncdisk/hermes/01-项目/PJ-102-LLM-MeetingKB/.kanban/index.html</span>
     <br>

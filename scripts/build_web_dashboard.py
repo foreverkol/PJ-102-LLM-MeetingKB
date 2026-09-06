@@ -73,7 +73,7 @@ def render_dashboard(state: dict) -> str:
 
     now_str = datetime.now(cst).strftime("%Y-%m-%d %H:%M:%S")
 
-    # 决策点卡片 HTML - 王老师单一行动项
+    # 决策点卡片 HTML - 王老师单一行动项 + 选项+推荐
     decision_cards = ""
     risk_emoji = {"low": "🟢", "medium": "🟡", "high": "🔴"}
     codex = state.get("last_codex_review", {})
@@ -82,8 +82,32 @@ def render_dashboard(state: dict) -> str:
         prio = d.get("priority", "?")
         title = html.escape(d.get("title", ""))
         status = html.escape(d.get("current_status", ""))
-        action = html.escape(d.get("user_action", ""))
-        skip = html.escape(d.get("or_skip", ""))
+        options = d.get("options", [])
+        user_action = d.get("user_action", "")
+
+        # 选项 HTML
+        options_html = ""
+        for opt in options:
+            rec = html.escape(opt.get("my_recommendation", ""))
+            reason = html.escape(opt.get("reason", ""))
+            label = html.escape(opt.get("label", ""))
+            key = opt.get("key", "")
+            is_recommended = "推荐" in rec or "强烈推荐" in rec
+            is_user_pick = key == user_action
+            border_class = "option-recommended" if is_recommended else "option-other"
+            if is_user_pick:
+                border_class += " option-picked"
+
+            options_html += f"""
+<div class="option {border_class}">
+    <div class="option-key">{key}</div>
+    <div class="option-content">
+        <div class="option-label">{label}</div>
+        <div class="option-rec">{rec}</div>
+        <div class="option-reason">💡 {reason}</div>
+    </div>
+</div>
+"""
 
         decision_cards += f"""
 <div class="card {d.get('risk', 'low')}-risk">
@@ -94,8 +118,7 @@ def render_dashboard(state: dict) -> str:
     </div>
     <h3>{title}</h3>
     <div class="current-status">📍 {status}</div>
-    <div class="user-action">👉 <strong>{action}</strong></div>
-    {f'<div class="skip-option">💭 或:{skip}</div>' if skip and skip != action else ''}
+    {options_html}
 </div>
 """
 
@@ -252,6 +275,52 @@ h2 {{ font-size: 20px; margin: 32px 0 16px; color: var(--accent); border-bottom:
 }}
 .user-action strong {{
     color: var(--success);
+}}
+.option {{
+    display: flex;
+    gap: 10px;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--border);
+}}
+.option-recommended {{
+    background: rgba(63, 185, 80, 0.08);
+    border-left-color: var(--success);
+}}
+.option-picked {{
+    background: rgba(63, 185, 80, 0.15);
+    border-left-color: var(--success);
+    border-left-width: 4px;
+}}
+.option-key {{
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 24px;
+    text-align: center;
+    padding-top: 2px;
+}}
+.option-content {{
+    flex: 1;
+}}
+.option-label {{
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 4px;
+}}
+.option-rec {{
+    font-size: 12px;
+    color: var(--warning);
+    margin-bottom: 4px;
+    font-weight: 600;
+}}
+.option-reason {{
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.4;
 }}
 .skip-option {{
     font-size: 12px;
