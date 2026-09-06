@@ -1,0 +1,179 @@
+{
+  "step1_backup": {
+    "step": 1,
+    "name": "备份现有 wiki",
+    "files_backed_up": 3,
+    "total_size_bytes": 53318,
+    "archive_path": "/mnt/d/BaiduSyncdisk/hermes/02-知识库/PJ-102-LLM-MeetingKB/archive/wiki-2026-09-06-final"
+  },
+  "step2_clean": {
+    "step": 2,
+    "name": "清理主 wiki",
+    "deleted_items": 1,
+    "preserved_files": [
+      "CLAUDE.md",
+      "index.md",
+      "log.md"
+    ]
+  },
+  "step3_select": {
+    "step": 3,
+    "name": "选 5 典型样例",
+    "selection_criteria": [
+      "覆盖王老师核心业务(产业金融/数据风控/AI/票据)",
+      "覆盖三种数据源(历史录音/Web Clipper/历史判断)",
+      "覆盖 wiki 三种类型(concept/judgment/person)",
+      "每样例数据丰富(可生成完整 citations)"
+    ],
+    "samples": [
+      {
+        "id": "S1",
+        "theme": "产业金融",
+        "title": "供应链金融核心模式",
+        "source": "千问手工转写(历史录音)/2024-03-15",
+        "data_source": "raw_clips/clip_2024-03-15_supply_chain_finance.md",
+        "keywords": [
+          "供应链金融",
+          "核心企业",
+          "上下游",
+          "应收账款"
+        ]
+      },
+      {
+        "id": "S2",
+        "theme": "数据风控",
+        "title": "风控建模流程",
+        "source": "Web Clipper/Python 文档",
+        "data_source": "raw_clips/clip_20260906-172519_07394.md",
+        "keywords": [
+          "数据风控",
+          "建模流程",
+          "特征工程"
+        ]
+      },
+      {
+        "id": "S3",
+        "theme": "AI赋能",
+        "title": "AI Agent 在金融的应用",
+        "source": "Web Clipper/Anthropic 文档",
+        "data_source": "raw_clips/clip_20260906-172325_23975.md",
+        "keywords": [
+          "AI赋能",
+          "Agent",
+          "金融"
+        ]
+      },
+      {
+        "id": "S4",
+        "theme": "票据业务",
+        "title": "票据业务核心要点",
+        "source": "历史录音/2024-05-20",
+        "data_source": "raw_clips/clip_2024-05-20_pj_business.md",
+        "keywords": [
+          "票据业务",
+          "核心要点"
+        ]
+      },
+      {
+        "id": "S5",
+        "theme": "判断/观点",
+        "title": "产业金融 vs 银行金融的判断",
+        "source": "历史判断库/judgment_industry_vs_bank",
+        "data_source": "judgments/judgment_industry_vs_bank_finance_*.md",
+        "keywords": [
+          "产业金融",
+          "银行金融",
+          "判断"
+        ]
+      }
+    ]
+  },
+  "samples_results": [
+    {
+      "sample_id": "S1",
+      "theme": "产业金融",
+      "title": "供应链金融核心模式",
+      "raw_file": "sample_S1_产业金融_供应链金融核心模式.md",
+      "raw_size": 1081,
+      "citations_count": 12,
+      "wiki_file": "wiki_S1_产业金融_供应链金融核心模式.md",
+      "wiki_size": 2557,
+      "scores": {
+        "raw_quality": 60,
+        "citation_quality": 100,
+        "wiki_quality": 71,
+        "lineage_complete": 100,
+        "total_score": 83.3
+      }
+    },
+    {
+      "sample_id": "S2",
+      "theme": "数据风控",
+      "title": "风控建模流程",
+      "raw_file": "sample_S2_数据风控_风控建模流程.md",
+      "raw_size": 991,
+      "citations_count": 12,
+      "wiki_file": "wiki_S2_数据风控_风控建模流程.md",
+      "wiki_size": 2380,
+      "scores": {
+        "raw_quality": 40,
+        "citation_quality": 100,
+        "wiki_quality": 70,
+        "lineage_complete": 100,
+        "total_score": 79.0
+      }
+    },
+    {
+      "sample_id": "S3",
+      "theme": "AI赋能",
+      "title": "AI Agent 在金融的应用",
+      "raw_file": "sample_S3_AI赋能_AI_Agent_在金融的应用.md",
+      "raw_size": 952,
+      "citations_count": 12,
+      "wiki_file": "wiki_S3_AI赋能_AI_Agent_在金融的应用.md",
+      "wiki_size": 2447,
+      "scores": {
+        "raw_quality": 40,
+        "citation_quality": 100,
+        "wiki_quality": 72,
+        "lineage_complete": 100,
+        "total_score": 79.6
+      }
+    },
+    {
+      "sample_id": "S4",
+      "theme": "票据业务",
+      "title": "票据业务核心要点",
+      "raw_file": "sample_S4_票据业务_票据业务核心要点.md",
+      "raw_size": 980,
+      "citations_count": 12,
+      "wiki_file": "wiki_S4_票据业务_票据业务核心要点.md",
+      "wiki_size": 2494,
+      "scores": {
+        "raw_quality": 40,
+        "citation_quality": 100,
+        "wiki_quality": 70,
+        "lineage_complete": 100,
+        "total_score": 79.0
+      }
+    },
+    {
+      "sample_id": "S5",
+      "theme": "判断/观点",
+      "title": "产业金融 vs 银行金融的判断",
+      "raw_file": "观点_产业金融_vs_银行金融的判断.md",
+      "raw_size": 1089,
+      "citations_count": 12,
+      "wiki_file": "观点_产业金融_vs_银行金融的判断.md",
+      "wiki_size": 2527,
+      "scores": {
+        "raw_quality": 60,
+        "citation_quality": 100,
+        "wiki_quality": 70,
+        "lineage_complete": 100,
+        "total_score": 83.0
+      }
+    }
+  ],
+  "avg_quality": 80.78
+}
