@@ -190,6 +190,42 @@ header {{
 }}
 h1 {{ font-size: 28px; margin-bottom: 8px; }}
 .subtitle {{ opacity: 0.9; font-size: 14px; }}
+
+/* v3 移动端响应式 */
+@media (max-width: 768px) {{
+    body {{ padding: 10px; }}
+    h1 {{ font-size: 20px; }}
+    .status-bar {{ grid-template-columns: 1fr 1fr; gap: 8px; }}
+    .status-cell {{ padding: 8px; font-size: 12px; }}
+    .now-banner {{ padding: 12px; font-size: 14px; }}
+    .now-text {{ font-size: 14px; }}
+    .decision-grid {{ grid-template-columns: 1fr; gap: 12px; }}
+    .completed-list {{ grid-template-columns: 1fr; }}
+    .log-section {{ max-height: 200px; overflow-y: auto; }}
+}}
+@media (max-width: 480px) {{
+    .status-bar {{ grid-template-columns: 1fr; }}
+    h1 {{ font-size: 18px; }}
+    .option {{ flex-direction: column; align-items: flex-start; }}
+}}
+
+/* v3 多 PJ swarm 视图 */
+.swarm-grid {{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+    margin-bottom: 20px;
+}}
+.swarm-card {{
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+}}
+.swarm-name {{ font-weight: 600; margin-bottom: 4px; }}
+.swarm-status {{ font-size: 10px; color: var(--text-dim); }}
 .status-bar {{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
