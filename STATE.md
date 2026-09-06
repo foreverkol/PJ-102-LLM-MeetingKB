@@ -45,9 +45,8 @@
 
 ## 🚀 Do Now(本 Sprint 立即行动)
 
-1. 打 v3.1.1-rc1 tag(本地 + push)
-2. Sprint 23 启动文档(Sprint23_v3.1.1-rc1_启动方案v1.0.md)
-3. STATE.json 更新 + push
+1. 重启前:王老师无需任何额外操作
+2. 重启后:cd + where.py 看位置 + 触发指令
 
 ---
 

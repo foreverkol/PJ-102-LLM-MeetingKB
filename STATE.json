@@ -28,9 +28,8 @@
   },
   "pending_decisions": [],
   "do_now": [
-    "1. 打 v3.1.1-rc1 tag(本地 + push)",
-    "2. Sprint 23 启动文档(Sprint23_v3.1.1-rc1_启动方案v1.0.md)",
-    "3. STATE.json 更新 + push"
+    "1. 重启前:王老师无需任何额外操作",
+    "2. 重启后:cd + where.py 看位置 + 触发指令"
   ],
   "mode_architecture": {
     "version": "v2.0",
@@ -114,17 +113,51 @@
     }
   ],
   "now": {
-    "current_action": "打 v3.1.1-rc1 tag + Sprint 23 启动文档",
-    "blocking": "(无)",
-    "next_action_after_decision": "tag 落地 → Sprint 23 L2 BT-14 启动",
-    "estimated_time": "5 分钟"
+    "current_action": "🛡 断点保护:王老师重启电脑,所有状态已保存",
+    "blocking": "(王老师操作中)",
+    "next_action_after_decision": "王老师开机后回复 '继续' → 推进 Sprint 24",
+    "estimated_time": "0 分钟 (已保存)"
   },
   "last_codex_review": {
     "file": ".codex-reviews/20260906-134414.md",
     "critical_count": 4,
     "medium_count": 4,
     "improvements_count": 4,
-    "reviewed_at": "2026-09-06 13:45:59"
+    "reviewed_at": "2026-09-06 13:46:56"
   },
-  "last_notified_commit": "165c9b3e0687dc12265fe245b73870c93bf9732c"
+  "last_notified_commit": "228f86d6fbefcaf62f3c71a6af2e4c117b5b9707",
+  "checkpoint": {
+    "type": "system_restart_preparation",
+    "triggered_by": "王老师 2026-09-06 OUT-OF-BAND '我需要重启电脑'",
+    "saved_at": "2026-09-06 14:01:35",
+    "what_works": [
+      "Sprint 22 全部 5 决策点按推荐闭环",
+      "Sprint 23 L1-L5 全部按推荐完成",
+      "v3.1.1-rc1 tag 已 push origin",
+      "HTML 看板服务在跑 (PID 4614, http://localhost:8788)",
+      "Post-commit hook 接通 kanban_refresh + qqbot 推送",
+      "Cron job */5 * * * * 已创建 (gateway 未跑可能未触发)",
+      "172 PASS + 1 skipped 全量测试"
+    ],
+    "what_pending": [
+      "王老师跑 codex login → L3 自动切换到真 Codex 评审",
+      "王老师跑 notebooklm login → L4 Web Clipper RAG 完整化",
+      "Sprint 24 启动 (待王老师触发)"
+    ],
+    "where_to_resume": [
+      "1. 终端: cd /mnt/d/BaiduSyncdisk/hermes/01-项目/PJ-102-LLM-MeetingKB",
+      "2. 看看板: http://localhost:8788 (刷新页面)",
+      "3. 看推进: python3 scripts/where.py --brief",
+      "4. 看完整 STATE: cat STATE.json"
+    ],
+    "recover_commands": [
+      "# 重启后恢复看板服务 (若死了)",
+      "cd /mnt/d/BaiduSyncdisk/hermes/01-项目/PJ-102-LLM-MeetingKB",
+      "python3 -m http.server 8788 --bind 0.0.0.0 --directory .kanban &",
+      "# 验证看板",
+      "curl http://localhost:8788/",
+      "# 全量测试",
+      "python3 -m pytest 03-执行/tests/unit/ -q"
+    ]
+  }
 }
