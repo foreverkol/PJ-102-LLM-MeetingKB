@@ -1,0 +1,86 @@
+[
+  {
+    "file": "person_全总_232f0446.md",
+    "name": "全总",
+    "role": "深度数科创始团队控股人",
+    "suggested_relationship": "团队关系",
+    "matched_key": "团队"
+  },
+  {
+    "file": "person_吴英杰_232f0446.md",
+    "name": "吴英杰",
+    "role": "CEO",
+    "suggested_relationship": "客户关系",
+    "matched_key": "CEO"
+  },
+  {
+    "file": "person_宋华_56776c39.md",
+    "name": "宋华",
+    "role": "供应链金融行业专家/教授",
+    "suggested_relationship": "学术合作",
+    "matched_key": "教授"
+  },
+  {
+    "file": "person_张总_906f4acf.md",
+    "name": "张总",
+    "role": "票据行业专家",
+    "suggested_relationship": "行业专家",
+    "matched_key": "专家"
+  },
+  {
+    "file": "person_张春_36945f63.md",
+    "name": "张春",
+    "role": "教授/学术机构成员",
+    "suggested_relationship": "学术合作",
+    "matched_key": "教授"
+  },
+  {
+    "file": "person_李明昌_232f0446.md",
+    "name": "李明昌",
+    "role": "票据行业专家/教授",
+    "suggested_relationship": "学术合作",
+    "matched_key": "教授"
+  },
+  {
+    "file": "person_李洋_232f0446.md",
+    "name": "李洋",
+    "role": "杭州战略总部负责人(研发与创新团队负责人)",
+    "suggested_relationship": "团队关系",
+    "matched_key": "团队"
+  },
+  {
+    "file": "person_梁超杰_67433832.md",
+    "name": "梁超杰",
+    "role": "主讲人/产业战略顾问",
+    "suggested_relationship": "顾问关系",
+    "matched_key": "顾问"
+  },
+  {
+    "file": "person_耿姝辰_04e404e8.md",
+    "name": "耿姝辰",
+    "role": "团队成员",
+    "suggested_relationship": "团队关系",
+    "matched_key": "团队"
+  },
+  {
+    "file": "person_高歌_04e404e8.md",
+    "name": "高歌",
+    "role": "团队成员/参与讨论",
+    "suggested_relationship": "团队关系",
+    "matched_key": "团队"
+  },
+  {
+    "file": "person_龚晓斌_36945f63.md",
+    "name": "龚晓斌",
+    "role": "投资人/资金方/决策者",
+    "suggested_relationship": "投资关系",
+    "matched_key": "投资人"
+  },
+  {
+    "file": "person_龚晓斌_67433832.md",
+    "name": "龚晓斌",
+    "role": "易云通联合创始人/技术负责人",
+    "suggested_relationship": "客户关系",
+    "matched_key": "创始人"
+  }
+]

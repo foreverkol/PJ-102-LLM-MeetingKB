@@ -1,0 +1,337 @@
+{
+  "产品": [
+    {
+      "file": "person_王老师_d869cd22.md",
+      "name": "王老师",
+      "role": "深度数科科技与产品负责人(原恒生股份大总监)"
+    },
+    {
+      "file": "person_王老师_36945f63.md",
+      "name": "王老师",
+      "role": "风控产品平台负责人/技术合伙人"
+    },
+    {
+      "file": "person_黄维国_2ff2026a.md",
+      "name": "黄维国",
+      "role": "票据中介/项目中间引荐人"
+    },
+    {
+      "file": "person_李洋_04e404e8.md",
+      "name": "李洋",
+      "role": "项目主导/产品负责人"
+    },
+    {
+      "file": "person_张春老师_67433832.md",
+      "name": "张春老师",
+      "role": "产品知识模型提供者"
+    }
+  ],
+  "其他": [
+    {
+      "file": "person_王忠华_d869cd22.md",
+      "name": "王忠华",
+      "role": "原京东济南保理公司负责人/本场引荐人"
+    },
+    {
+      "file": "person_王平_d869cd22.md",
+      "name": "王平",
+      "role": "济南历城城投陪同人员(姓名提及)"
+    },
+    {
+      "file": "person_陈总_906f4acf.md",
+      "name": "陈总",
+      "role": "深度公司决策层(具体职务未明确)"
+    },
+    {
+      "file": "person_黄总_d869cd22.md",
+      "name": "黄总",
+      "role": "历城控股/集团决策人(全名未明)"
+    },
+    {
+      "file": "person_王老师_5fd71a38.md",
+      "name": "王老师",
+      "role": "公司负责人/主持方(疑似王总)"
+    },
+    {
+      "file": "person_华少_906f4acf.md",
+      "name": "华少",
+      "role": "浙江卫视主持人(直播带货方)"
+    },
+    {
+      "file": "person_李洋_5fd71a38.md",
+      "name": "李洋",
+      "role": "数据中心负责人(疑似建华总)"
+    },
+    {
+      "file": "person_周丽_04e404e8.md",
+      "name": "周丽",
+      "role": "数据/供应商关系核验负责人"
+    },
+    {
+      "file": "person_洪平总_67433832.md",
+      "name": "洪平总",
+      "role": "未确认(似为东风方负责人)"
+    },
+    {
+      "file": "person_梁超杰_36945f63.md",
+      "name": "梁超杰",
+      "role": "战略架构主导人/总设计师"
+    },
+    {
+      "file": "person_王义_67433832.md",
+      "name": "王义",
+      "role": "易云通负责人/集团采购方"
+    },
+    {
+      "file": "person_罗晋_56776c39.md",
+      "name": "罗晋",
+      "role": "诚信国际负责人(涉案人)"
+    },
+    {
+      "file": "person_李劲松_36945f63.md",
+      "name": "李劲松",
+      "role": "海塑胶相关付款方负责人"
+    },
+    {
+      "file": "person_王总_2ff2026a.md",
+      "name": "王总",
+      "role": "董事长(青岛融合集团)"
+    },
+    {
+      "file": "person_陆总_d869cd22.md",
+      "name": "陆总",
+      "role": "济南历城控股前期对接人"
+    },
+    {
+      "file": "person_戴明_56776c39.md",
+      "name": "戴明",
+      "role": "美国著名质量管理之父"
+    },
+    {
+      "file": "person_王老师_04e404e8.md",
+      "name": "王老师",
+      "role": "我方主负责人/记录人"
+    },
+    {
+      "file": "person_董峰_36945f63.md",
+      "name": "董峰",
+      "role": "未明确(沟通中提及)"
+    },
+    {
+      "file": "person_邵伟_36945f63.md",
+      "name": "邵伟",
+      "role": "未明确(沟通中提及)"
+    },
+    {
+      "file": "person_林总_e98fedfd.md",
+      "name": "林总",
+      "role": "未明确(原京东系)"
+    },
+    {
+      "file": "person_王俊寿_906f4acf.md",
+      "name": "王俊寿",
+      "role": "原山东银保监局书记"
+    },
+    {
+      "file": "person_王老师_67433832.md",
+      "name": "王老师",
+      "role": "在场第三方/陪同者"
+    },
+    {
+      "file": "person_蒋海_36945f63.md",
+      "name": "蒋海",
+      "role": "拟引入合伙企业代表"
+    },
+    {
+      "file": "person_龙峰_36945f63.md",
+      "name": "龙峰",
+      "role": "拟引入合伙企业代表"
+    },
+    {
+      "file": "person_冯锡强_d869cd22.md",
+      "name": "冯锡强",
+      "role": "济南城建相关人员"
+    },
+    {
+      "file": "person_唐总_04e404e8.md",
+      "name": "唐总",
+      "role": "绩效方案决策人"
+    },
+    {
+      "file": "person_洪军总_04e404e8.md",
+      "name": "洪军总",
+      "role": "上级/被引述人"
+    },
+    {
+      "file": "person_魏总_906f4acf.md",
+      "name": "魏总",
+      "role": "平台建设负责人"
+    },
+    {
+      "file": "person_胡明总_04e404e8.md",
+      "name": "胡明总",
+      "role": "绩效表负责人"
+    },
+    {
+      "file": "person_郑淑娇_36945f63.md",
+      "name": "郑淑娇",
+      "role": "签约方负责人"
+    },
+    {
+      "file": "person_马林海_36945f63.md",
+      "name": "马林海",
+      "role": "签约方负责人"
+    },
+    {
+      "file": "person_杨老师_67433832.md",
+      "name": "杨老师",
+      "role": "督导/导师"
+    },
+    {
+      "file": "person_罗老师_bf4ffd29.md",
+      "name": "罗老师",
+      "role": "前任班主任"
+    },
+    {
+      "file": "person_李总_f8bcfc1b.md",
+      "name": "李总",
+      "role": "未明确"
+    },
+    {
+      "file": "person_李洋_2ff2026a.md",
+      "name": "李洋",
+      "role": "副总裁"
+    },
+    {
+      "file": "person_胡老师_bf4ffd29.md",
+      "name": "胡老师",
+      "role": "班主任"
+    },
+    {
+      "file": "person_郭庆良_67433832.md",
+      "name": "郭庆良",
+      "role": "未确认"
+    }
+  ],
+  "金融业务": [
+    {
+      "file": "person_徐驰_2ff2026a.md",
+      "name": "徐驰",
+      "role": "临沂担保公司负责人/核心执行人"
+    },
+    {
+      "file": "person_林商银行行长(退休)_906f4acf.md",
+      "name": "林商银行行长(退休)",
+      "role": "临沂供应链金融协会会长"
+    },
+    {
+      "file": "person_孙冰冰_56776c39.md",
+      "name": "孙冰冰",
+      "role": "金融科技公司相关人员"
+    },
+    {
+      "file": "person_王总_232f0446.md",
+      "name": "王总",
+      "role": "数字金融云负责人"
+    }
+  ],
+  "业务负责人": [
+    {
+      "file": "person_王老师_e98fedfd.md",
+      "name": "王老师",
+      "role": "数据风控/产业金融业务负责人"
+    },
+    {
+      "file": "person_朱宝磊_d869cd22.md",
+      "name": "朱宝磊",
+      "role": "深度数科业务负责人/介绍方"
+    },
+    {
+      "file": "person_李洋_906f4acf.md",
+      "name": "李洋",
+      "role": "深度公司业务负责人/主讲人"
+    },
+    {
+      "file": "person_深圳征信人员_5fd71a38.md",
+      "name": "深圳征信人员",
+      "role": "征信业务人员(姓名未明)"
+    },
+    {
+      "file": "person_骆总_906f4acf.md",
+      "name": "骆总",
+      "role": "原京东金融保理业务负责人"
+    },
+    {
+      "file": "person_郭总_d869cd22.md",
+      "name": "郭总",
+      "role": "济南历城城投业务负责人"
+    },
+    {
+      "file": "person_朱宝磊_f8bcfc1b.md",
+      "name": "朱宝磊",
+      "role": "培训讲师/业务负责人"
+    },
+    {
+      "file": "person_王老师_f8bcfc1b.md",
+      "name": "王老师",
+      "role": "数据/渠道业务负责人"
+    },
+    {
+      "file": "person_周力_5fd71a38.md",
+      "name": "周力",
+      "role": "大湾区业务负责人"
+    }
+  ],
+  "技术": [
+    {
+      "file": "person_姓鹏副总_36945f63.md",
+      "name": "姓鹏副总",
+      "role": "系统架构师候选人(雪藏中)"
+    }
+  ],
+  "行业专家": [
+    {
+      "file": "person_董博士_67433832.md",
+      "name": "董博士",
+      "role": "中科院博士/产业模型设计者"
+    }
+  ],
+  "家庭": [
+    {
+      "file": "person_张总_bf4ffd29.md",
+      "name": "张总",
+      "role": "家长(被提及)"
+    },
+    {
+      "file": "person_长城妈妈_bf4ffd29.md",
+      "name": "长城妈妈",
+      "role": "家长(被提及)"
+    }
+  ],
+  "运营": [
+    {
+      "file": "person_朝阳总_04e404e8.md",
+      "name": "朝阳总",
+      "role": "推广负责人"
+    },
+    {
+      "file": "person_李加尔_04e404e8.md",
+      "name": "李加尔",
+      "role": "深度运营"
+    }
+  ],
+  "风控": [
+    {
+      "file": "person_易皓_5fd71a38.md",
+      "name": "易皓",
+      "role": "风控总监"
+    }
+  ],
+  "学术/讲师": [
+    {
+      "file": "person_范老师_bf4ffd29.md",
+      "name": "范老师",
+      "role": "数学老师"
+    }
+  ]
+}
